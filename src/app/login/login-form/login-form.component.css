@@ -1,0 +1,34 @@
+.validation-error {
+  color:red
+}
+
+.form-control {
+  width: 28%;
+}
+
+.loginFormContainer {
+  position: relative;
+  left: 35%;
+  margin-bottom: 3em;
+}
+
+.invalidCredentials {
+  margin-bottom: 1em;
+}
+
+.registerLink {
+  cursor: pointer;
+}
+
+.loginButton {
+  margin-bottom: 2em;
+}
+
+@media (max-width: 600px) {
+  .loginFormContainer {
+    left: 25%;
+  }
+  .form-control {
+    width: 65%;
+  }
+}

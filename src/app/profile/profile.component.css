@@ -1,0 +1,34 @@
+.validation-error {
+  color:red
+}
+
+.validation-pass {
+  color:green;
+}
+
+.form-control {
+  width: 28%;
+}
+
+.userVerifier {
+  cursor: pointer;
+}
+
+.registerFormContainer {
+  position: relative;
+  left: 35%;
+  margin-bottom: 3em;
+}
+
+.invalidCredentials {
+  margin-bottom: 1em;
+}
+
+@media (max-width: 600px) {
+  .registerFormContainer {
+    left: 25%;
+  }
+  .form-control {
+    width: 65%;
+  }
+}

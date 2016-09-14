@@ -1,0 +1,9 @@
+<div class="headerContainer">
+  <button *ngIf="isAuth()" (click)="onLogout()">logout</button>
+  <div class="profileImgContainer" *ngIf="isAuth()">
+    <i class="fa fa-caret-down accountArrow" aria-hidden="true"></i>
+    <img [src]="imageSrc" class="profileImg" (click)="goToProfile()">
+  </div>
+
+</div>
+

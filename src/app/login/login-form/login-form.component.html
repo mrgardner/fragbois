@@ -1,0 +1,28 @@
+<div class="loginFormContainer">
+  <form [formGroup]="loginForm" (ngSubmit)="onSignin()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text"
+             class="form-control"
+             id="email"
+             formControlName="email">
+      <div *ngIf="loginForm.controls.email.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(loginForm.controls.email.errors?.required)">Email is Required</span>
+        <span class="validation-error" *ngIf="(loginForm.controls.email.errors?.pattern)">Invalid Email Address</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password"
+             class="form-control"
+             id="password"
+             formControlName="password" #password>
+      <div *ngIf="loginForm.controls.password.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(loginForm.controls.password.errors?.required)">Password is Required</span>
+        <span class="validation-error" *ngIf="wrongCredentials">Wrong Username or Password</span>
+      </div>
+    </div>
+    <button type="submit" class="loginButton btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+  </form>
+  <span>Don't have an account? Register <a class="registerLink" (click)="onRegister()">Here</a></span>
+</div>

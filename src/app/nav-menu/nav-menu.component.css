@@ -1,0 +1,22 @@
+.headerContainer {
+  height: 50px;
+  background-color: black;
+}
+
+.profileImgContainer {
+  height: auto;
+  position: absolute;
+  right: 0;
+}
+
+.profileImg {
+  height: auto;
+  width: 50px;
+  bottom: 25px;
+  position: relative;
+  cursor: pointer;
+}
+
+.accountArrow {
+  color: white;
+}
