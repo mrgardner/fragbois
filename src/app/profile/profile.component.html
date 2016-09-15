@@ -1,18 +1,19 @@
 <app-nav-menu></app-nav-menu>
-<div class="registerFormContainer">
-  <form [formGroup]="registerForm" (ngSubmit)="onSignup()">
+<div class="profileFormContainer">
+  <form [formGroup]="profileForm" (ngSubmit)="onSignup()">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text"
              class="form-control"
              id="username"
              formControlName="username" [value]="userDetails.username">
-      <span *ngIf="registerForm.controls.username.value.length > 0">Verify Username <a (click)="verifyUser(registerForm.controls.username.value)" class="userVerifier">here</a></span>
-      <span *ngIf="userAvailable == true && registerForm.controls.username.value.length > 0" class="validation-pass">available</span>
-      <span *ngIf="userAvailable == false && registerForm.controls.username.value.length > 0" class="validation-error">not available</span>
-      <div *ngIf="registerForm.controls.username.touched" class="validation-error">
-        <span class="validation-error" *ngIf="(registerForm.controls.username.errors?.required)">User Name is Required</span>
-        <span class="validation-error" *ngIf="(registerForm.controls.username.errors?.pattern)">Only letter and numbers allowed</span>
+      <span *ngIf="profileForm.controls.username.value.length > 0 && !profileForm.controls.username.errors?.pattern">
+        Verify Username <a (click)="verifyUser(profileForm.controls.username.value)" class="userVerifier">here</a></span>
+      <span *ngIf="userAvailable == true && profileForm.controls.username.value.length > 0" class="validation-pass">available</span>
+      <span *ngIf="userAvailable == false && profileForm.controls.username.value.length > 0" class="validation-error">not available</span>
+      <div *ngIf="profileForm.controls.username.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(profileForm.controls.username.errors?.required)">User Name is Required</span>
+        <span class="validation-error" *ngIf="(profileForm.controls.username.errors?.pattern)">Only letter and numbers allowed</span>
       </div>
     </div>
     <div class="form-group">
@@ -21,9 +22,9 @@
              class="form-control"
              id="firstName"
              formControlName="firstName" [value]="userDetails.firstName">
-      <div *ngIf="registerForm.controls.firstName.touched" class="validation-error">
-        <span class="validation-error" *ngIf="(registerForm.controls.firstName.errors?.required)">User Name is Required</span>
-        <span class="validation-error" *ngIf="(registerForm.controls.firstName.errors?.pattern)">Only letters are allowed</span>
+      <div *ngIf="profileForm.controls.firstName.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(profileForm.controls.firstName.errors?.required)">User Name is Required</span>
+        <span class="validation-error" *ngIf="(profileForm.controls.firstName.errors?.pattern)">Only letters are allowed</span>
       </div>
     </div>
     <div class="form-group">
@@ -32,9 +33,9 @@
              class="form-control"
              id="lastName"
              formControlName="lastName" [value]="userDetails.lastName">
-      <div *ngIf="registerForm.controls.lastName.touched" class="validation-error">
-        <span class="validation-error" *ngIf="(registerForm.controls.lastName.errors?.required)">Last Name is Required</span>
-        <span class="validation-error" *ngIf="(registerForm.controls.lastName.errors?.pattern)">Only letters are allowed</span>
+      <div *ngIf="profileForm.controls.lastName.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(profileForm.controls.lastName.errors?.required)">Last Name is Required</span>
+        <span class="validation-error" *ngIf="(profileForm.controls.lastName.errors?.pattern)">Only letters are allowed</span>
       </div>
     </div>
     <div class="form-group">
@@ -43,35 +44,35 @@
              class="form-control"
              id="email"
              formControlName="email" [value]="userDetails.email">
-      <div *ngIf="registerForm.controls.email.touched" class="validation-error">
-        <span class="validation-error" *ngIf="(registerForm.controls.email.errors?.required)">Email Address is Required</span>
-        <span class="validation-error" *ngIf="(registerForm.controls.email.errors?.pattern)">Invalid Email Address</span>
+      <div *ngIf="profileForm.controls.email.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(profileForm.controls.email.errors?.required)">Email Address is Required</span>
+        <span class="validation-error" *ngIf="(profileForm.controls.email.errors?.pattern)">Invalid Email Address</span>
       </div>
     </div>
     <div class="form-group">
       <label for="confirmPassword">Date of Birth</label>
       <br>
-      <select formControlName="month"  (change)="onMonthChange($event.target.value)">
-        <option *ngFor="let month of months" [value]="userDetails.month" >{{month}}</option>
+      <select formControlName="month"  (change)="onMonthChange($event.target.value)" [ngModel]="userDetails.month">
+        <option *ngFor="let month of months" [value]="month" >{{month}}</option>
       </select>
-      <select formControlName="day" >
+      <select formControlName="day" [ngModel]="userDetails.day">
         <option *ngFor="let day of days" [value]="day"  >{{day}}</option>
       </select>
-      <select formControlName="year" >
-        <option *ngFor="let year of years" [value]="year" >{{year}}</option>
+      <select formControlName="year" [ngModel]="userDetails.year">
+        <option *ngFor="let year of years" [value]="year">{{year}}</option>
       </select>
-      <div class="validation-error" *ngIf="(registerForm.controls.month.errors?.required ||
-                registerForm.controls.day.errors?.required || registerForm.controls.year.errors?.required)">Date of Birth is Required</div>
+      <div class="validation-error" *ngIf="(profileForm.controls.month.errors?.required ||
+                profileForm.controls.day.errors?.required || profileForm.controls.year.errors?.required)">Date of Birth is Required</div>
     </div>
     <div class="form-group">
       <label>Gender</label>
       <div class="radio" *ngFor="let g of genders" >
         <label>
-          <input type="radio" name="gender" formControlName="gender" [value]="g.value" >
+          <input type="radio" name="gender" formControlName="gender" [value]="g.value" [ngModel]="userDetails.gender">
           {{g.display}}
         </label>
       </div>
-      <div class="validation-error" *ngIf="(registerForm.controls.gender.errors?.required)">Gender is Required</div>
+      <div class="validation-error" *ngIf="(profileForm.controls.gender.errors?.required)">Gender is Required</div>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
@@ -79,8 +80,8 @@
              class="form-control"
              id="password"
              formControlName="password" #password [value]="userDetails.password">
-      <div *ngIf="registerForm.controls.password.touched" class="validation-error">
-        <span class="validation-error" *ngIf="(registerForm.controls.password.errors?.required)">Password is Required</span>
+      <div *ngIf="profileForm.controls.password.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(profileForm.controls.password.errors?.required)">Password is Required</span>
       </div>
     </div>
     <div class="form-group">
@@ -89,11 +90,13 @@
              class="form-control"
              id="confirmPassword"
              formControlName="confirmPassword" #confirmPassword [value]="userDetails.password">
-      <div *ngIf="registerForm.controls.confirmPassword.touched" class="validation-error">
-        <span class="validation-error" *ngIf="(registerForm.controls.confirmPassword.errors?.required)">Password is Required</span>
-        <span class="validation-error" *ngIf="(registerForm.errors)">Password need to Match</span>
+      <div *ngIf="profileForm.controls.confirmPassword.touched" class="validation-error">
+        <span class="validation-error" *ngIf="(profileForm.controls.confirmPassword.errors?.required)">Password is Required</span>
+        <span class="validation-error" *ngIf="(profileForm.errors)">Password need to Match</span>
       </div>
     </div>
-    <button type="submit" class="registerButton btn btn-primary" [disabled]="(userVerify == false  || registerForm.valid == false)">Register</button>
+    <button type="submit" class="registerButton btn btn-primary" [disabled]="(userVerify == false  || profileForm.valid == false)">Register</button>
+
   </form>
+  <button (click)="enable()"></button>
 </div>

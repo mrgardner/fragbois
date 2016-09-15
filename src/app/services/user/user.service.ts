@@ -9,11 +9,15 @@ export class UserService {
   private user: Object;
   private users: Array<Object>;
   private verifyUser: boolean;
+  private verifyEmailAddress: boolean;
+  private signedInValue: boolean;
 
   constructor(private router: Router) {
 
     this.users = [];
-    this.verifyUser = true;
+    this.verifyUser = null;
+    this.verifyEmailAddress = null;
+    this.signedInValue = false;
 
   }
 
@@ -22,7 +26,6 @@ export class UserService {
     firebase.auth().createUserWithEmailAndPassword(users.email, users.password).then(function(user){
       that.createUserDB(users, user.uid);
       //Here if you want you can sign in the user
-      firebase.auth().sendEmailVerification();
     }).catch(function(error) {
       //Handle error
     });
@@ -38,6 +41,9 @@ export class UserService {
     tuple["lastName"] = user.lastName;
     tuple["email"] = user.email;
     tuple["dob"] = user.month + " "+ user.day + " " + user.year;
+    tuple["day"] = user.day;
+    tuple["month"] = user.month;
+    tuple["year"] = user.year;
     tuple["age"] = age;
     tuple["password"] = user.password;
     tuple["gender"] = user.gender;
@@ -54,6 +60,9 @@ export class UserService {
               that.user["lastName"] = snapshot.val().lastName;
               that.user["email"] = snapshot.val().email;
               that.user["dob"] = snapshot.val().dob;
+              that.user["day"] = snapshot.val().day;
+              that.user["month"] = snapshot.val().month;
+              that.user["year"] = snapshot.val().year;
               that.user["age"] = snapshot.val().age;
               that.user["password"] = snapshot.val().password;
               that.user["gender"] = snapshot.val().gender;
@@ -67,16 +76,35 @@ export class UserService {
       .on('value', function(snapshot) {
         let total = Object.keys(snapshot.val()).length;
         for(let i = 0; i < total; i++) {
-            let id = Object(Object.keys(snapshot.val())[i]);
-              if(username == snapshot.val()[id].username) {
-                that.verifyUser = false;
-              }
-              else {
-                that.verifyUser = true;
-              }
+          let id = Object(Object.keys(snapshot.val())[i]);
+            if(username == snapshot.val()[id].username) {
+              that.verifyUser = false;
+              break;
+            }
+            else {
+              that.verifyUser = true;
+            }
         }
       });
     return that.verifyUser;
+  }
+
+  verifyEmail(email: string) {
+    let that = this;
+    firebase.database().ref(`Users/`)
+      .on('value', function(snapshot) {
+        let total = Object.keys(snapshot.val()).length;
+        for(let i = 0; i < total; i++) {
+          let id = Object(Object.keys(snapshot.val())[i]);
+          if(email == snapshot.val()[id].email) {
+            that.verifyEmailAddress = false;
+          }
+          else {
+            that.verifyEmailAddress = true;
+          }
+        }
+      });
+    return that.verifyEmailAddress;
   }
 
   uploadFile(file:File, fileName:string) {
@@ -110,5 +138,18 @@ export class UserService {
 
   getCurrentUser() {
     return firebase.auth().currentUser;
+  }
+
+  signedIn(value:boolean) {
+    this.signedInValue = value;
+  }
+
+  isSignedIn() {
+    if(this.signedInValue) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }

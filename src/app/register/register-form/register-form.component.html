@@ -6,7 +6,8 @@
              class="form-control"
              id="username"
              formControlName="username">
-      <span *ngIf="registerForm.controls.username.value.length > 0">Verify Username <a (click)="verifyUser(registerForm.controls.username.value)" class="userVerifier">here</a></span>
+      <span *ngIf="registerForm.controls.username.value.length > 0 && !registerForm.controls.username.errors?.pattern">
+        Verify Username <a (click)="verifyUser(registerForm.controls.username.value)" class="userVerifier">here</a></span>
       <span *ngIf="userAvailable == true && registerForm.controls.username.value.length > 0" class="validation-pass">available</span>
       <span *ngIf="userAvailable == false && registerForm.controls.username.value.length > 0" class="validation-error">not available</span>
       <div *ngIf="registerForm.controls.username.touched" class="validation-error">
@@ -42,6 +43,10 @@
              class="form-control"
              id="email"
              formControlName="email">
+      <span *ngIf="registerForm.controls.email.value.length > 0 && !registerForm.controls.email.errors?.pattern">
+        Verify Email Address <a (click)="verifyEmail(registerForm.controls.email.value)" class="userVerifier">here</a></span>
+      <span *ngIf="emailAvailable == true && registerForm.controls.email.value.length > 0" class="validation-pass">available</span>
+      <span *ngIf="emailAvailable == false && registerForm.controls.email.value.length > 0" class="validation-error">not available</span>
       <div *ngIf="registerForm.controls.email.touched" class="validation-error">
         <span class="validation-error" *ngIf="(registerForm.controls.email.errors?.required)">Email Address is Required</span>
         <span class="validation-error" *ngIf="(registerForm.controls.email.errors?.pattern)">Invalid Email Address</span>
@@ -93,6 +98,6 @@
         <span class="validation-error" *ngIf="(registerForm.errors)">Password need to Match</span>
       </div>
     </div>
-    <button type="submit" class="registerButton btn btn-primary" [disabled]="(userVerify == false  || registerForm.valid == false)">Register</button>
+    <button type="submit" class="registerButton btn btn-primary" [disabled]="(userVerify == false || emailVerify == false || registerForm.valid == false)">Register</button>
   </form>
 </div>

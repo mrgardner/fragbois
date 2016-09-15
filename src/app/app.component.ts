@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, NgZone, ChangeDetectorRef} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+
+  constructor(private zone: NgZone, private cdr: ChangeDetectorRef) {
+    zone.run(function() {
+      cdr.markForCheck();
+    });
+  }
 }

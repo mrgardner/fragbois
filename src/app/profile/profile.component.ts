@@ -9,21 +9,13 @@ import {Validators, FormBuilder, FormGroup} from "@angular/forms";
 })
 export class ProfileComponent implements OnInit {
   private userDetails: Object;
-  private registerForm:FormGroup;
+  private profileForm:FormGroup;
   private months:Array<string>;
   private days:Array<number>;
   private years:Array<number>;
   private users:Array<Object>;
   private userVerify: boolean;
   private userAvailable: boolean;
-  private username: string;
-  private firstName: string;
-  private lastName: string;
-  private email: string;
-  private dobDay: number;
-  private dobMonth: string;
-  private dobYear: number;
-  private gender: string;
   public genders = [
     { value: 'Female', display: 'Female' },
     { value: 'Male', display: 'Male' },
@@ -38,17 +30,10 @@ export class ProfileComponent implements OnInit {
       let user = this.userService.getCurrentUser();
       this.userDetails = this.userService.getUser(user.uid);
     }
-    // this.username = "";
-    // this.firstName = "";
-    // this.lastName = "";
-    // this.email = "tttttt";
-    // this.dobDay = 6;
-    // this.dobMonth = "December";
-    // this.dobYear = 1993;
-    // this.gender = "Male";
+    this.userService.verifyUsername("")
     this.users = [];
     this.userVerify = false;
-    this.registerForm = formBuilder.group({
+    this.profileForm = formBuilder.group({
       'username': ['',[
         Validators.required,
         Validators.pattern("^[a-zA-Z0-9]+$")
@@ -93,77 +78,83 @@ export class ProfileComponent implements OnInit {
       1919,1918,1917,1916,1915,1914,1913,1912,1911,1910,1909,1908,1907,1906,1905,1904,1903,1902,1901,1900];
   }
 
-ngOnInit() {
-}
+  ngOnInit() {}
 
-verifyUser(username:string) {
-  let user = this.userService.verifyUsername(username);
-  if(user) {
-    this.userVerify = true;
-    this.userAvailable = true
-  }
-  else {
-    this.userVerify = false;
-    this.userAvailable = false;
-  }
-}
-
-onSignup() {
-  this.userService.signupUser(this.registerForm.value);
-  // this.router.navigate(['login']);
-}
-
-onMonthChange(monthName) {
-  switch (monthName) {
-    case "January":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-      break;
-    case "February":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
-      break;
-    case "March":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-      break;
-    case "April":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-      break;
-    case "May":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-      break;
-    case "June":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-      break;
-    case "July":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-      break;
-    case "August":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-      break;
-    case "September":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-      break;
-    case "October":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-      break;
-    case "November":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-      break;
-    case "December":
-      this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-      break;
-  }
-
-}
-matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-  return (group: FormGroup): {[key: string]: any} => {
-    let password = group.controls[passwordKey];
-    let confirmPassword = group.controls[confirmPasswordKey];
-
-    if (password.value !== confirmPassword.value) {
-      return {
-        mismatchedPasswords: true
-      };
+  verifyUser(username:string) {
+    let user = this.userService.verifyUsername(username);
+    console.log(user);
+    if(user) {
+      this.userVerify = true;
+      this.userAvailable = true
+    }
+    else {
+      this.userVerify = false;
+      this.userAvailable = false;
     }
   }
-}
+
+  onSignup() {
+    console.log(this.profileForm.value)
+    // this.userService.signupUser(this.profileForm.value);
+    // this.router.navigate(['login']);
+  }
+
+  onMonthChange(monthName) {
+    switch (monthName) {
+      case "January":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        break;
+      case "February":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
+        break;
+      case "March":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        break;
+      case "April":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+        break;
+      case "May":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        break;
+      case "June":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+        break;
+      case "July":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        break;
+      case "August":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        break;
+      case "September":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+        break;
+      case "October":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        break;
+      case "November":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+        break;
+      case "December":
+        this.days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        break;
+    }
+
+  }
+  enable() : void {
+    let ctrl = this.profileForm.get('email')
+    ctrl.enable();
+  }
+
+  matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      let password = group.controls[passwordKey];
+      let confirmPassword = group.controls[confirmPasswordKey];
+
+      if (password.value !== confirmPassword.value) {
+        return {
+          mismatchedPasswords: true
+        };
+      }
+    }
+  }
 }

@@ -1,16 +1,15 @@
 <app-nav-menu></app-nav-menu>
 <div class="fileFormContainer">
-  <form [formGroup]="fileForm" (ngSubmit)="onUpload()" (change)="getFile($event)">
-    <div class="form-group">
+  <!--<form [formGroup]="fileForm" (ngSubmit)="onUpload()" (change)="getFile($event)">-->
+    <!--<div class="form-group">-->
       <label for="file">file</label>
-      <input type="file"
+      <input (change)="getFile($event)" type="file"
              id="file"
-             formControlName="file" accept="image/*" height="440px" width="440px">
-      <!--<div *ngIf="fileForm.controls.file.touched" class="validation-error">-->
-        <!--<span class="validation-error" *ngIf="(fileForm.controls.file.errors?.required)">file is Required</span>-->
-        <!--&lt;!&ndash;<span class="validation-error" *ngIf="(loginForm.controls.username.errors?.pattern)">Only letter and numbers allowed</span>&ndash;&gt;-->
-      <!--</div>-->
-    </div>
-    <button type="submit" class="registerButton btn btn-primary" [disabled]="!isFile">Upload</button>
-  </form>
+              accept="image/*">
+  <img *ngIf="isFile" [src]="imgSrc" height="75px" width="75px">
+<span *ngIf="imgTooBig" class="validation-error">Image is too big!</span>
+  <br>
+    <button type="submit" class="registerButton btn btn-primary" (click)="onUpload()" [disabled]="!isFile">Upload</button>
+  <!--</form>-->
+  <img class="image" />
 </div>

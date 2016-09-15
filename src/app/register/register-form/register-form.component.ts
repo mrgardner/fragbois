@@ -23,6 +23,8 @@ export class RegisterFormComponent implements OnInit {
   private users:Array<Object>;
   private userVerify: boolean;
   private userAvailable: boolean;
+  private emailAvailable: boolean;
+  private emailVerify: boolean;
   public genders = [
     { value: 'Female', display: 'Female' },
     { value: 'Male', display: 'Male' },
@@ -31,9 +33,13 @@ export class RegisterFormComponent implements OnInit {
 
 
   constructor(private formBuilder:FormBuilder, private userService: UserService, private router: Router) {
-    this.userAvailable = null;
     this.users = [];
     this.userVerify = false;
+    this.emailVerify = false;
+    this.userAvailable = null;
+    this.emailAvailable = null;
+    this.userService.verifyUsername("")
+    this.userService.verifyEmail("")
     this.registerForm = formBuilder.group({
       'username': ['',[
         Validators.required,
@@ -98,10 +104,21 @@ export class RegisterFormComponent implements OnInit {
     }
   }
 
+  verifyEmail(email:string) {
+    let user = this.userService.verifyEmail(email);
+    if(user) {
+      this.emailVerify = true;
+      this.emailAvailable = true
+    }
+    else {
+      this.emailVerify = false;
+      this.emailAvailable = false;
+    }
+  }
+
   onSignup() {
-    console.log(this.registerForm.value)
-    // this.userService.signupUser(this.registerForm.value);
-    // this.router.navigate(['login']);
+    this.userService.signupUser(this.registerForm.value);
+    this.router.navigate(['login']);
   }
 
   onMonthChange(monthName) {
