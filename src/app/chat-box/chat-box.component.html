@@ -4,7 +4,7 @@
 <div class="chatContainer">
   <div class="messageContainer">
     <div *ngFor="let message of messages">
-       <span *ngIf="showTimestamp">{{message.time | date:"hh:mm:ss"}}</span> {{message.sender}} {{message.message}}
+       <span *ngIf="showTimestamp" class="messageTime">{{message.time | date:"MM/dd/yyyy hh:mm:ss"}} - </span> <span class="messageSender">{{message.sender}}:</span>  <span class="messageSent">{{message.message}}</span>
     </div>
   </div>
   <div class="textContainer">
