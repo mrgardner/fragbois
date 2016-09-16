@@ -1,3 +1,7 @@
 .validation-error {
   color:red
 }
+
+.fileFormContainer {
+  margin-bottom: 3em;
+}

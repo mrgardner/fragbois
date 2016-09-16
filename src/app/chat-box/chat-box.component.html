@@ -1,0 +1,16 @@
+<button (click)="hideTime()">Hide time stamp</button>
+<button (click)="showTime()">Show time stamp</button>
+<button (click)="clearChat()">Clear Chat</button>
+<div class="chatContainer">
+  <div class="messageContainer">
+    <div *ngFor="let message of messages">
+       <span *ngIf="showTimestamp">{{message.time | date:"hh:mm:ss"}}</span> {{message.sender}} {{message.message}}
+    </div>
+  </div>
+  <div class="textContainer">
+      <form [formGroup]="chatForm" (ngSubmit)="onMessageSend()">
+        <textarea type="text" id="chatBox" formControlName="chatBox" [(ngModel)]="chatTextArea"></textarea>
+        <button type="submit" class="SendMessageButton btn btn-primary" [disabled]="!chatForm.valid">Send Message</button>
+      </form>
+  </div>
+</div>

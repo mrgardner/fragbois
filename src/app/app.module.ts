@@ -15,6 +15,8 @@ import {routing} from "./app.routes";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import { ProfileComponent } from './profile/profile.component';
 import {AuthGuard} from "./services/user/auth.guard";
+import {MessagesService} from "./services/messages/messages.service";
+import { ChatBoxComponent } from './chat-box/chat-box.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import {AuthGuard} from "./services/user/auth.guard";
     HomeComponent,
     NavMenuComponent,
     HeaderBannerComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChatBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import {AuthGuard} from "./services/user/auth.guard";
     HttpModule,
     routing
   ],
-  providers: [UserService, {provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuard],
+  providers: [UserService, {provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuard, MessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

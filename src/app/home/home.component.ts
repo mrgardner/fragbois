@@ -18,11 +18,23 @@ export class HomeComponent implements OnInit {
   private fileName:string;
   private imgSrc: any;
   private imgTooBig: boolean;
+  private userDetails: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService, private ref: ChangeDetectorRef) {
     if(!this.userService.isAuthenticated())
     {
       this.router.navigate(['login']);
+      this.userDetails = {};
+      let user = this.userService.getCurrentUser();
+      this.userDetails = this.userService.getUser(user.uid);
     }
+
+    if(this.userService.isAuthenticated())
+    {
+      this.userDetails = {};
+      let user = this.userService.getCurrentUser();
+      this.userDetails = this.userService.getUser(user.uid);
+    }
+
     this.isFile = false;
 
     this.fileForm = formBuilder.group({
@@ -64,7 +76,8 @@ export class HomeComponent implements OnInit {
 
     reader.readAsDataURL(imageFile);
       this.filesToUpload = imageFile;
-      this.fileName = localStorage.getItem('username') + ".jpg";
+
+      this.fileName =  this.userDetails.email+ ".jpg";
       this.isFile = true;
   }
 }

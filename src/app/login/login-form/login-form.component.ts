@@ -38,7 +38,6 @@ export class LoginFormComponent implements OnInit {
     var t = this.userService.signinUser(this.loginForm.value);
     t.then((res) => {
       this.wrongCredentials = false;
-      localStorage.setItem('username', this.loginForm.value.email);
       this.userService.signedIn(true);
       this.router.navigate(['']);
     }).catch((error) => {
