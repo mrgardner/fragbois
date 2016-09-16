@@ -19,10 +19,12 @@
 }
 
 textarea {
-  width: 90.2%;
+  width: 89.3%;
   height: 100px;
   border: 0;
   resize: none;
+  margin-bottom: -5px;
+  padding: 0;
   background-color: darkgrey;
   color: white;
 }
