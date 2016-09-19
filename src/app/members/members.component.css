@@ -1,0 +1,10 @@
+.profileImg {
+  height: auto;
+  width: 50px;
+  position: relative;
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}

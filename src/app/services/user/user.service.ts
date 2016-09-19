@@ -66,8 +66,43 @@ export class UserService {
               that.user["age"] = snapshot.val().age;
               that.user["password"] = snapshot.val().password;
               that.user["gender"] = snapshot.val().gender;
+              that.user["profileImg"] = snapshot.val().profileImg;
+              that.user["requests"] = snapshot.val().requests;
+              that.user["friends"] = snapshot.val().friends;
         });
     return that.user;
+  }
+
+  getAllUsers() {
+    let that = this;
+    that.users = [];
+    firebase.database().ref(`Users/`)
+      .on('value', function(snapshot) {
+        if(snapshot.val()) {
+          let total = Object.keys(snapshot.val()).length;
+          for (let i = 0; i < total; i++) {
+            let id = Object(Object.keys(snapshot.val())[i]);
+            that.user = {};
+            that.user["uid"] = id;
+            that.user["username"] = snapshot.val()[id].username;
+            that.user["firstName"] = snapshot.val()[id].firstName;
+            that.user["lastName"] = snapshot.val()[id].lastName;
+            that.user["email"] = snapshot.val()[id].email;
+            that.user["dob"] = snapshot.val()[id].dob;
+            that.user["day"] = snapshot.val()[id].day;
+            that.user["month"] = snapshot.val()[id].month;
+            that.user["year"] = snapshot.val()[id].year;
+            that.user["age"] = snapshot.val()[id].age;
+            that.user["password"] = snapshot.val()[id].password;
+            that.user["requests"] = snapshot.val()[id].requests;
+            that.user["friends"] = snapshot.val()[id].friends;
+            that.user["gender"] = snapshot.val()[id].gender;
+            that.user["profileImg"] = snapshot.val()[id].profileImg;
+            that.users.push(that.user)
+          }
+        }
+      });
+    return that.users;
   }
 
   verifyUsername(username: string) {
@@ -107,9 +142,27 @@ export class UserService {
     return that.verifyEmailAddress;
   }
 
-  uploadFile(file:File, fileName:string) {
+  uploadFile(file:File, fileName:string, id: string) {
     var storageRef = firebase.storage().ref(`images/${fileName}`);
     storageRef.put(file);
+  }
+
+  updateProfileImg(id: any, url: any) {
+    let tuple = {};
+    tuple["profileImg"] = url;
+    firebase.database().ref(`Users/${id}`).update(tuple);
+  }
+
+  addFriend(id: any, requests: any) {
+    firebase.database().ref(`Users/${id}/requests/${requests.name}`).update(requests);
+  }
+
+  acceptFriend(id: any, friends: any) {
+    firebase.database().ref(`Users/${id}/friends/${friends.name}`).update(friends);
+  }
+
+  removeRequest(id: any, friends: any) {
+    firebase.database().ref(`Users/${id}/requests/${friends.name}`).remove();
   }
 
   downloadFile(fileName: string) {

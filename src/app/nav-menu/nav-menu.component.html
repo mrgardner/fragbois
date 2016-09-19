@@ -1,8 +1,25 @@
 <div class="headerContainer">
   <button *ngIf="isSigned()" (click)="onLogout()">logout</button>
+  <button *ngIf="isSigned()" (click)="onHome()">Home</button>
+  <button *ngIf="isSigned()" (click)="onMembers()">members</button>
+  <div class="notificationContainer dropdown" *ngIf="isSigned() && showNotifications == true" type="button" data-toggle="dropdown">
+    <div class="dropdown">
+      <span class="notificationIcon fa fa-bell dropdown-toggle" type="button" data-toggle="dropdown"></span>
+      <span class="notificationNumber">{{numOfNotifications}}</span>
+      <div class="dropdown-menu" (click)="$event.stopPropagation()">
+        <span class="numberOfNotifications">Notifications {{numOfNotifications}}</span>
+        <div *ngFor="let request of requests" class="notificationSubContainer" (mouseover)="setUsername(request.name);">
+          <span> {{request.name}} </span>
+          <button class="acceptButton" (click)="onAccept(request.name)">Accept</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <div class="profileImgContainer" *ngIf="isSigned()">
-    <i class="fa fa-caret-down accountArrow" aria-hidden="true"></i>
     <img [src]="imageSrc" class="profileImg" (click)="goToProfile()">
+    <span *ngIf="isSigned()" class="userText">{{test}}</span>
+    <i class="fa fa-caret-down accountArrow" aria-hidden="true"></i>
   </div>
 </div>
 

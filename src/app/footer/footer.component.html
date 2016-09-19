@@ -1,0 +1,12 @@
+  <div class="dropup">
+    <button class="dropdown-toggle" type="button" data-toggle="dropdown">click</button>
+    <div class="dropdown-menu" (click)="$event.stopPropagation()">
+      <div class="chatWindow"></div>
+      <div>
+        <input>
+        <button>send</button>
+      </div>
+    </div>
+  </div>
+
+

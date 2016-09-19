@@ -19,20 +19,18 @@ export class HomeComponent implements OnInit {
   private imgSrc: any;
   private imgTooBig: boolean;
   private userDetails: any;
+  private user: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService, private ref: ChangeDetectorRef) {
     if(!this.userService.isAuthenticated())
     {
       this.router.navigate(['login']);
-      this.userDetails = {};
-      let user = this.userService.getCurrentUser();
-      this.userDetails = this.userService.getUser(user.uid);
     }
 
     if(this.userService.isAuthenticated())
     {
       this.userDetails = {};
-      let user = this.userService.getCurrentUser();
-      this.userDetails = this.userService.getUser(user.uid);
+      this.user = this.userService.getCurrentUser();
+      this.userDetails = this.userService.getUser(this.user.uid);
     }
 
     this.isFile = false;
@@ -52,7 +50,7 @@ export class HomeComponent implements OnInit {
   }
 
   onUpload() {
-    this.userService.uploadFile(this.filesToUpload, this.fileName);
+    this.userService.uploadFile(this.filesToUpload, this.fileName, this.user.uid);
   }
 
   getFile(event) {

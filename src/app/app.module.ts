@@ -17,6 +17,9 @@ import { ProfileComponent } from './profile/profile.component';
 import {AuthGuard} from "./services/user/auth.guard";
 import {MessagesService} from "./services/messages/messages.service";
 import { ChatBoxComponent } from './chat-box/chat-box.component';
+import { MembersComponent } from './members/members.component';
+import { MemberProfileComponent } from './member-profile/member-profile.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { ChatBoxComponent } from './chat-box/chat-box.component';
     NavMenuComponent,
     HeaderBannerComponent,
     ProfileComponent,
-    ChatBoxComponent
+    ChatBoxComponent,
+    MembersComponent,
+    MemberProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

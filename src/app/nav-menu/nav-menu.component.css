@@ -9,6 +9,12 @@
   right: 0;
 }
 
+.notificationContainer {
+  position: absolute;
+  left: 85%;
+  color: white;
+}
+
 .profileImg {
   height: auto;
   width: 50px;
@@ -17,6 +23,45 @@
   cursor: pointer;
 }
 
-.accountArrow {
+.dropdown-menu {
+  background-color: black;
+}
+
+.numberOfNotifications {
+  margin-bottom: 1em;
+}
+
+.notificationSubContainer {
+  margin-bottom: 1em;
+}
+
+.acceptButton {
+  color: black;
+  position: absolute;
+  right: 0;
+}
+
+.userText {
+  margin-left: 0.5em;
+}
+
+.accountArrow,
+.userText  {
   color: white;
+  position: relative;
+  bottom: 15px;
+  margin-right: 0.5em;
+}
+
+.notificationNumber {
+  position: relative;
+  bottom: 14px;
+  right: 10px;
+  background-color: red;
+  padding-right: 0.3em;
+  padding-left: 0.3em;
+}
+
+.notificationIcon{
+  font-size: 20px;
 }

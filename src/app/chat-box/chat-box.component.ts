@@ -26,9 +26,12 @@ export class ChatBoxComponent implements OnInit{
     this.messages = [];
     this.showTimestamp = true;
     this.messages = this.messagesService.getAllMessages();
-    this.userDetails = {};
-    let user = this.userService.getCurrentUser();
-    this.userDetails = this.userService.getUser(user.uid);
+    if(this.userService.isAuthenticated())
+    {
+      this.userDetails = {};
+      let user = this.userService.getCurrentUser();
+      this.userDetails = this.userService.getUser(user.uid);
+    }
 
     if(localStorage.getItem('total'))
     {

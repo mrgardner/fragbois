@@ -1,0 +1,6 @@
+<div class="container">
+  <ul *ngFor="let member of members">
+    <li> <img class="profileImg" [src]="member.profileImg"><a (click)="onMemberProfile(member.username)">{{member.username}}</a></li>
+  </ul>
+</div>
+
