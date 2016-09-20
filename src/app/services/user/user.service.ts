@@ -69,6 +69,7 @@ export class UserService {
               that.user["profileImg"] = snapshot.val().profileImg;
               that.user["requests"] = snapshot.val().requests;
               that.user["friends"] = snapshot.val().friends;
+              that.user["loggedIn"] = snapshot.val().loggedIn;
         });
     return that.user;
   }
@@ -98,6 +99,7 @@ export class UserService {
             that.user["friends"] = snapshot.val()[id].friends;
             that.user["gender"] = snapshot.val()[id].gender;
             that.user["profileImg"] = snapshot.val()[id].profileImg;
+            that.user["loggedIn"] = snapshot.val()[id].loggedIn;
             that.users.push(that.user)
           }
         }
@@ -157,6 +159,10 @@ export class UserService {
     firebase.database().ref(`Users/${id}/requests/${requests.name}`).update(requests);
   }
 
+  removeFriend(id: any, requests: any) {
+    firebase.database().ref(`Users/${id}/friends/${requests.name}`).remove();
+  }
+
   acceptFriend(id: any, friends: any) {
     firebase.database().ref(`Users/${id}/friends/${friends.name}`).update(friends);
   }
@@ -177,6 +183,18 @@ export class UserService {
     firebase.auth().signOut();
     localStorage.removeItem('username');
     this.router.navigate(['/login']);
+  }
+
+  userOnline(uid: any, name: any) {
+    let tuple = {}
+    tuple["loggedIn"] = true;
+    firebase.database().ref(`Users/${uid}/friends/${name}`).update(tuple);
+  }
+
+  userOffline(uid: any, name: any) {
+    let tuple = {}
+    tuple["loggedIn"] = false;
+    firebase.database().ref(`Users/${uid}/friends/${name}`).update(tuple);
   }
 
   isAuthenticated() {

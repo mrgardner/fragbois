@@ -20,6 +20,7 @@ export class NavMenuComponent implements OnInit {
   private uid: any;
   private currentUser: any;
   private username: any;
+  private logoutUser:any;
 
   constructor(private router: Router, private userService: UserService) {
     let that = this;
@@ -72,10 +73,26 @@ export class NavMenuComponent implements OnInit {
   isSigned() {
     return this.userService.isSignedIn();
   }
+  // if (Object.keys(that.users[i].friends)[j] == that.currentUser.username && res.uid != that.users[i].uid) {
 
   onLogout() {
+    let that = this;
     this.imageName = "";
+    // localStorage.removeItem('personalMessageTotal')
+    // localStorage.removeItem('personalMessageId');
     this.userService.signedIn(false);
+    that.logoutUser = that.userService.getUser(that.user.uid);
+    that.users = that.userService.getAllUsers();
+    for (let i = 0; i < that.users.length; i++) {
+      if (that.users[i].friends) {
+        for (let j = 0; j < Object.keys(that.users[i].friends).length; j++) {
+          if (Object.keys(that.users[i].friends)[j] == that.logoutUser.username && that.user.uid != that.users[i].uid) {
+            console.log(Object.keys(that.users[i].friends)[j])
+            that.userService.userOffline(that.users[i].uid,that.logoutUser.username)
+          }
+        }
+      }
+    }
     this.userService.logout();
   }
 

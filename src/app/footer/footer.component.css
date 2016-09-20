@@ -1,3 +1,138 @@
 .chatWindow {
-  height: 150px;
+  height: 88.5%;
+  overflow-y: scroll;
+}
+
+.fa-times {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.friendListButton {
+  position: fixed;
+  top: 97%;
+  right: 0;
+  width: 14.85%;
+}
+
+.friendList {
+  top: 30%;
+  left: 85.1%;
+  height: 66.5%;
+  width: 14.2%;
+  position: fixed;
+  color: black;
+  overflow-y: scroll;
+}
+
+.online {
+  color: green;
+}
+
+.offline {
+  color: red;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+#friendChatButton0{
+  display: none;
+  position: fixed;
+  top: 97%;
+  left: 68%;
+  width: 16%;
+  text-align: center;
+  background-color: grey;
+  color: white;
+}
+
+#friendChat0{
+  top: 30%;
+  left: 68%;
+  height: 66.5%;
+  width: 16%;
+  position: fixed;
+  color: black;
+}
+
+#friendChatButton1{
+  display: none;
+  position: fixed;
+  top: 97%;
+  left: 51%;
+  width: 16%;
+  text-align: center;
+  background-color: grey;
+  color: white;
+}
+
+#friendChat1{
+  top: 30%;
+  left: 51%;
+  height: 66.5%;
+  width: 16%;
+  position: fixed;
+  color: black;
+}
+
+#friendChatButton2{
+  display: none;
+  position: fixed;
+  top: 97%;
+  left: 36%;
+  width: 16%;
+  text-align: center;
+  background-color: grey;
+  color: white;
+}
+
+#friendChat2{
+  top: 30%;
+  left: 36%;
+  height: 66.5%;
+  width: 16%;
+  position: fixed;
+  color: black;
+}
+
+#friendChatButton3{
+  display: none;
+  position: fixed;
+  top: 97%;
+  left: 21%;
+  width: 16%;
+  text-align: center;
+  background-color: grey;
+  color: white;
+}
+
+#friendChat3{
+  top: 30%;
+  left: 21%;
+  height: 66.5%;
+  width: 16%;
+  position: fixed;
+  color: black;
+}
+
+.chat0,
+.chat1,
+.chat2,
+.chat3 {
+  position: absolute;
+  top: 90%;
+}
+
+.chatButton0,
+.chatButton1,
+.chatButton2,
+.chatButton3 {
+  position: absolute;
+  top: 90%;
+  right: 0;
 }

@@ -2,5 +2,7 @@
   <h1>{{username}}</h1>
   <img [src]="imageSrc" class="profileImg">
   <br>
-  <button (click)="addFriend()">Add Friend?</button> <span>{{friendStatus}}</span>
+  <button *ngIf="isFriend == false" (click)="addFriend()">Add Friend?</button>
+  <button *ngIf="isFriend == true" (click)="removeFriend()">Remove Friend?</button>
+  <span>{{friendStatus}}</span>
 </div>

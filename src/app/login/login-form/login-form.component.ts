@@ -16,6 +16,8 @@ export class LoginFormComponent implements OnInit {
 
   private loginForm:FormGroup;
   private wrongCredentials:boolean;
+  private users:any;
+  private currentUser:any;
 
   constructor(private formBuilder:FormBuilder, private userService:UserService, private router:Router) {
     this.wrongCredentials = false;
@@ -35,13 +37,26 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSignin() {
-    var t = this.userService.signinUser(this.loginForm.value);
+    let that = this;
+    var t = that.userService.signinUser(that.loginForm.value);
     t.then((res) => {
-      this.wrongCredentials = false;
-      this.userService.signedIn(true);
-      this.router.navigate(['']);
+      that.wrongCredentials = false;
+      that.currentUser = that.userService.getUser(res.uid);
+      that.users = that.userService.getAllUsers();
+      for (let i = 0; i < that.users.length; i++) {
+        if (that.users[i].friends) {
+          for (let j = 0; j < Object.keys(that.users[i].friends).length; j++) {
+            if (Object.keys(that.users[i].friends)[j] == that.currentUser.username && res.uid != that.users[i].uid) {
+              that.userService.userOnline(that.users[i].uid,that.currentUser.username)
+            }
+          }
+        }
+      }
+      that.userService.signedIn(true);
+
+      that.router.navigate(['']);
     }).catch((error) => {
-      this.wrongCredentials = true;
+      that.wrongCredentials = true;
     });
   }
 
