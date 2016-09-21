@@ -15,6 +15,13 @@
   color: white;
 }
 
+.spinner {
+  position: absolute;
+  left: 47%;
+  color: white;
+  font-size: 45px;
+}
+
 .profileImg {
   height: auto;
   width: 50px;

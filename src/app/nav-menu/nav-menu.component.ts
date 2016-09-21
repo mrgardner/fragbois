@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../services/user/user.service";
+import {MessagesService} from "../services/messages/messages.service";
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
@@ -21,22 +22,27 @@ export class NavMenuComponent implements OnInit {
   private currentUser: any;
   private username: any;
   private logoutUser:any;
+  private loading: boolean;
 
   constructor(private router: Router, private userService: UserService) {
     let that = this;
     that.imageName = "";
     that.imageSrc = "";
+    that.loading = true;
 
-    setInterval(() =>  {
-      if(this.userService.isAuthenticated())
-      {
-        this.showNotifications = false;
-        that.userDetails = {};
-        that.user = that.userService.getCurrentUser();
-        that.userDetails = that.userService.getUser(that.user.uid);
-        that.test = that.userDetails.username;
-        that.imageName = that.userDetails.email+ ".jpg";
-        that.userService.downloadFile(that.imageName).getDownloadURL().then(function (url) {
+    this.userService.signInItem$.subscribe(_ => {
+      console.log("Sign In");
+      that.loading = true;
+      setTimeout(function () {
+        if(that.userService.isAuthenticated())
+        {
+          that.showNotifications = false;
+          that.userDetails = {};
+          that.user = that.userService.getCurrentUser();
+          that.userDetails = that.userService.getUser(that.user.uid);
+          that.test = that.userDetails.username;
+          that.imageName = that.userDetails.email+ ".jpg";
+          that.userService.downloadFile(that.imageName).getDownloadURL().then(function (url) {
             that.imageSrc = url;
             that.userService.updateProfileImg(that.user.uid,url);
           }).catch(function (error) {
@@ -45,23 +51,23 @@ export class NavMenuComponent implements OnInit {
             that.userService.updateProfileImg(that.user.uid,'https://firebasestorage.googleapis.com/v0/b/fragbois-b7c29.appspot.com/o/images%2Fidenticon.png?alt=media&token=949eb2a7-32d5-4603-9aac-e32cecdb43bd');
           })
 
-        if(that.userDetails.requests)
-        {
-          that.requests =  Object.keys(that.userDetails.requests).map(function (key) {return that.userDetails.requests[key]});
-          this.showNotifications = true;
-          that.numOfNotifications = Object.keys(that.userDetails.requests).length;
-        }
-
-        that.users = that.userService.getAllUsers();
-        for (let i = 0; i < that.users.length; i++) {
-          if (that.users[i].username == this.username) {
-            that.uid = that.users[i].uid;
+          if(that.userDetails.requests)
+          {
+            that.requests =  Object.keys(that.userDetails.requests).map(function (key) {return that.userDetails.requests[key]});
+            that.showNotifications = true;
+            that.numOfNotifications = Object.keys(that.userDetails.requests).length;
           }
+
+          that.users = that.userService.getAllUsers();
+          for (let i = 0; i < that.users.length; i++) {
+            if (that.users[i].username == that.username) {
+              that.uid = that.users[i].uid;
+            }
+          }
+          that.loading = false;
         }
-
-
-      }
-    }, 1000);
+      },5000);
+    })
   }
 
   ngOnInit() {}
@@ -87,7 +93,6 @@ export class NavMenuComponent implements OnInit {
       if (that.users[i].friends) {
         for (let j = 0; j < Object.keys(that.users[i].friends).length; j++) {
           if (Object.keys(that.users[i].friends)[j] == that.logoutUser.username && that.user.uid != that.users[i].uid) {
-            console.log(Object.keys(that.users[i].friends)[j])
             that.userService.userOffline(that.users[i].uid,that.logoutUser.username)
           }
         }

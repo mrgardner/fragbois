@@ -1,8 +1,8 @@
 <div class="headerContainer">
-  <button *ngIf="isSigned()" (click)="onLogout()">logout</button>
-  <button *ngIf="isSigned()" (click)="onHome()">Home</button>
-  <button *ngIf="isSigned()" (click)="onMembers()">members</button>
-  <div class="notificationContainer dropdown" *ngIf="isSigned() && showNotifications == true" type="button" data-toggle="dropdown">
+  <button *ngIf="isSigned() && isAuth() && !loading" (click)="onLogout()">logout</button>
+  <button *ngIf="isSigned() && isAuth() && !loading" (click)="onHome()">Home</button>
+  <button *ngIf="isSigned() && isAuth() && !loading" (click)="onMembers()">members</button>
+  <div class="notificationContainer dropdown" *ngIf="isSigned() && showNotifications == true && isAuth() && !loading" type="button" data-toggle="dropdown">
     <div class="dropdown">
       <span class="notificationIcon fa fa-bell dropdown-toggle" type="button" data-toggle="dropdown"></span>
       <span class="notificationNumber">{{numOfNotifications}}</span>
@@ -16,7 +16,8 @@
     </div>
 
   </div>
-  <div class="profileImgContainer" *ngIf="isSigned()">
+  <span class="spinner fa fa-circle-o-notch fa-spin" *ngIf="isSigned() && isAuth() && loading"></span>
+  <div class="profileImgContainer" *ngIf="isSigned() && isAuth() && !loading">
     <img [src]="imageSrc" class="profileImg" (click)="goToProfile()">
     <span *ngIf="isSigned()" class="userText">{{test}}</span>
     <i class="fa fa-caret-down accountArrow" aria-hidden="true"></i>

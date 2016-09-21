@@ -34,6 +34,32 @@
   color: red;
 }
 
+.spinner {
+  color: black;
+  font-size: 25px;
+}
+
+.chatWindow {
+  background-color: rgba(44, 44, 44, 0.93);
+}
+
+.messageSender {
+  color: red;
+}
+
+.messageReceiver {
+
+  color: green;
+}
+
+.messageTime {
+  color: #4678ff;
+}
+
+.messageSent {
+  color: white;
+}
+
 a {
   cursor: pointer;
   text-decoration: none;

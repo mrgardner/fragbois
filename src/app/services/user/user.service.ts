@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { User } from "./user.interface";
 import {Router} from "@angular/router";
+import {EventEmitter} from "@angular/common/src/facade/async";
 
 declare var firebase: any;
 
@@ -11,9 +12,12 @@ export class UserService {
   private verifyUser: boolean;
   private verifyEmailAddress: boolean;
   private signedInValue: boolean;
+  public signInItem$: EventEmitter<any>;
+  public signInUser$: EventEmitter<any>;
 
   constructor(private router: Router) {
-
+    this.signInItem$ = new EventEmitter();
+    this.signInUser$ = new EventEmitter();
     this.users = [];
     this.verifyUser = null;
     this.verifyEmailAddress = null;
@@ -159,16 +163,18 @@ export class UserService {
     firebase.database().ref(`Users/${id}/requests/${requests.name}`).update(requests);
   }
 
-  removeFriend(id: any, requests: any) {
-    firebase.database().ref(`Users/${id}/friends/${requests.name}`).remove();
+  removeFriend(id: any, friends: any) {
+    this.signInItem$.emit();
+    firebase.database().ref(`Users/${id}/friends/${friends.name}`).remove();
   }
 
   acceptFriend(id: any, friends: any) {
+    this.signInItem$.emit();
     firebase.database().ref(`Users/${id}/friends/${friends.name}`).update(friends);
   }
 
-  removeRequest(id: any, friends: any) {
-    firebase.database().ref(`Users/${id}/requests/${friends.name}`).remove();
+  removeRequest(id: any, requests: any) {
+    firebase.database().ref(`Users/${id}/requests/${requests.name}`).remove();
   }
 
   downloadFile(fileName: string) {
@@ -176,6 +182,8 @@ export class UserService {
   }
 
   signinUser(user: User) {
+    this.signInItem$.emit();
+    this.signInUser$.emit();
     return firebase.auth().signInWithEmailAndPassword(user.email, user.password);
   }
 

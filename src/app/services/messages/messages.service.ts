@@ -1,11 +1,19 @@
-import {Injectable, ElementRef} from "@angular/core";
+import {Injectable} from "@angular/core";
+import {EventEmitter} from "@angular/common/src/facade/async";
 
 declare var firebase: any;
 
 @Injectable()
 export class MessagesService {
 
+  public user$: EventEmitter<any>;
+  public sender$: EventEmitter<any>;
+  public recipient$: EventEmitter<any>;
+
   constructor() {
+    this.user$ = new EventEmitter();
+    this.sender$ = new EventEmitter();
+    this.recipient$ = new EventEmitter();
   }
 
   sendMessage(message:Object, id:any) {
@@ -44,6 +52,14 @@ export class MessagesService {
 
   removeMessage(id) {
     firebase.database().ref(`Messages/Global/${id}`).remove();
+  }
+
+  setSender(sender: any, id: any) {
+    this.sender$.emit({sender, id});
+  }
+
+  setRecipient(recipient: any, id: any) {
+    this.recipient$.emit({recipient, id});
   }
 
   sendPersonalMessage(message:Object,index:any, sender:any, recipient:any) {

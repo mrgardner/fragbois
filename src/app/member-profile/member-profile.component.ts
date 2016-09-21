@@ -17,12 +17,19 @@ export class MemberProfileComponent implements OnInit {
   private currentUser: any
   private isFriend: boolean;
   private userToRemove: any;
+  private currentUserFriends: any;
+  private otherUserFriends: any;
+  private otherUserRequests: any;
 
   constructor(private route:ActivatedRoute, private userService:UserService) {
+    let that = this;
     if (this.userService.isAuthenticated()) {
-      this.user = this.userService.getCurrentUser();
-      this.currentUser = this.userService.getUser(this.user.uid);
-      let that = this;
+      that.user = this.userService.getCurrentUser();
+      that.currentUser = this.userService.getUser(this.user.uid);
+      that.currentUserFriends = [];
+      that.otherUserFriends = [];
+      that.otherUserRequests = [];
+
       that.route.snapshot.params["matrixParameterName"];
       that.route.params.subscribe(matrixParams =>
         that.username = matrixParams["id"]);
@@ -32,45 +39,73 @@ export class MemberProfileComponent implements OnInit {
           that.imageSrc = that.users[i].profileImg;
           that.uid = that.users[i].uid;
           that.userToRemove = that.users[i].username;
-          if (that.users[i].friends && that.currentUser.friends) {
-            for (let j = 0; j < Object.keys(that.users[i].friends).length; j++) {
-              for(let k=0; k<Object.keys(that.currentUser.friends).length;k++) {
 
-                console.log("This "+ Object.keys(that.users[i].friends)[j] + " should match "+ that.currentUser.username +
-                    "and this "+ Object.keys(that.currentUser.friends)[k] + " should match "+that.users[i].username);
-                if (Object.keys(that.users[i].friends)[j] == that.currentUser.username && Object.keys(that.currentUser.friends)[k] == that.users[i].username) {
-                  console.log("Score!");
-                  this.friendStatus = "Friend";
-                  this.isFriend = true;
-                  break;
+          if(that.users[i].friends != null && that.currentUser.friends != null)
+          {
+            that.otherUserFriends =  Object.keys(that.users[i].friends).map(function (key) {return that.users[i].friends[key]});
+            that.currentUserFriends =  Object.keys(that.currentUser.friends).map(function (key) {return that.currentUser.friends[key]});
 
-                }
-                else if (that.users[i].requests) {
-                  for (let j = 0; j < Object.keys(that.users[i].requests).length; j++) {
-                    if (Object.keys(that.users[i].requests)[j] == this.currentUser.username) {
-                      this.friendStatus = "Pending";
-                      this.isFriend = null;
-                      break;
-
+            outerloop:for(let j=0; j<that.otherUserFriends.length; j++) {
+              if(that.otherUserFriends[j].name == that.currentUser.username) {
+                for(let k=0; k<that.currentUserFriends.length;k++) {
+                  if(that.currentUserFriends[k].name == that.users[i].username) {
+                    this.friendStatus = "Friend";
+                    this.isFriend = true;
+                    break outerloop;
+                  }
+                  else if (that.users[i].requests != null) {
+                    that.otherUserRequests =  Object.keys(that.users[i].requests).map(function (key) {return that.users[i].requests[key]});
+                    for(let l =0; l<that.otherUserRequests.length;l++) {
+                      if(that.otherUserRequests[l].name == that.currentUser.username) {
+                        this.friendStatus = "Pending";
+                        this.isFriend = null;
+                        break outerloop;
+                      }
                     }
                   }
-                }
-                else {
-                  this.friendStatus = "Not Friend";
-                  this.isFriend = false;
+                  else {
+                    that.friendStatus = "Not Friend";
+                    that.isFriend = false;
+                  }
                 }
               }
-
+              else if (that.users[i].requests != null) {
+                that.otherUserRequests =  Object.keys(that.users[i].requests).map(function (key) {return that.users[i].requests[key]});
+                for(let l =0; l<that.otherUserRequests.length;l++) {
+                  if(that.otherUserRequests[l].name == that.currentUser.username) {
+                    this.friendStatus = "Pending";
+                    this.isFriend = null;
+                    break outerloop;
+                  }
+                }
+              }
+              else if(that.otherUserFriends[j].name != that.currentUser.username) {
+                that.friendStatus = "Not Friend";
+                that.isFriend = false;
+              }
             }
           }
-
-          else if (that.users[i].requests != null ) {
-            this.friendStatus = "Pending";
-            this.isFriend = null;
+          else if (that.users[i].requests != null) {
+            console.log("Request not null");
+            console.log(that.users[i].requests.length);
+            that.otherUserRequests =  Object.keys(that.users[i].requests).map(function (key) {return that.users[i].requests[key]});
+            for(let l =0; l<that.otherUserRequests.length;l++) {
+              console.log(l)
+              console.log(that.otherUserRequests[l].name)
+              if(that.otherUserRequests[l].name == that.currentUser.username) {
+                console.log("There is a request for "+that.otherUserRequests[l].name);
+                this.friendStatus = "Pending";
+                this.isFriend = null;
+              }
+              else {
+                console.log("there is no request :(")
+              }
+            }
           }
           else {
-            this.friendStatus = "Not Friend";
-            this.isFriend = false;
+            console.log("Boo no friends")
+            that.friendStatus = "Not Friend";
+            that.isFriend = false;
           }
         }
       }
@@ -86,11 +121,9 @@ export class MemberProfileComponent implements OnInit {
     for(let i =0; i<this.uid.length; i++) {
       fullUid += this.uid[i];
     }
-
     let tuple = {}
     tuple["name"] = this.currentUser.username;
     tuple["accept"] = false;
-    console.log(fullUid);
     this.userService.addFriend(fullUid,tuple)
     this.isFriend = null
   }
@@ -101,12 +134,15 @@ export class MemberProfileComponent implements OnInit {
     for(let i =0; i<this.uid.length; i++) {
       fullUid += this.uid[i];
     }
-
     let tuple = {}
     tuple["name"] = this.userToRemove;
     tuple["accept"] = false;
-    console.log(this.userToRemove);
+    let removeTuple = {}
+    removeTuple["name"] = this.currentUser.username;
+    removeTuple["accept"] = false;
+
     this.userService.removeFriend(this.user.uid,tuple)
+    this.userService.removeFriend(fullUid,removeTuple)
     this.isFriend = false;
   }
 }
