@@ -70,18 +70,18 @@ a {
   display: none;
   position: fixed;
   top: 97%;
-  left: 68%;
-  width: 16%;
+  left: 61%;
+  width: 23%;
   text-align: center;
   background-color: grey;
   color: white;
 }
 
 #friendChat0{
-  top: 30%;
-  left: 68%;
-  height: 66.5%;
-  width: 16%;
+  top: 46.5%;
+  left: 61%;
+  height: 50%;
+  width: 23%;
   position: fixed;
   color: black;
 }
@@ -90,18 +90,18 @@ a {
   display: none;
   position: fixed;
   top: 97%;
-  left: 51%;
-  width: 16%;
+  left: 37%;
+  width: 23%;
   text-align: center;
   background-color: grey;
   color: white;
 }
 
 #friendChat1{
-  top: 30%;
-  left: 51%;
-  height: 66.5%;
-  width: 16%;
+  top: 46.5%;
+  left: 37%;
+  height: 50%;
+  width: 23%;
   position: fixed;
   color: black;
 }
@@ -110,41 +110,41 @@ a {
   display: none;
   position: fixed;
   top: 97%;
-  left: 36%;
-  width: 16%;
+  left: 13%;
+  width: 23%;
   text-align: center;
   background-color: grey;
   color: white;
 }
 
 #friendChat2{
-  top: 30%;
-  left: 36%;
-  height: 66.5%;
-  width: 16%;
+  top: 46.5%;
+  left: 13%;
+  height: 50%;
+  width: 23%;
   position: fixed;
   color: black;
 }
 
-#friendChatButton3{
-  display: none;
-  position: fixed;
-  top: 97%;
-  left: 21%;
-  width: 16%;
-  text-align: center;
-  background-color: grey;
-  color: white;
-}
+/*#friendChatButton3{*/
+  /*display: none;*/
+  /*position: fixed;*/
+  /*top: 97%;*/
+  /*left: 21%;*/
+  /*width: 23%;*/
+  /*text-align: center;*/
+  /*background-color: grey;*/
+  /*color: white;*/
+/*}*/
 
-#friendChat3{
-  top: 30%;
-  left: 21%;
-  height: 66.5%;
-  width: 16%;
-  position: fixed;
-  color: black;
-}
+/*#friendChat3{*/
+  /*top: 46.5%;*/
+  /*left: 21%;*/
+  /*height: 50%;*/
+  /*width: 23%;*/
+  /*position: fixed;*/
+  /*color: black;*/
+/*}*/
 
 .chat0,
 .chat1,

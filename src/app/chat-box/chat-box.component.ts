@@ -21,8 +21,6 @@ export class ChatBoxComponent implements OnInit{
   private userDetails: any;
 
   constructor(private formBuilder:FormBuilder, private messagesService:MessagesService, private router:Router, private userService: UserService) {
-    // console.log(this.el.nativeElement.getElementById('input').value);
-    // document.getElementById("test").value;
     this.messages = [];
     this.showTimestamp = true;
     this.messages = this.messagesService.getAllMessages();

@@ -11,70 +11,24 @@
       </div>
     </div>
   </div>
-  <!--<div *ngFor="let send of sender; let i = index; let recipient of recipients">-->
   <div *ngFor="let friend of friends; let i = index;">
     <div class="dropup" >
       <span class="dropdown-toggle" id="friendChatButton{{i}}" type="button" data-toggle="dropdown">{{friendName[i]}}</span>
       <div class="dropdown-menu" id="friendChat{{i}}" (click)="$event.stopPropagation()">
-        <div class="chatWindow" >
+        <div class="chatWindow" id="chatterBox{{i}}">
           <span class="fa fa-times" (click)="closeChatWindow(i)"></span>
-          <div class="messageContainer" *ngFor="let send of senderList[i]; let i = index; let recipient of recipientList[i]">
+          <div class="messageContainer" *ngFor="let send of senderList[i]">
             <div>
-              <span class="messageTime">{{send.time | date:"MM/dd/yyyy hh:mm:ss a"}} - </span>
-              <span class="messageSender">{{send.personalSender}}:</span>
-              <span class="messageSent">{{send.personalMessage}}</span>
-            </div>
-            <div>
-              <span class="messageTime">{{recipient.time | date:"MM/dd/yyyy hh:mm:ss a"}} - </span>
-              <span class="messageReceiver">{{recipient.recipient}}:</span>
-              <span class="messageSent">{{recipient.personalMessage}}</span>
+              <div class="messageTime">{{send.time | date:"MM/dd/yyyy hh:mm:ss a"}}</div>
+              <span class="messageSender">{{send.sender}}:</span>
+              <span class="messageSent">{{send.message}}</span>
             </div>
           </div>
         </div>
         <div>
-          <input class="chat{{i}}" [(ngModel)]="friend.name">
-          <button class="chatButton{{i}}" (click)="onMessageSend(friendName[i], friend.name, i)">Send</button>
-
+          <input class="chat{{i}}" [(ngModel)]="chats[friend.name]">
+          <button class="chatButton{{i}}" (click)="onMessageSend(friendName[i], chats[friend.name], i)">Send</button>
         </div>
       </div>
     </div>
   </div>
-
-  <!--<div class="dropup">-->
-    <!--<span class="dropdown-toggle" id="friendChatButton1" type="button" data-toggle="dropdown">{{friendName[1]}}</span>-->
-    <!--<div class="dropdown-menu" id="friendChat1" (click)="$event.stopPropagation()">-->
-      <!--<div class="chatWindow">-->
-        <!--<span class="fa fa-times" (click)="closeChatWindow(1)"></span>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<input class="chat1" [(ngModel)]="chat1">-->
-        <!--<button class="chatButton1" (click)="onMessageSend(friendName[1], chat1)">Send</button>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="dropup">-->
-    <!--<span class="dropdown-toggle" id="friendChatButton2" type="button" data-toggle="dropdown">{{friendName[2]}}</span>-->
-    <!--<div class="dropdown-menu" id="friendChat2" (click)="$event.stopPropagation()">-->
-      <!--<div class="chatWindow">-->
-        <!--<span class="fa fa-times" (click)="closeChatWindow(2)"></span>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<input class="chat2" [(ngModel)]="chat2">-->
-        <!--<button class="chatButton2" (click)="onMessageSend(friendName[2], chat2)">Send</button>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="dropup">-->
-    <!--<button class="dropdown-toggle" id="friendChatButton3" type="button" data-toggle="dropdown">{{friendName[3]}}</button>-->
-    <!--<div class="dropdown-menu" id="friendChat3" (click)="$event.stopPropagation()">-->
-      <!--<div class="chatWindow">-->
-        <!--<span class="fa fa-times" (click)="closeChatWindow(3)"></span>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<input class="chat3" [(ngModel)]="chat3">-->
-        <!--<button class="chatButton3" (click)="onMessageSend(friendName[3], chat3)">Send</button>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
-
