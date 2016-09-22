@@ -27,7 +27,7 @@
         </div>
         <div>
           <input class="chat{{i}}" [(ngModel)]="chats[friend.name]">
-          <button class="chatButton{{i}}" (click)="onMessageSend(friendName[i], chats[friend.name], i)">Send</button>
+          <button class="chatButton{{i}}" (click)="onMessageSend(friendName[i], chats[friend.name], i); chats[friend.name] = ''">Send</button>
         </div>
       </div>
     </div>

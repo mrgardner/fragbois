@@ -20,6 +20,7 @@ export class FooterComponent implements OnInit {
   private recipient: any;
   private sender: any;
   private id: number;
+  private windowId: number;
   private chats: any;
   private loading: boolean;
   private chatId: any;
@@ -35,6 +36,7 @@ export class FooterComponent implements OnInit {
     that.recipient = [];
     that.id = 0;
     that.chatId = 0;
+    that.windowId = 0;
 
     this.userService.signInItem$.subscribe(_ => {
       that.loading = true;
@@ -85,51 +87,82 @@ export class FooterComponent implements OnInit {
     else {
       that.id = 0;
     }
-
     that.messagesService.sendPersonalMessage(tuple,that.id,that.currentUser.username , name );
     that.messagesService.setSender(that.currentUser.username, index, name);
-    setTimeout(function () {
-      let objDiv = document.getElementById("chatterBox"+this.chatId);
-      objDiv.scrollTop = objDiv.scrollHeight;
-    },200);
-    // console.log(this.chats);
-    // that.chats = null;
   }
 
   openChatWindow(name: any, id: any) {
 
-    if (this.chatId < 3) {
-      this.friendName[this.chatId] = name;
-      for(let i = 0; i<this.friendName.length;i++) {
-        if(this.friendName[i] == name){
-          console.log("OPENED NEW WINDOW");
-          document.getElementById('friendChatButton'+(this.chatId)).style.display = "block"
-          document.getElementById('friendChat'+(this.chatId)).style.display = "block";
-          this.messagesService.setSender(this.currentUser.username, this.chatId, name);
-          this.chatId++;
-        }
-        else {
-          console.log("USER WINDOW ALREADY OPEN")
-        }
+
+    let that = this;
+    console.log("OPENED " +that.chatId)
+
+    if (that.chatId < 3 && that.chatId >= 0) {
+      if(this.friendName.length == 0) {
+        this.friendName = [];
+        console.log("BOOM");
+        console.log(this.friendName);
+        that.chatId =0;
+
+      }
+      else {
+        // this.friendName[that.chatId] = name;
       }
 
-
-      console.log(this.chatId)
-    }
-    else {
-      console.log("Too many chat windows open!!");
-    }
-    console.log(this.friendName)
-
+      console.log("OPENED LIST: "+that.friendName)
+        if(!that.duplicates(that.friendName)) {
+          this.friendName[that.chatId] = name;
+          document.getElementById('friendChatButton'+(that.chatId)).style.display = "block"
+          document.getElementById('friendChat'+(that.chatId)).style.display = "block";
+          that.messagesService.setSender(that.currentUser.username, that.chatId, name);
+          this.chatId++;
+        }
+      }
   }
 
   closeChatWindow(id: any) {
-    console.log(id%3)
-    document.getElementById('friendChatButton'+(id%3)).style.display = "none"
-    document.getElementById('friendChat'+(id%3)).style.display = "none"
-    this.chatId--;
-    console.log(this.chatId)
+    console.log(id)
+    let that = this;
+    if(that.chatId < 4 && that.chatId >= 0){
+      console.log(id)
+      document.getElementById('friendChatButton'+(id)).style.display = "none"
+      document.getElementById('friendChat'+(id)).style.display = "none"
+
+      if ((id) > -1) {
+        if(that.friendName.length > 1) {
+          that.friendName.splice((id), 1);
+          console.log(that.friendName.length)
+          // for(let i=0; i<that.friendName.length; i++){
+          //   console.log(that.friendName[i]);
+          //   that.friendName[id] = that.friendName[i];
+          //
+          //   console.log(that.friendName);
+          // }
+          that.chatId = id;
+        }
+        else {
+          that.friendName = [];
+        }
+
+        // this.friendName[id] = undefined;
+        // that.messagesService.setSender(that.currentUser.username, id, this.friendName[id]);
+        console.log(that.friendName.length)
+      }
+    }
+    console.log("CLOSED LIST: "+that.friendName)
+    console.log("CLOSED " +that.chatId)
   }
+  duplicates (a) {
+  var counts = [];
+  for(var i = 0; i <= a.length; i++) {
+    if(counts[a[i]] === undefined) {
+      counts[a[i]] = 1;
+    } else {
+      return true;
+    }
+  }
+  return false;
+}
 
   isAuth() {
     return this.userService.isAuthenticated();
