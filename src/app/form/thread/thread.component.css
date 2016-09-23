@@ -1,0 +1,90 @@
+.threadPageBackGround {
+  background-color: white;
+}
+
+.threadContainer {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+.threadTitle {
+  font-weight: bold;
+  font-size: 35px;
+  margin-bottom: 1em;
+}
+
+.right-panel {
+  float: left;
+  width: 80%;
+}
+
+.left-panel {
+  float: left;
+  width: 20%;
+}
+
+textarea {
+  resize: none;
+  width: 90%;
+  height: 200px;
+  margin-bottom: -8px;
+  background-color: grey;
+  border: 5px solid black;
+  color: white;
+}
+
+.postButton {
+  width: 9%;
+  height: 200px;
+  position: relative;
+  bottom: 88px;
+}
+
+.profileImg {
+  width: 70%;
+  margin-left: 1em;
+}
+
+.entirePost  {
+  margin-bottom: 5em;
+  height: 500px;
+  background-color: cornsilk;
+}
+
+.userName {
+  color: red;
+  font-size: 20px;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.dateContainer {
+  margin-top: 0em;
+  font-size: 20px;
+  color: grey;
+  opacity: .5;
+  text-align: right;
+}
+
+.postContainer {
+  margin-top: 2em;
+  font-size: 20px;
+  padding-right: 4em;
+}
+
+.emptyPost {
+  margin-top: 5em;
+  margin-bottom: 15em;
+  height: 100px;
+  background-color: cornsilk;
+}
+
+.emptyPostContainer {
+  font-size: 20px;
+  padding-top: 1.5em;
+  text-align: center;
+}
+
+
+

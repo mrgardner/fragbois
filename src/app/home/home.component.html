@@ -1,16 +1,11 @@
 <div class="container">
   <div class="fileFormContainer">
-    <!--<form [formGroup]="fileForm" (ngSubmit)="onUpload()" (change)="getFile($event)">-->
-      <!--<div class="form-group">-->
         <label for="file">file</label>
-        <input (change)="getFile($event)" type="file"
-               id="file"
-                accept="image/*">
+        <input (change)="getFile($event)" type="file" id="file" accept="image/*">
     <img *ngIf="isFile" [src]="imgSrc" height="75px" width="75px">
   <span *ngIf="imgTooBig" class="validation-error">Image is too big!</span>
     <br>
-      <button type="submit" class="registerButton btn btn-primary" (click)="onUpload()" [disabled]="!isFile">Upload</button>
-    <!--</form>-->
+    <button type="submit" class="registerButton btn btn-primary" (click)="onUpload()" [disabled]="!isFile">Upload</button>
     <img class="image" />
   </div>
   <app-chat-box></app-chat-box>

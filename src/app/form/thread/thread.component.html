@@ -1,0 +1,36 @@
+<div class="threadPageBackGround">
+  <div class="container">
+      <div *ngIf="id > 0" class="threadContainer">
+          <span class="threadTitle">{{threadTitle}}</span>
+            <div *ngFor="let post of posts; let i = index">
+              <div class="entirePost" id="post{{i}}">
+                <div class="left-panel">
+                  <div class="userContainer">
+                    <div class="userName">{{post.author}}</div>
+                    <img [src]="imageSrc[i]" class="profileImg">
+                  </div>
+                </div>
+                <div class="right-panel">
+                  <div class="dateContainer">
+                    <span>{{post.time | date:"MM/dd/yyyy hh:mm:ss a"}}</span> #{{i+1}}
+                  </div>
+                  <div class="postContainer">
+                    <span>{{post.post}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <textarea type="text" [(ngModel)]="text"></textarea>
+          <button class="postButton" (click)="createPost(author, text); text = ''">Create post</button>
+      </div>
+    <div *ngIf="id == 0">
+      <div class="emptyPost">
+          <div class="emptyPostContainer">
+            <span>There Aren't any posts yet!  Be the first one to post on this thread</span>
+          </div>
+      </div>
+      <textarea type="text" [(ngModel)]="text"></textarea>
+      <button class="postButton" (click)="createPost(author, text); text = ''">Create post</button>
+    </div>
+  </div>
+</div>

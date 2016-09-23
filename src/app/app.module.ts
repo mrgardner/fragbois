@@ -20,6 +20,9 @@ import { ChatBoxComponent } from './chat-box/chat-box.component';
 import { MembersComponent } from './members/members.component';
 import { MemberProfileComponent } from './member-profile/member-profile.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormComponent } from './form/form.component';
+import {FormService} from "./services/form/form.service";
+import { ThreadComponent } from './form/thread/thread.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { FooterComponent } from './footer/footer.component';
     ChatBoxComponent,
     MembersComponent,
     MemberProfileComponent,
-    FooterComponent
+    FooterComponent,
+    FormComponent,
+    ThreadComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,7 @@ import { FooterComponent } from './footer/footer.component';
     HttpModule,
     routing
   ],
-  providers: [UserService, {provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuard, MessagesService],
+  providers: [UserService, {provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuard, MessagesService, FormService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

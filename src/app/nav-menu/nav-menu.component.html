@@ -2,6 +2,7 @@
   <button *ngIf="isSigned() && isAuth() && !loading" (click)="onLogout()">logout</button>
   <button *ngIf="isSigned() && isAuth() && !loading" (click)="onHome()">Home</button>
   <button *ngIf="isSigned() && isAuth() && !loading" (click)="onMembers()">members</button>
+  <button *ngIf="isSigned() && isAuth() && !loading" (click)="onForm()">Form</button>
   <div class="notificationContainer dropdown" *ngIf="isSigned() && showNotifications == true && isAuth() && !loading" type="button" data-toggle="dropdown">
     <div class="dropdown">
       <span class="notificationIcon fa fa-bell dropdown-toggle" type="button" data-toggle="dropdown"></span>

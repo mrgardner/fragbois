@@ -1,0 +1,57 @@
+.formSection {
+  background-color: #bb5b41;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  margin-bottom: 2em;
+}
+
+.formSection:first-child {
+  margin-top: 3em;
+}
+
+.formSectionTitle {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.threadTitle {
+  cursor: pointer;
+}
+
+.formThread {
+  background-color: grey;
+}
+
+.formThreadContainer {
+  border-bottom: 1px solid black;
+}
+
+.formThreadContainer:last-child {
+  border-bottom: none;
+}
+
+.threadTextBox {
+  color: black;
+}
+
+.formBackGround {
+  /*background-image: url("/assets/grid.jpg");*/
+}
+
+.createThreadIcon {
+  color: blue;
+  font-size: 25px;
+  margin-right: 2em;
+}
+.newThread {
+  background-color: wheat;
+  text-align: left;
+  border-bottom: 1px solid black;
+  border-top: 3px solid black;
+}
+
+.createThreadIcon {
+  cursor: pointer;
+}

@@ -1,6 +1,5 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {FormGroup, FormBuilder} from "@angular/forms";
 import {UserService} from "../services/user/user.service";
 import {FileReaderEvent} from "../shared/fileReaderEvent.interface";
 
@@ -11,39 +10,20 @@ import {FileReaderEvent} from "../shared/fileReaderEvent.interface";
 })
 export class HomeComponent implements OnInit {
 
-  private fileForm:FormGroup;
-  private file: string;
   private isFile: boolean;
   filesToUpload: File;
   private fileName:string;
   private imgSrc: any;
   private imgTooBig: boolean;
-  private userDetails: any;
+  private currentUser: any;
   private user: any;
-  constructor(private router: Router, private formBuilder: FormBuilder, private userService: UserService, private ref: ChangeDetectorRef) {
+  constructor(private router: Router, private userService: UserService) {
     if(!this.userService.isAuthenticated())
     {
       this.router.navigate(['login']);
     }
 
-    if(this.userService.isAuthenticated())
-    {
-      this.userDetails = {};
-      this.user = this.userService.getCurrentUser();
-      this.userDetails = this.userService.getUser(this.user.uid);
-    }
-
     this.isFile = false;
-
-    this.fileForm = formBuilder.group({
-      'file': ['',[
-        // Validators.required,
-      ]]
-    });
-    // setInterval(() => {
-    // the following is required, otherwise the view will not be updated
-
-  // }, 1000);
   }
 
   ngOnInit() {
@@ -51,17 +31,19 @@ export class HomeComponent implements OnInit {
 
   onUpload() {
     this.userService.uploadFile(this.filesToUpload, this.fileName, this.user.uid);
+    this.userService.signInItem$.emit();
   }
 
   getFile(event) {
     let that = this;
     let imageFile = event.target.files[0];
-    var img = new Image();
-    var reader = new FileReader();
+    console.log(imageFile)
+    let img = new Image();
+    let reader = new FileReader();
     reader.addEventListener("load", (fre:FileReaderEvent) => {
       img.src = fre.target.result;
       img.addEventListener('load', function () {
-        if(this.width > 420 && this.height > 420) {
+        if(this.width > 800 && this.height > 800) {
           that.isFile = false;
           that.imgTooBig = true;
         }
@@ -73,9 +55,12 @@ export class HomeComponent implements OnInit {
     }, false);
 
     reader.readAsDataURL(imageFile);
-      this.filesToUpload = imageFile;
+    that.user = that.userService.getCurrentUser();
+    that.currentUser = that.userService.getUser(that.user.uid);
+      that.filesToUpload = imageFile;
+      console.log(that.currentUser)
+      that.fileName =  that.currentUser.username+ ".jpg";
+      that.isFile = true;
 
-      this.fileName =  this.userDetails.email+ ".jpg";
-      this.isFile = true;
   }
 }

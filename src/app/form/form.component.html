@@ -1,0 +1,20 @@
+
+<div class="formBackGround">
+  <div class="container">
+    <div class="formContainer">
+      <div *ngFor="let section of sections; let i = index" class="formSection">
+        <span class="formSectionTitle">{{section.section}}</span>
+        <div (click)="showCreateNewThread(section.section)" class="newThread"><span class="createThreadIcon fa fa-plus-circle"></span>Create a New Thread</div>
+        <div *ngIf="showCreateThread[section.section] == true" >
+          <input class="threadTextBox" type="text" [(ngModel)]="threadText[section.section]">
+          <button class="btn-primary btn" (click)="createNewThread(section.section, threadText[section.section])">Create thread</button>
+        </div>
+        <div class="formThreadContainer" *ngFor="let thread of threads[i]; let i = index ">
+          <div class="formThread">
+            <span class="threadTitle" (click)="onThreadPage(section.section, thread.thread)">{{thread.thread}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

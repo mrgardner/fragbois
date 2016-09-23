@@ -149,6 +149,7 @@ export class UserService {
   }
 
   uploadFile(file:File, fileName:string, id: string) {
+    console.log(fileName)
     var storageRef = firebase.storage().ref(`images/${fileName}`);
     storageRef.put(file);
   }

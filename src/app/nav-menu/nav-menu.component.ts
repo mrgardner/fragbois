@@ -31,7 +31,6 @@ export class NavMenuComponent implements OnInit {
     that.loading = true;
 
     this.userService.signInItem$.subscribe(_ => {
-      console.log("Sign In");
       that.loading = true;
       setTimeout(function () {
         if(that.userService.isAuthenticated())
@@ -41,7 +40,7 @@ export class NavMenuComponent implements OnInit {
           that.user = that.userService.getCurrentUser();
           that.userDetails = that.userService.getUser(that.user.uid);
           that.test = that.userDetails.username;
-          that.imageName = that.userDetails.email+ ".jpg";
+          that.imageName = that.userDetails.username+ ".jpg";
           that.userService.downloadFile(that.imageName).getDownloadURL().then(function (url) {
             that.imageSrc = url;
             that.userService.updateProfileImg(that.user.uid,url);
@@ -66,7 +65,7 @@ export class NavMenuComponent implements OnInit {
           }
           that.loading = false;
         }
-      },5000);
+      },3000);
     })
   }
 
@@ -103,6 +102,10 @@ export class NavMenuComponent implements OnInit {
 
   onMembers() {
     this.router.navigate(['members']);
+  }
+
+  onForm() {
+    this.router.navigate(['form']);
   }
 
   goToProfile() {

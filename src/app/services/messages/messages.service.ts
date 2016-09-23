@@ -6,14 +6,10 @@ declare var firebase: any;
 @Injectable()
 export class MessagesService {
 
-  public user$: EventEmitter<any>;
   public sender$: EventEmitter<any>;
-  public recipient$: EventEmitter<any>;
 
   constructor() {
-    this.user$ = new EventEmitter();
     this.sender$ = new EventEmitter();
-    this.recipient$ = new EventEmitter();
   }
 
   sendMessage(message:Object, id:any) {
@@ -58,17 +54,9 @@ export class MessagesService {
     this.sender$.emit({sender, id, recipient});
   }
 
-  setRecipient(recipient: any, id: any) {
-    this.recipient$.emit({recipient, id});
-  }
-
   sendPersonalMessage(message:Object,index:any, sender:any, recipient:any) {
     localStorage.setItem(''+sender+"ID", index);
     firebase.database().ref(`Messages/Personal/Sender/${sender}/${recipient}/${index}`).update(message);
-  }
-
-  removePersonalMessage(name, id) {
-    firebase.database().ref(`Messages/${name}/${id}`).remove();
   }
 
   getAllPersonalSenderMessages(sender: any, recipient: any) {
@@ -109,7 +97,7 @@ export class MessagesService {
           }
         }
       });
-    // messages = [];
+    messages = [];
 
     return messages;
   }

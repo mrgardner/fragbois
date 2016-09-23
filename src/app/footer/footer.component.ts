@@ -65,7 +65,7 @@ export class FooterComponent implements OnInit {
           that.numOfFriends = Object.keys(that.currentUser.friends).length;
           that.loading = false;
         }
-      },5000);
+      },3000);
     })
   }
 
