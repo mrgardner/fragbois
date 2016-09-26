@@ -68,6 +68,18 @@
                   registerForm.controls.day.errors?.required || registerForm.controls.year.errors?.required)">Date of Birth is Required</div>
     </div>
     <div class="form-group">
+      <label for="confirmPassword">Place Of Residence</label>
+      <br>
+      <select formControlName="country" (change)="onCountryChange($event.target.value)">
+        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+      </select>
+      <select formControlName="city">
+        <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+      </select>
+      <div class="validation-error" *ngIf="(registerForm.controls.country.errors?.required ||
+                    registerForm.controls.city.errors?.required)">Place of Residence is Required</div>
+    </div>
+    <div class="form-group">
       <label>Gender</label>
       <div class="radio" *ngFor="let gender of genders">
         <label>

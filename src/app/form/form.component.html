@@ -3,8 +3,11 @@
   <div class="container">
     <div class="formContainer">
       <div *ngFor="let section of sections; let i = index" class="formSection">
-        <span class="formSectionTitle">{{section.section}}</span>
-        <div (click)="showCreateNewThread(section.section)" class="newThread"><span class="createThreadIcon fa fa-plus-circle"></span>Create a New Thread</div>
+        <span class="formSectionTitle">{{section.section}}  {{currentUser.role}}</span>
+        <div *ngIf="currentUser.role === 'admin'" (click)="showCreateNewThread(section.section)" class="newThread">
+          <span class="createThreadIcon fa fa-plus-circle" [ngClass]="displayIcon[section.section]"></span>
+          Create a New Thread
+        </div>
         <div *ngIf="showCreateThread[section.section] == true" >
           <input class="threadTextBox" type="text" [(ngModel)]="threadText[section.section]">
           <button class="btn-primary btn" (click)="createNewThread(section.section, threadText[section.section])">Create thread</button>

@@ -52,11 +52,51 @@ textarea {
 }
 
 .userName {
-  color: red;
+  font-size: 25px;
+  margin-top: 1em;
+  margin-left: 0.5em;
+  font-weight: bold;
+}
+.userRole {
   font-size: 20px;
-  margin-bottom: 1em;
+}
+
+.userStatus {
+  margin-left: 1em;
+}
+
+.userDetails {
   margin-top: 1em;
   margin-left: 1em;
+}
+
+.admin {
+  color: red;
+  font-size: 20px;
+}
+
+.signInStatus {
+  color: #93ff7c;
+  font-size: 15px;
+  position: relative;
+  bottom: 3px;
+}
+
+.signOutStatus {
+  color: rgba(255, 24, 17, 0.64);
+  font-size: 15px;
+  position: relative;
+  bottom: 3px;
+}
+
+.guest {
+  color: green;
+  font-size: 20px;
+}
+
+.member {
+  color: blue;
+  font-size: 20px;
 }
 
 .dateContainer {
@@ -85,6 +125,3 @@ textarea {
   padding-top: 1.5em;
   text-align: center;
 }
-
-
-

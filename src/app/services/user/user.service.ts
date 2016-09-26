@@ -74,6 +74,10 @@ export class UserService {
               that.user["requests"] = snapshot.val().requests;
               that.user["friends"] = snapshot.val().friends;
               that.user["loggedIn"] = snapshot.val().loggedIn;
+              that.user["numberOfPosts"] = snapshot.val().numberOfPosts;
+              that.user["postTitle"] = snapshot.val().postTitle;
+              that.user["role"] = snapshot.val().role;
+              that.user["roleColor"] = snapshot.val().roleColor;
         });
     return that.user;
   }
@@ -104,6 +108,10 @@ export class UserService {
             that.user["gender"] = snapshot.val()[id].gender;
             that.user["profileImg"] = snapshot.val()[id].profileImg;
             that.user["loggedIn"] = snapshot.val()[id].loggedIn;
+            that.user["numberOfPosts"] = snapshot.val()[id].numberOfPosts;
+            that.user["postTitle"] = snapshot.val()[id].postTitle;
+            that.user["role"] = snapshot.val()[id].role;
+            that.user["roleColor"] = snapshot.val()[id].roleColor;
             that.users.push(that.user)
           }
         }
@@ -162,6 +170,10 @@ export class UserService {
 
   addFriend(id: any, requests: any) {
     firebase.database().ref(`Users/${id}/requests/${requests.name}`).update(requests);
+  }
+
+  updatePostCount(id: any, posts: any) {
+    firebase.database().ref(`Users/${id}`).update(posts);
   }
 
   removeFriend(id: any, friends: any) {

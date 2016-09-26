@@ -2,12 +2,39 @@
   <div class="container">
       <div *ngIf="id > 0" class="threadContainer">
           <span class="threadTitle">{{threadTitle}}</span>
-            <div *ngFor="let post of posts; let i = index">
+            <div *ngFor="let post of posts; let i = index;">
               <div class="entirePost" id="post{{i}}">
                 <div class="left-panel">
                   <div class="userContainer">
-                    <div class="userName">{{post.author}}</div>
-                    <img [src]="imageSrc[i]" class="profileImg">
+
+                    <div *ngFor="let user of allUsers; let j = index">
+                      <div *ngIf="user.username == post.author">
+
+                        <div class="userName">
+                          <span>{{post.author}}</span>
+                          <span *ngIf="user.loggedIn" class="signInStatus fa fa-circle"></span>
+                          <span *ngIf="!user.loggedIn" class="signOutStatus fa fa-circle"></span>
+                        </div>
+                        <div class="userStatus">
+
+                          <span class="userRole" [ngClass]="authorColor[i]">{{post.role}}</span>
+                        </div>
+                        <br>
+                        <img [src]="imageSrc[i]" class="profileImg">
+                        <br>
+                        <div class="userDetails">
+                          <span>Post Title: </span>
+                          <span>{{user.postTitle}}</span>
+                          <br>
+                          <span >Posts: </span>
+                          <span>{{user.numberOfPosts}}</span>
+                          <br>
+
+                          <span>Location: </span>
+                          <span>{{user.location}}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="right-panel">

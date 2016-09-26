@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormService} from "../services/form/form.service";
 import {Router, ActivatedRoute} from "@angular/router";
+import {UserService} from "../services/user/user.service";
 
 @Component({
   selector: 'app-form',
@@ -13,12 +14,22 @@ export class FormComponent implements OnInit {
   private threads: any;
   private showCreateThread: any;
   private threadText: any;
+  private displayIcon: any;
+  private user: any;
+  private currentUser: any;
 
-  constructor(private formService: FormService, private router: Router, private route: ActivatedRoute) {
+  constructor(private formService: FormService, private userService: UserService, private router: Router, private route: ActivatedRoute) {
     let that = this;
     that.sections = [];
     that.threads = [];
     that.threadText = [];
+    that.displayIcon = [];
+
+    if (this.userService.isAuthenticated()) {
+      that.user = this.userService.getCurrentUser();
+      that.currentUser = this.userService.getUser(this.user.uid);
+      console.log(that.currentUser.role)
+    }
 
     that.sections = that.formService.getSections();
     that.showCreateThread = [];
@@ -33,6 +44,7 @@ export class FormComponent implements OnInit {
       setTimeout(function () {
         for(let i = 0; i < that.sections.length; i++){
           that.threads[i] = that.formService.getThreads(that.sections[i].section);
+          this.displayIcon = 'fa fa-plus-circle';
         }
       },500);
     })
@@ -45,6 +57,13 @@ export class FormComponent implements OnInit {
 
   showCreateNewThread(i: any) {
     this.showCreateThread[i] = !this.showCreateThread[i];
+    if(this.showCreateThread[i] == true)
+    {
+      this.displayIcon[i] = 'fa fa-minus-circle';
+    }
+    else {
+      this.displayIcon[i] = 'fa fa-plus-circle';
+    }
   }
 
   createNewThread(sectionTitle: string, text: string) {

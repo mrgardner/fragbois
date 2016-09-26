@@ -80,6 +80,7 @@ export class FormService {
             tuple["post"] = snapshot.val()[id].post;
             tuple["author"] = snapshot.val()[id].author;
             tuple["time"] = snapshot.val()[id].time;
+            tuple["role"] = snapshot.val()[id].role;
             posts.push(tuple);
           }
         }
