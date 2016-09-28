@@ -47,22 +47,34 @@ export class FooterComponent implements OnInit {
           that.messagesService.sender$.subscribe((user) => {
             that.sender = that.messagesService.getAllPersonalSenderMessages(user.sender, user.recipient);
             that.recipient = that.messagesService.getAllPersonalRecipientMessages(user.sender,user.recipient);
-            // that.chats = [];
+            console.log("RECIPIENT "+user.recipient)
+            console.log("SENDER "+user.sender)
             setTimeout(function () {
-              let t = that.recipient;
-              that.senderList[user.id] = t.concat(that.sender).sort((function(a:any, b:any) {
+              console.log(user.id)
+              console.log(user.sender)
+              console.log(user.recipient)
+
+              console.log("Sedner List "+that.sender.length)
+              console.log("Sedner List "+that.sender)
+              console.log("RECIVERS LIST "+that.recipient.length)
+              console.log("RECIVERS LIST "+that.recipient)
+              that.senderList[user.id] = that.recipient.concat(that.sender).sort((function(a:any, b:any) {
                 return +new Date(a.time) - +new Date(b.time);
               }));
+
+              console.log(that.senderList[user.id]);
             },200);
             setTimeout(function () {
               let objDiv = document.getElementById("chatterBox"+user.id);
               objDiv.scrollTop = objDiv.scrollHeight;
             },200);
           });
-          that.friends = Object.keys(that.currentUser.friends).map(function (key) {
-            return that.currentUser.friends[key]
-          });
-          that.numOfFriends = Object.keys(that.currentUser.friends).length;
+          if(that.currentUser.friends != null) {
+            that.friends = Object.keys(that.currentUser.friends).map(function (key) {
+              return that.currentUser.friends[key]
+            });
+            that.numOfFriends = Object.keys(that.currentUser.friends).length;
+          }
           that.loading = false;
         }
       },3000);
@@ -92,65 +104,96 @@ export class FooterComponent implements OnInit {
   }
 
   openChatWindow(name: any, id: any) {
-
-
     let that = this;
-    console.log("OPENED " +that.chatId)
-
+    console.log(that.friendName.length)
     if (that.chatId < 3 && that.chatId >= 0) {
       if(this.friendName.length == 0) {
         this.friendName = [];
-        console.log("BOOM");
-        console.log(this.friendName);
         that.chatId =0;
 
       }
-      else {
-        // this.friendName[that.chatId] = name;
+      if(!that.duplicates(that.friendName)) {
+        this.friendName[that.chatId] = name;
+        document.getElementById('friendChatButton'+(that.chatId)).style.display = "block"
+        document.getElementById('friendChat'+(that.chatId)).style.display = "block";
+        that.messagesService.setSender(that.currentUser.username, that.chatId, name);
+        this.chatId++;
       }
-
-      console.log("OPENED LIST: "+that.friendName)
-        if(!that.duplicates(that.friendName)) {
-          this.friendName[that.chatId] = name;
-          document.getElementById('friendChatButton'+(that.chatId)).style.display = "block"
-          document.getElementById('friendChat'+(that.chatId)).style.display = "block";
-          that.messagesService.setSender(that.currentUser.username, that.chatId, name);
-          this.chatId++;
-        }
-      }
+    }
   }
 
   closeChatWindow(id: any) {
-    console.log(id)
     let that = this;
+    that.senderList = [];
+    that.senderList = [];
+    console.log(that.friendName[0]);
+    console.log(id);
     if(that.chatId < 4 && that.chatId >= 0){
-      console.log(id)
-      document.getElementById('friendChatButton'+(id)).style.display = "none"
-      document.getElementById('friendChat'+(id)).style.display = "none"
+      if(that.friendName.length  == 3) {
+        if(id == 0) {
+          document.getElementById('friendChatButton'+(2)).style.display = "none";
+          document.getElementById('friendChat'+(2)).style.display = "none";
+          that.messagesService.setSender(that.currentUser.username, 0, that.friendName[1]);
+          setTimeout(function () {
+              that.messagesService.setSender(that.currentUser.username, 1, that.friendName[1]);
+          },200)
+        }
+        else if(id == 1) {
+          document.getElementById('friendChatButton'+(2)).style.display = "none";
+          document.getElementById('friendChat'+(2)).style.display = "none";
+          that.messagesService.setSender(that.currentUser.username, 0, that.friendName[0]);
+          setTimeout(function () {
+            that.messagesService.setSender(that.currentUser.username, 1, that.friendName[1]);
+          },200)
+        }
+        else if(id == 2 ) {
+          document.getElementById('friendChatButton'+(id)).style.display = "none";
+          document.getElementById('friendChat'+(id)).style.display = "none";
+          that.messagesService.setSender(that.currentUser.username, 0, that.friendName[0]);
+          setTimeout(function () {
+            that.messagesService.setSender(that.currentUser.username, 1, that.friendName[1]);
+          },200)
+        }
+      }
+      else if(that.friendName.length  == 2) {
+        if(id == 0) {
+          document.getElementById('friendChatButton'+(1)).style.display = "none";
+          document.getElementById('friendChat'+(1)).style.display = "none";
+          that.messagesService.setSender(that.currentUser.username, 0, that.friendName[1]);
+        }
+        else if(id == 1) {
+          document.getElementById('friendChatButton'+(id)).style.display = "none";
+          document.getElementById('friendChat'+(id)).style.display = "none";
+          that.messagesService.setSender(that.currentUser.username, 0, that.friendName[0]);
+        }
+      }
+      else {
+        document.getElementById('friendChatButton'+(id)).style.display = "none";
+        document.getElementById('friendChat'+(id)).style.display = "none";
+      }
 
       if ((id) > -1) {
         if(that.friendName.length > 1) {
           that.friendName.splice((id), 1);
-          console.log(that.friendName.length)
-          // for(let i=0; i<that.friendName.length; i++){
-          //   console.log(that.friendName[i]);
-          //   that.friendName[id] = that.friendName[i];
-          //
-          //   console.log(that.friendName);
-          // }
-          that.chatId = id;
+          console.log(that.friendName)
+          if(that.friendName.length < 2) {
+            that.chatId = id;
+          }
+          else {
+            if(id == 0)
+            {
+              that.chatId = id+2;
+            }
+            else {
+              that.chatId = id+1;
+            }
+          }
         }
         else {
           that.friendName = [];
         }
-
-        // this.friendName[id] = undefined;
-        // that.messagesService.setSender(that.currentUser.username, id, this.friendName[id]);
-        console.log(that.friendName.length)
       }
     }
-    console.log("CLOSED LIST: "+that.friendName)
-    console.log("CLOSED " +that.chatId)
   }
   duplicates (a) {
   var counts = [];

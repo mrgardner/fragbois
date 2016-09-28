@@ -28,7 +28,6 @@ export class FormComponent implements OnInit {
     if (this.userService.isAuthenticated()) {
       that.user = this.userService.getCurrentUser();
       that.currentUser = this.userService.getUser(this.user.uid);
-      console.log(that.currentUser.role)
     }
 
     that.sections = that.formService.getSections();

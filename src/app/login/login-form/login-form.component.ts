@@ -42,6 +42,7 @@ export class LoginFormComponent implements OnInit {
     t.then((res) => {
       that.wrongCredentials = false;
       that.currentUser = that.userService.getUser(res.uid);
+      that.userService.currentUserOnline(res.uid);
       that.users = that.userService.getAllUsers();
       for (let i = 0; i < that.users.length; i++) {
         if (that.users[i].friends) {

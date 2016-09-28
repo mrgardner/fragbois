@@ -21,7 +21,7 @@ export class RegisterFormComponent implements OnInit {
   private days:Array<number>;
   private years:Array<number>;
   private countries:Array<string>;
-  private cities:Array<string>;
+  private states:Array<string>;
   private users:Array<Object>;
   private userVerify: boolean;
   private userAvailable: boolean;
@@ -80,7 +80,7 @@ export class RegisterFormComponent implements OnInit {
       'country': ['', [
         Validators.required
       ]],
-      'city': ['', [
+      'state': ['', [
         Validators.required
       ]]
     }, {validator: this.matchingPasswords('password', 'confirmPassword')});
@@ -93,24 +93,35 @@ export class RegisterFormComponent implements OnInit {
                 1959,1958,1957,1956,1955,1954,1953,1952,1951,1950,1949,1948,1947,1946,1946,1945,1944,1943,1942,1941,1940,
                 1939,1938,1937,1936,1935,1934,1933,1932,1931,1930,1929,1928,1927,1926,1925,1924,1923,1922,1921,1920,
                 1919,1918,1917,1916,1915,1914,1913,1912,1911,1910,1909,1908,1907,1906,1905,1904,1903,1902,1901,1900];
-    this.countries = ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua & Barbuda', 'Argentina', 'Armenia', 'Australia',
-                'Austria', 'Azerbaijan', 'Bahamas','Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin',
-                'Bhutan', 'Bolivia', 'Bosnia & Herzegovina', 'Botswana', 'Brazil', 'Brunei Darussalam', 'Bulgaria', 'Burkina Faso', 'Burma (Myanmar)',
-                'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros',
-                'Congo', 'Congo, Democratic Republic', 'Costa Rica', "Côte d'Ivoire", 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica',
-                'Dominican Republic', 'Ecuador', 'East Timor', 'Egypt', 'El Salvador', 'England', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia',
-                'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau',
-                'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan',
-                'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'North Korea', 'South Korea', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon',
-                'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali',
-                'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco',
-                'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'The Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Norway', 'Northern Ireland',
-                'Pakistan', 'Palau', 'Palestinian State', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'The Philippines', 'Poland', 'Portugal', 'Qatar',
-                'Romania', 'Russia', 'Rwanda', 'St Kitts & Nevis', 'St. Lucia', 'St. Vincent & The Grenadines', 'Samoa', 'San Marino', 'São Tomé & Príncipe', 'Saudi Arabia',
-                'Scotland', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'Spain',
-                'Sir Lanka', 'Sudan', 'South Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo',
-                'Tonga', 'Trinidad & Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United States', 'Uruguay',
-                'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Western Sahara', 'Wales', 'Yemen', 'Zaire', 'Zambia', 'Zimbabwe'];
+    this.countries = ["Afghanistan", "Albania", "Algeria", "American Samoa", "Angola", "Anguilla", "Antartica", "Antigua and Barbuda",
+                      "Argentina", "Armenia", "Aruba", "Ashmore and Cartier Island", "Australia", "Austria", "Azerbaijan", "Bahamas",
+                      "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia",
+                      "Bosnia and Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burma",
+                      "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile",
+                      "China", "Christmas Island", "Clipperton Island", "Cocos (Keeling) Islands", "Colombia", "Comoros",
+                      "Congo, Democratic Republic of the", "Congo, Republic of the", "Cook Islands", "Costa Rica", "Cote d'Ivoire", "Croatia",
+                      "Cuba", "Cyprus", "Czeck Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador",
+                      "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Europa Island", "Falkland Islands (Islas Malvinas)", "Faroe Islands",
+                      "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern and Antarctic Lands", "Gabon", "Gambia, The",
+                      "Gaza Strip", "Georgia", "Germany", "Ghana", "Gibraltar", "Glorioso Islands", "Greece", "Greenland", "Grenada", "Guadeloupe",
+                      "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands",
+                      "Holy See (Vatican City)", "Honduras", "Hong Kong", "Howland Island", "Hungary", "Iceland", "India", "Indonesia", "Iran",
+                      "Iraq", "Ireland", "Ireland, Northern", "Israel", "Italy", "Jamaica", "Jan Mayen", "Japan", "Jarvis Island", "Jersey",
+                      "Johnston Atoll", "Jordan", "Juan de Nova Island", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South",
+                      "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania",
+                      "Luxembourg", "Macau", "Macedonia, Former Yugoslav Republic of", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali",
+                      "Malta", "Man, Isle of", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of",
+                      "Midway Islands", "Moldova", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Namibia", "Nauru", "Nepal",
+                      "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island",
+                      "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines",
+                      "Pitcaim Islands", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romainia", "Russia", "Rwanda", "Saint Helena",
+                      "Saint Kitts and Nevis", "Saint Lucia", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino",
+                      "Sao Tome and Principe", "Saudi Arabia", "Scotland", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+                      "Solomon Islands", "Somalia", "South Africa", "South Georgia and South Sandwich Islands", "Spain", "Spratly Islands", "Sri Lanka",
+                      "Sudan", "Suriname", "Svalbard", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Tobago",
+                      "Toga", "Tokelau", "Tonga", "Trinidad", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates",
+                      "United Kingdom", "Uruguay", "USA", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands", "Wales", "Wallis and Futuna", "West Bank",
+                      "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"];
   }
 
 
@@ -190,463 +201,1200 @@ export class RegisterFormComponent implements OnInit {
 
   onCountryChange(countryName) {
     switch (countryName) {
-      case'Afghanistan':
-        this.cities = ['Kebaul', 'Kandahar', 'Herat', 'Mazar-i-Sharif', 'Kunduz', 'Taloqan', 'Jalalbad', 'Puli Khumri', 'Charikar',
-                      'Sheberghan', 'Ghazni', 'Sar-e Pol', 'Khost', 'Chaghcharan', 'Mihtarlam', 'Farah', 'Puli Alam', 'Samangan', 'Lashkar Gah'];
-        break;
-      case 'Albania':
-        this.cities = ['Tiranë', 'Durrës', 'Vlorë', 'Elbasan', 'Shkodër', 'Kamëz', 'Fier', 'Korçë', 'Berat', 'Lushnjë', 'Pogradec', '	Kavajë',
-                      'Gjirokastër', 'Fushë-Krujë', 'Sarandë', 'Laç', 'Kukës', 'Sukth', 'Patos', 'Lezhë', 'Mamurras', 'Peshkopi',
-                      'Kuçovë', 'Krujë', 'Vorë', 'Burrel', 'Rrëshen', 'Milot', 'Divjakë', ' Gramsh', 'Bulqizë', 'Vau i Dejës', 'Shëngjin',
-                      'Klos', 'Ballsh', 'Shijak', 'Ura Vajgurore', 'Rrogozhinë', 'Librazhd', 'Cërrik', 'Manëz', 'Peqin', 'Bilisht', '	Krumë',
-                      'Përmet', 'Prrenjas', 'Delvinë', 'Orikum', 'Bajram Curri', 'Roskovec', 'Rubik', 'Tepelenë', 'Poliçan', 'Maliq', '	Çorovodë',
-                      'Ersekë', 'Koplik', 'Pukë', 'Himarë', 'Këlcyrë', 'Memaliaj', 'Fushë-Arrëz', 'Bajzë', 'Krrabë', 'Selenicë', 'Konispol', 'Libohovë',
-                      'Reps', 'Fierzë', 'Krastë', 'Leskovik', 'Finiq', 'Ulëz', 'Kurbnesh'];
+      case "Afghanistan":
+        this.states = ["Badakhshan","Badghis","Baghlan","Balkh","Bamian","Farah","Faryab","Ghazni","Ghowr","Helmand","Herat",
+                      "Jowzjan","Kabol","Kandahar","Kapisa","Konar","Kondoz","Laghman","Lowgar","Nangarhar","Nimruz",
+                      "Oruzgan","Paktia","Paktika","Parvan","Samangan","Sar-e Pol","Takhar","Vardak","Zabol"];
+        break;
+      case "Albania":
+        this.states = ["Berat","Bulqize","Delvine","Devoll (Bilisht)","Diber (Peshkopi)","Durres","Elbasan","Fier",
+                      "Gjirokaster","Gramsh","Has (Krume)","Kavaje","Kolonje (Erseke)","Korce","Kruje","Kucove","Kukes",
+                      "Kurbin","Lezhe","Librazhd","Lushnje","Malesi e Madhe (Koplik)","Mallakaster (Ballsh)",
+                      "Mat (Burrel)","Mirdite (Rreshen)","Peqin","Permet","Pogradec","Puke","Sarande","Shkoder",
+                      "Skrapar (Corovode)","Tepelene","Tirane (Tirana)","Tirane (Tirana)","Tropoje (Bajram Curri)","Vlore"];
+        break;
+      case "Algeria":
+        this.states = ["Adrar","Ain Defla","Ain Temouchent","Alger","Annaba","Batna","Bechar","Bejaia","Biskra","Blida",
+                      "Bordj Bou Arreridj","Bouira","Boumerdes","Chlef","Constantine","Djelfa","El Bayadh","El Oued",
+                      "El Tarf","Ghardaia","Guelma","Illizi","Jijel","Khenchela","Laghouat","M'Sila","Mascara","Medea",
+                      "Mila","Mostaganem","Naama","Oran","Ouargla","Oum el Bouaghi","Relizane","Saida","Setif",
+                      "Sidi Bel Abbes","Skikda","Souk Ahras","Tamanghasset","Tebessa","Tiaret","Tindouf","Tipaza",
+                      "Tissemsilt","Tizi Ouzou","Tlemcen"];
+        break;
+      case"American Samoa":
+        this.states = ["Eastern","Manu'a","Rose Island","Swains Island","Western"];
+        break;
+      case"Angola":
+        this.states = ["Andorra la Vella","Bengo","Benguela","Bie","Cabinda","Canillo","Cuando Cubango","Cuanza Norte",
+                      "Cuanza Sul","Cunene","Encamp","Escaldes-Engordany","Huambo","Huila","La Massana","Luanda","Lunda Norte",
+                      "Lunda Sul","Malanje","Moxico","Namibe","Ordino","Sant Julia de Loria","Uige","Zaire"];
+        break;
+      case "Anguilla":
+        this.states = ["Anguilla"];
+        break;
+      case "Antartica":
+        this.states = ["Antartica"];
+        break;
+      case "Antigua and Barbuda":
+        this.states = ["Barbuda","Redonda","Saint George","Saint John","Saint Mary","Saint Paul","Saint Peter","Saint Philip"];
+        break;
+      case"Argentina":
+        this.states = ["Antartica e Islas del Atlantico Sur","Buenos Aires","Buenos Aires Capital Federal","Catamarca","Chaco",
+                      "Chubut","Cordoba","Corrientes","Entre Rios","Formosa","Jujuy","La Pampa","La Rioja","Mendoza","Misiones",
+                      "Neuquen","Rio Negro","Salta","San Juan","San Luis","Santa Cruz","Santa Fe","Santiago del Estero",
+                      "Tierra del Fuego","Tucuman"];
+        break;
+      case "Armenia":
+        this.states = ["Aragatsotn","Ararat","Armavir","Geghark'unik'","Kotayk'","Lorri","Shirak","Syunik'","Tavush",
+                      "Vayots' Dzor","Yerevan"];
+        break;
+      case "Aruba":
+        this.states = ["Aruba"];
+        break;
+      case "Ashmore and Cartier Island":
+        this.states = ["Ashmore and Cartier Island"];
+        break;
+      case "Australia":
+        this.states = ["Australian Capital Territory","New South Wales","Northern Territory","Queensland",
+                      "South Australia","Tasmania","Victoria","Western Australia"];
+        break;
+      case "Austria":
+        this.states = ["Burgenland","Kaernten","Niederoesterreich","Oberoesterreich","Salzburg",
+                      "Steiermark","Tirol","Vorarlberg","Wien"];
+        break;
+      case "Azerbaijan":
+        this.states = ["Abseron Rayonu","Agcabadi Rayonu","Agdam Rayonu","Agdas Rayonu","Agstafa Rayonu",
+                      "Agsu Rayonu","Ali Bayramli Sahari","Astara Rayonu","Baki Sahari","Balakan Rayonu",
+                      "Barda Rayonu","Beylaqan Rayonu","Bilasuvar Rayonu","Cabrayil Rayonu","Calilabad Rayonu",
+                      "Daskasan Rayonu","Davaci Rayonu","Fuzuli Rayonu","Gadabay Rayonu","Ganca Sahari","Goranboy Rayonu",
+                      "Goycay Rayonu","Haciqabul Rayonu","Imisli Rayonu","Ismayilli Rayonu","Kalbacar Rayonu","Kurdamir Rayonu",
+                      "Lacin Rayonu","Lankaran Rayonu","Lankaran Sahari","Lerik Rayonu","Masalli Rayonu","Mingacevir Sahari",
+                      "Naftalan Sahari","Naxcivan Muxtar Respublikasi","Neftcala Rayonu","Oguz Rayonu","Qabala Rayonu",
+                      "Qax Rayonu","Qazax Rayonu","Qobustan Rayonu","Quba Rayonu","Qubadli Rayonu","Qusar Rayonu",
+                      "Saatli Rayonu","Sabirabad Rayonu","Saki Rayonu","Saki Sahari","Salyan Rayonu","Samaxi Rayonu",
+                      "Samkir Rayonu","Samux Rayonu","Siyazan Rayonu","Sumqayit Sahari","Susa Rayonu","Susa Sahari","Tartar Rayonu",
+                      "Tovuz Rayonu","Ucar Rayonu","Xacmaz Rayonu","Xankandi Sahari","Xanlar Rayonu","Xizi Rayonu","Xocali Rayonu",
+                      "Xocavand Rayonu","Yardimli Rayonu","Yevlax Rayonu","Yevlax Sahari","Zangilan Rayonu","Zaqatala Rayonu","Zardab Rayonu"];
+        break;
+      case "Bahamas":
+        this.states = ["Acklins and Crooked Islands","Bimini","Cat Island","Exuma","Freeport","Fresh Creek","Governor's Harbour",
+                      "Green Turtle Cay","Harbour Island","High Rock","Inagua","Kemps Bay","Long Island","Marsh Harbour",
+                      "Mayaguana","New Providence","Nicholls Town and Berry Islands","Ragged Island","Rock Sound",
+                      "San Salvador and Rum Cay","Sandy Point"];
+        break;
+      case "Bahrain":
+        this.states = ["Al Hadd","Al Manamah","Al Mintaqah al Gharbiyah","Al Mintaqah al Wusta","Al Mintaqah ash Shamaliyah",
+                      "Al Muharraq","Ar Rifa' wa al Mintaqah al Janubiyah","Jidd Hafs","Juzur Hawar","Madinat 'Isa","Madinat Hamad","Sitrah"];
+        break;
+      case "Bangladesh":
+        this.states = ["Barguna","Barisal","Bhola","Jhalokati","Patuakhali","Pirojpur","Bandarban","Brahmanbaria","Chandpur",
+                      "Chittagong","Comilla","Cox's Bazar","Feni","Khagrachari","Lakshmipur","Noakhali","Rangamati","Dhaka",
+                      "Faridpur","Gazipur","Gopalganj","Jamalpur","Kishoreganj","Madaripur","Manikganj","Munshiganj","Mymensingh",
+                      "Narayanganj","Narsingdi","Netrokona","Rajbari","Shariatpur","Sherpur","Tangail","Bagerhat","Chuadanga",
+                      "Jessore","Jhenaidah","Khulna","Kushtia","Magura","Meherpur","Narail","Satkhira","Bogra","Dinajpur","Gaibandha",
+                      "Jaipurhat","Kurigram","Lalmonirhat","Naogaon","Natore","Nawabganj","Nilphamari","Pabna","Panchagarh","Rajshahi",
+                      "Rangpur","Sirajganj","Thakurgaon","Habiganj","Maulvi bazar","Sunamganj","Sylhet"];
+        break;
+      case "Barbados":
+        this.states = ["Bridgetown","Christ Church","Saint Andrew","Saint George","Saint James","Saint John",
+                      "Saint Joseph","Saint Lucy","Saint Michael","Saint Peter","Saint Philip","Saint Thomas"];
+        break;
+      case "Belarus":
+        this.states = ["Brestskaya (Brest)","Homyel'skaya (Homyel')","Horad Minsk","Hrodzyenskaya (Hrodna)",
+                      "Mahilyowskaya (Mahilyow)","Minskaya","Vitsyebskaya (Vitsyebsk)"];
+        break;
+      case "Belgium":
+        this.states = ["Antwerpen","Brabant Wallon","Brussels Capitol Region","Hainaut","Liege","Limburg",
+                      "Luxembourg","Namur","Oost-Vlaanderen","Vlaams Brabant","West-Vlaanderen"];
+        break;
+      case "Belize":
+        this.states = ["Belize","Cayo","Corozal","Orange Walk","Stann Creek","Toledo"];
         break;
-      case 'Algeria':
-        this.cities = ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Blida', 'Batna', 'Djelfa', 'Sétif', 'Sidi Bel Abbès', 'Biskra', 'Tébessa', 'El Qued',
-                      'Skikda', 'Tiaret', 'Béjaïa', 'Tlemcen', 'Ouargla', 'Béchar', 'Mostaganem', 'Bordj Bou Arréridj', 'Chlef', 'Souk Ahras', 'Médéa',
-                      'El Eulma', 'Touggourt', 'Ghardaïa', 'Saïda', 'Laghouat', "M'Sila", 'Jijel', 'Relizane', 'Guelma', 'Aïn Béïda', 'Khenchela',
-                      'Bousaada', 'Mascara', 'Tindouf', 'Tizi Ouzou'];
+      case "Benin":
+        this.states = ["Alibori","Atakora","Atlantique","Borgou","Collines","Couffo",
+                      "Donga","Littoral","Mono","Oueme","Plateau","Zou"];
         break;
-      case 'Andorra':
-        this.cities = ['Canillo', 'Encamp', 'Ordino', 'La Massana', 'Andorra la Vella', 'Sant Julià de Lòria', 'Escaldes-Engordany'];
+      case "Bermuda":
+        this.states = ["Devonshire","Hamilton","Hamilton","Paget","Pembroke","Saint George",
+                      "Saint Georges","Sandys","Smiths","Southampton","Warwick"];
+        break;
+      case "Bhutan":
+        this.states = ["Bumthang","Chhukha","Chirang","Daga","Geylegphug","Ha","Lhuntshi","Mongar",
+                      "Paro","Pemagatsel","Punakha","Samchi","Samdrup Jongkhar","Shemgang","Tashigang",
+                      "Thimphu","Tongsa","Wangdi Phodrang"];
+        break;
+      case "Bolivia":
+        this.states = ["Beni","Chuquisaca","Cochabamba","La Paz","Oruro","Pando","Potosi","Santa Cruz","Tarija"];
         break;
-      case'Angola':
-        this.cities = ['Ambriz', 'Andulo', 'Bailundo','Baía Farta', 'Benguela', 'Bibala', 'Bimbe', 'Biula', 'Bungo', 'Cabamba', 'Cabinda',
-                      'Caboledo', 'Cacolo', 'Caconda', 'Caculama', 'Cacuso', 'Cafunfo', 'Cahama', 'Caiengue', 'Caimbambo', 'Calandala', 'Calenga',
-                      'Calonda', 'Calucinga', 'Calulo', 'Caluquembe', 'Camabatela', 'Camacupa', 'Camanongue', 'Camaxilo', 'Cambambe', 'Cambongue',
-                      'Cambundi', 'Camissombo','Cangandala', 'Cangumbe', 'Capelongo', 'Capenda Camulemba', 'Capulo', 'Cassanguide', 'Cassongue', 'Catabola',
-                      'Catacanha', 'Catchiungo', 'Catumbela', 'Caungula', 'Caxita', 'Caxito', 'Cazaje', 'Cazombo', 'Caála', 'Cela', 'Chiange', 'Chibanda',
-                      'Chibemba', 'Chibia', 'Chicala', 'Chingufo', 'Chipindo', 'Chissamba', 'Chitado', 'Chitembo', 'Coemba', 'Colui', 'Conda', 'Coutada',
-                      'Cuangar', 'Cuango-Luzamba', 'Cuasa', 'Cubal', 'Cuchi', 'Cuilo', 'Cuima', 'Cuima', 'Cuimba', 'Cuito Cuanavale', 'Cuvelai', 'Dala',
-                      'Damba', 'Didimbo', 'Dombe Grande', 'Dondo', 'Dongo', 'Dundo', 'Ekunha', 'Folgares', 'Funda', 'Gabela', 'Galo', 'Ganda', 'Golungo Alto',
-                      'Guri', 'Huambo', 'Humpata', 'Jamba', 'Kuito', 'Leúa', 'Lobito', 'Lombe', 'Longa', 'Longonjo','Luacano', 'Luanda', 'Luau', 'Lubango', 'Lucala',
-                      'Lucapa', 'Lucusse', 'Luena', 'Luiana', 'Luimbale', 'Luma Cassao', "Lumbala N'guimbo", 'Lumeje', 'Luremo', 'Luxilo', 'Lândana', 'Malanje',
-                      'Malembo', 'Maludi', 'Marimba', 'Marimbanguengo', 'Massango', 'Matala', 'Mavinga', 'Mbanza-Congo', 'Menongue', 'Muchinda', 'Mucinda',
-                      'Muconda', 'Mucumbo', 'Mucusso', 'Mucussueje', 'Muginga', 'Mulondo', 'Mungo', 'Munhango', 'Mussende', 'Musserra', 'Mussuco', "N'dalatando",
-                      "N'zteo", 'Namacunde', 'Namibe', 'Negage', 'Nharea', 'Nóqui', 'Nzagi (Andrada)', 'Ondjiva', 'Pinheiro', 'Porto Amboim', 'Quela', 'Quibala',
-                      'Quibaxe', 'Quicombo', 'Quilengues', 'Quimavongo', 'Quimbango', 'Quimbele', 'Quipungo', 'Quirima', 'Sacomar', 'Samunona', 'Saurimo',
-                      'Savungo', 'Songo', 'Soyo', 'Sumbe', 'Tchindjenje', 'Tchipelongo', 'Techamutete', 'Tentativa', 'Tommbua', 'Uku', 'Ukuma', 'Uíge',
-                      'Viana', 'Waku Kungo', 'Xangongo', 'Xá-Muteba'];
+      case "Bosnia and Herzegovina":
+        this.states = ["Federation of Bosnia and Herzegovina","Republika Srpska"];
         break;
-      case 'Antigua & Barbuda':
-        this.cities = ['All Saints', 'Bolans', 'Carlisle', 'Clare Hall', 'Cedar Grove', 'Codrington', 'Dickenson Bay', 'English Harbour', 'Falmouth',
-                      'Freetown', 'Jennings', 'Liberta', 'Old Road', 'Parham', 'Pigotts', "Potter's Village", "St. John's", 'Swetes', 'Willikies'];
+      case "Botswana":
+        this.states = ["Central","Chobe","Francistown","Gaborone","Ghanzi","Kgalagadi","Kgatleng","Kweneng",
+                      "Lobatse","Ngamiland","North-East","Selebi-Pikwe","South-East","Southern"];
         break;
-      case 'Argentina':
-        this.cities = ['Buenos Aires', 'Córdoba', 'Rosario','Mendoza', 'La Plata', 'Tucumán', 'Mar del Plata', 'Salta', 'Santa Fe', 'San Juan', 'Resistencia',
-                      'Neuquén', 'Santiago del Estero', 'Corrientes', 'Avellaneda', 'Bahía Blanca', 'San Salvador de Jujuy', 'Quilmes', 'Lanús',
-                      'Comodoro Rivadavia', 'Concordia'];
-        break;
-      case 'Armenia':
-        this.cities = ['Yerevan', 'Gyumri', 'Vanadzor', 'Vagharshapat', 'Abovyan', 'Kapan', 'Hrazdan', 'Armavir', 'Artashat', 'Ijevan', 'Gavar', 'Goris',
-                      'Charentsavan', 'Ararat', 'Masis', 'Artik', 'Sevan', 'Ashtarak', 'Dilijan', 'Sisian', 'Alaverdi', 'Stepanavan', 'Martuni',
-                      'Spitak', 'Vardenis', 'Yeghvard', 'Vedi', 'Byureghavan', 'Nor Hachen', 'Metsamor', 'Berd', ' Yeghegnadzor', 'Tashir', 'Kajaran',
-                      'Aparan', 'Vayk', 'Chambarak', 'Maralik', 'Noyemberyan', 'Talin', 'Jermuk', 'Meghri', 'Agarak', 'Ayrum', 'Akhtala', 'Tumanyan',
-                      'Tsaghkadzor', 'Shamlugh', 'Dastakert'];
-        break;
-      case 'Australia':
-        this.cities = ['Sydney', 'Albury', 'Armidale', 'Bathurst', 'Blue Mountains', 'Broken Hill', 'Campbelltown', 'Cessnock', 'Dubbo', 'Goulburn', 'Grafton',
-                      'Lithgow', 'Liverpool', 'Newcastle', 'Orange', 'Parramatta', 'Penrith', 'Queanbeyan', 'Tamworth', 'Wagga Wagga', 'Wollongong'];
-        break;
-      case 'Austria':
-        // TODO Austria
-        break;
-      case 'Azerbaijan':
-        this.cities = ['Agdam', 'Agdash', 'Agjabadi', 'Agstafa', 'Agsu', 'Astara', 'Babek', 'Baku', 'Balakən', 'Barda', 'Beylagan', 'Bilasuvar',
-                      'Dashkasan', 'Davachi', 'Fuzuli', 'Gadabay', 'Ganja', 'Goranboy', 'Goychay', 'Goygol', 'Hajigabul', 'Imishli', 'Ismailli',
-                      'Jabrayil', 'Julfa', 'Kalbajar', 'Karabakh', 'Khachmaz', 'Khojavend', 'Khyrdalan', 'Kurdamir', 'Lankaran'];
-        break;
-      case 'Bahamas':
-        this.cities = ['Nassau', 'Freeport', 'West End', 'Coopers Town', 'March Harbour', 'Freetown', ' high Rock', 'Andros Town', 'Spanish Wells',
-                      'Clarence Town', 'Dunmore Town', 'Rock Sound', "Arthur's Town", 'Cockburn Town', 'George Town', 'Alice Town', 'Sweeting Cay',
-                      'Matthew Town', 'Snug Corner', 'Great Harbour Cay', 'Nicholls Town', 'Colonel Hill', 'Pirates Well', 'Port Nelson', 'Duncan Town',
-                      'Albert Town'];
-        break;
-      case 'Bahrain':
-        this.cities = ['Manama', 'Riffa', 'Muharraq', 'Hamad Town', "A'ali", 'Isa Town', 'Sitra', 'Budaiya', 'Jidhafs', 'Al-Malikiyah', 'Adilya',
-                      'Sanabis', 'Tubli', 'Al Seef', 'Sar', 'Mahooz', 'Al Dur', 'Hoora', 'Gudaibiya'];
-        break;
-      case 'Bangladesh':
-        this.cities = ['Bogra', 'Mymensingh', 'Jessore', 'Dinajpur', 'Nawabganj', 'Brahmanbaria', 'Tangail', 'Feni', 'Sirajganj', 'Pabna', 'Jamalpur',
-                      'Faridpur', "Cox's Bazar", 'Noakhali', 'Kushtia'];
-        break;
-      case 'Barbados':
-        this.cities = ['Saint Lucy', 'Saint Peter', 'Saint Andrews', 'Saint James', 'Saint Thomas', 'Saint Joseph', 'Saint Michael', 'Saint George',
-                      'Saint John', 'Saint Philip', 'Christ Church'];
-        break;
-      case 'Belarus':
-        break;
-      case 'Belgium':
-        break;
-      case 'Belize':
-        break;
-      case 'Benin':
-        break;
-      case 'Bhutan':
-        break;
-      case 'Bolivia':
-        break;
-      case 'Bosnia & Herzegovina':
-        break;
-      case 'Botswana':
-        break;
-      case 'Brazil':
-        break;
-      case 'Brunei Darussalam':
-        break;
-      case 'Bulgaria':
-        break;
-      case 'Burkina Faso':
-        break;
-      case 'Burma (Myanmar)':
-        break;
-      case 'Burundi':
-        break;
-      case 'Cambodia':
-        break;
-      case 'Cameroon':
-        break;
-      case 'Canada':
-        break;
-      case 'Cape Verde':
-        break;
-      case 'Central African Republic':
-        break;
-      case 'Chad':
-        break;
-      case 'Chile':
-        break;
-      case 'China':
-        break;
-      case 'Colombia':
-        break;
-      case 'Comoros':
-        break;
-      case 'Congo':
-        break;
-      case 'Congo, Democratic Republic':
-        break;
-      case 'Costa Rica':
-        break;
-      case "Côte d'Ivoire":
-        break;
-      case 'Croatia':
-        break;
-      case 'Cyprus':
-        break;
-      case 'Czech Republic':
-        break;
-      case 'Denmark':
-        break;
-      case 'Djibouti':
-        break;
-      case 'Dominica':
-        break;
-      case 'Dominican Republic':
-        break;
-      case 'Ecuador':
-        break;
-      case 'East Timor':
-        break;
-      case 'Egypt':
-        break;
-      case 'El Salvador':
-        break;
-      case 'England':
-        break;
-      case 'Equatorial Guinea':
-        break;
-      case 'Eritrea':
-        break;
-      case 'Estonia':
-        break;
-      case 'Ethiopia':
-        break;
-      case 'Fiji':
-        break;
-      case 'Finland':
-        break;
-      case 'France':
-        break;
-      case 'Gabon':
-        break;
-      case 'Gambia':
-        break;
-      case 'Georgia':
-        break;
-      case 'Germany':
-        break;
-      case 'Ghana':
-        break;
-      case 'Greece':
-        break;
-      case 'Grenada':
-        break;
-      case 'Guatemala':
-        break;
-      case 'Guinea':
-        break;
-      case 'Guinea-Bissau':
-        break;
-      case 'Guyana':
-        break;
-      case 'Haiti':
-        break;
-      case 'Honduras':
-        break;
-      case 'Hungary':
-        break;
-      case 'Iceland':
-        break;
-      case 'India':
-        break;
-      case 'Indonesia':
-        break;
-      case 'Iran':
-        break;
-      case 'Iraq':
-        break;
-      case 'Ireland':
-        break;
-      case 'Israel':
-        break;
-      case 'Italy':
-        break;
-      case 'Jamaica':
-        break;
-      case 'Japan':
-        break;
-      case 'Jordan':
-        break;
-      case 'Kazakhstan':
-        break;
-      case 'Kenya':
-        break;
-      case 'Kiribati':
-        break;
-      case 'North Korea':
-        break;
-      case 'South Korea':
-        break;
-      case 'Kosovo':
-        break;
-      case 'Kuwait':
-        break;
-      case 'Kyrgyzstan':
-        break;
-      case 'Laos':
-        break;
-      case 'Latvia':
-        break;
-      case 'Lebanon':
-        break;
-      case 'Lesotho':
-        break;
-      case 'Liberia':
-        break;
-      case 'Libya':
-        break;
-      case 'Liechtenstein':
-        break;
-      case 'Lithuania':
-        break;
-      case 'Luxembourg':
-        break;
-      case 'Macedonia':
-        break;
-      case 'Madagascar':
-        break;
-      case 'Malawi':
-        break;
-      case 'Malaysia':
-        break;
-      case 'Maldives':
-        break;
-      case 'Mali':
-        break;
-      case 'Malta':
-        break;
-      case 'Marshall Islands':
-        break;
-      case 'Mauritania':
-        break;
-      case 'Mauritius':
-        break;
-      case 'Mexico':
-        break;
-      case 'Micronesia':
-        break;
-      case 'Moldova':
-        break;
-      case 'Monaco':
-        break;
-      case 'Mongolia':
-        break;
-      case 'Montenegro':
-        break;
-      case 'Morocco':
-        break;
-      case 'Mozambique':
-        break;
-      case 'Myanmar':
-        break;
-      case 'Namibia':
-        break;
-      case 'Nauru':
-        break;
-      case 'Nepal':
-        break;
-      case 'The Netherlands':
-        break;
-      case 'New Zealand':
-        break;
-      case 'Nicaragua':
-        break;
-      case 'Niger':
-        break;
-      case 'Nigeria':
-        break;
-      case 'Norway':
-        break;
-      case 'Northern Ireland':
-        break;
-      case 'Pakistan':
-        break;
-      case 'Palau':
-        break;
-      case 'Palestinian State':
-        break;
-      case 'Panama':
-        break;
-      case 'Papua New Guinea':
-        break;
-      case 'Paraguay':
-        break;
-      case 'Peru':
-        break;
-      case 'The Philippines':
-        break;
-      case 'Poland':
-        break;
-      case 'Portugal':
-        break;
-      case 'Qatar':
-        break;
-      case 'Romania':
-        break;
-      case 'Russia':
-        break;
-      case 'Rwanda':
-        break;
-      case 'St Kitts & Nevis':
-        break;
-      case 'St. Lucia':
-        break;
-      case 'St. Vincent & The Grenadines':
-        break;
-      case 'Samoa':
-        break;
-      case 'San Marino':
-        break;
-      case 'São Tomé & Príncipe':
-        break;
-      case 'Saudi Arabia':
-        break;
-      case 'Scotland':
-        break;
-      case 'Senegal':
-        break;
-      case 'Serbia':
-        break;
-      case 'Seychelles':
-        break;
-      case 'Sierra Leone':
-        break;
-      case 'Singapore':
-        break;
-      case 'Slovakia':
-        break;
-      case 'Slovenia':
-        break;
-      case 'Solomon Islands':
-        break;
-      case 'Somalia':
-        break;
-      case 'South Africa':
-        break;
-      case 'Spain':
-        break;
-      case 'Sir Lanka':
-        break;
-      case 'Sudan':
-        break;
-      case 'South Sudan':
-        break;
-      case 'Suriname':
-        break;
-      case 'Swaziland':
-        break;
-      case 'Sweden':
-        break;
-      case 'Switzerland':
-        break;
-      case 'Syria':
-        break;
-      case 'Taiwan':
-        break;
-      case 'Tajikistan':
-        break;
-      case 'Tanzania':
-        break;
-      case 'Thailand':
-        break;
-      case 'Togo':
-        break;
-      case 'Tonga':
-        break;
-      case 'Trinidad & Tobago':
-        break;
-      case 'Tunisia':
-        break;
-      case 'Turkey':
-        break;
-      case 'Turkmenistan':
-        break;
-      case 'Tuvalu':
-        break;
-      case 'Uganda':
-        break;
-      case 'Ukraine':
-        break;
-      case 'United Arab Emirates':
-        break;
-      case 'United States':
-        break;
-      case 'Uruguay':
-        break;
-      case 'Uzbekistan':
-        break;
-      case 'Vanuatu':
-        break;
-      case 'Vatican City':
-        break;
-      case 'Venezuela':
-        break;
-      case 'Vietnam':
-        break;
-      case 'Western Sahara':
-        break;
-      case 'Wales':
-        break;
-      case 'Yemen':
-        break;
-      case 'Zaire':
-        break;
-      case 'Zambia':
-        break;
-      case 'Zimbabwe':
+      case "Brazil":
+        this.states = ["Acre","Alagoas","Amapa","Amazonas","Bahia","Ceara","Distrito Federal","Espirito Santo",
+                      "Goias","Maranhao","Mato Grosso","Mato Grosso do Sul","Minas Gerais","Para","Paraiba","Parana",
+                      "Pernambuco","Piaui","Rio de Janeiro","Rio Grande do Norte","Rio Grande do Sul","Rondonia","Roraima",
+                      "Santa Catarina","Sao Paulo","Sergipe","Tocantins"];
+        break;
+      case "British Virgin Islands":
+        this.states = ["Anegada","Jost Van Dyke","Tortola","Virgin Gorda"];
+        break;
+      case "Brunei":
+        this.states = ["Belait","Brunei and Muara","Temburong","Tutong"];
+        break;
+      case "Bulgaria":
+        this.states = ["Blagoevgrad","Burgas","Dobrich","Gabrovo","Khaskovo","Kurdzhali","Kyustendil","Lovech","Montana",
+                      "Pazardzhik","Pernik","Pleven","Plovdiv","Razgrad","Ruse","Shumen","Silistra","Sliven","Smolyan",
+                      "Sofiya","Sofiya-Grad","Stara Zagora","Turgovishte","Varna","Veliko Turnovo","Vidin","Vratsa","Yambol"];
+        break;
+      case "Burkina Faso":
+        this.states = ["Bale","Bam","Banwa","Bazega","Bougouriba","Boulgou","Boulkiemde","Comoe","Ganzourgou","Gnagna",
+                      "Gourma","Houet","Ioba","Kadiogo","Kenedougou","Komandjari","Kompienga","Kossi","Koupelogo",
+                      "Kouritenga","Kourweogo","Leraba","Loroum","Mouhoun","Nahouri","Namentenga","Naumbiel","Nayala",
+                      "Oubritenga","Oudalan","Passore","Poni","Samentenga","Sanguie","Seno","Sissili","Soum","Sourou",
+                      "Tapoa","Tuy","Yagha","Yatenga","Ziro","Zondomo","Zoundweogo"];
+        break;
+      case "Burma":
+        this.states = ["Ayeyarwady","Bago","Chin State","Kachin State","Kayah State","Kayin State","Magway",
+                      "Mandalay","Mon State","Rakhine State","Sagaing","Shan State","Tanintharyi","Yangon"];
+        break;
+      case "Burundi":
+        this.states = ["Bubanza","Bujumbura","Bururi","Cankuzo","Cibitoke","Gitega","Karuzi","Kayanza",
+                      "Kirundo","Makamba","Muramvya","Muyinga","Mwaro","Ngozi","Rutana","Ruyigi"];
+        break;
+      case "Cambodia":
+        this.states = ["Banteay Mean Cheay","Batdambang","Kampong Cham","Kampong Chhnang","Kampong Spoe",
+                      "Kampong Thum","Kampot","Kandal","Kaoh Kong","Keb","Kracheh","Mondol Kiri","Otdar Mean Cheay",
+                      "Pailin","Phnum Penh","Pouthisat","Preah Seihanu (Sihanoukville)","Preah Vihear","Prey Veng",
+                      "Rotanah Kiri","Siem Reab","Stoeng Treng","Svay Rieng","Takev"];
+        break;
+      case "Cameroon":
+        this.states = ["Adamaoua","Centre","Est","Extreme-Nord","Littoral","Nord","Nord-Ouest","Ouest","Sud","Sud-Ouest"];
+        break;
+      case "Canada":
+        this.states = ["Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland","Northwest Territories",
+                      "Nova Scotia","Nunavut","Ontario","Prince Edward Island","Quebec","Saskatchewan","Yukon Territory"];
+        break;
+      case "Cape Verde":
+        this.states = ["Boa Vista","Brava","Maio","Mosteiros","Paul","Porto Novo","Praia","Ribeira Grande","Sal",
+                      "Santa Catarina","Santa Cruz","Sao Domingos","Sao Filipe","Sao Nicolau","Sao Vicente","Tarrafal"];
+        break;
+      case "Cayman Islands":
+        this.states = ["Creek","Eastern","Midland","South Town","Spot Bay","Stake Bay","West End","Western"];
+        break;
+      case "Central African Republic":
+        this.states = ["Bamingui-Bangoran","Bangui","Basse-Kotto","Gribingui","Haut-Mbomou","Haute-Kotto","Haute-Sangha",
+                      "Kemo-Gribingui","Lobaye","Mbomou","Nana-Mambere","Ombella-Mpoko","Ouaka","Ouham","Ouham-Pende","Sangha","Vakaga"];
+        break;
+      case "Chad":
+        this.states = ["Batha","Biltine","Borkou-Ennedi-Tibesti","Chari-Baguirmi","Guera","Kanem","Lac","Logone Occidental",
+                      "Logone Oriental","Mayo-Kebbi","Moyen-Chari","Ouaddai","Salamat","Tandjile"];
+        break;
+      case "Chile":
+        this.states = ["Aisen del General Carlos Ibanez del Campo","Antofagasta","Araucania","Atacama","Bio-Bio",
+                      "Coquimbo","Libertador General Bernardo O'Higgins","Los Lagos","Magallanes y de la Antartica Chilena",
+                      "Maule","Region Metropolitana (Santiago)","Tarapaca","Valparaiso"];
+        break;
+      case"China":
+        this.states = ["Anhui","Beijing","Chongqing","Fujian","Gansu","Guangdong","Guangxi","Guizhou","Hainan","Hebei",
+                      "Heilongjiang","Henan","Hubei","Hunan","Jiangsu","Jiangxi","Jilin","Liaoning","Nei Mongol","Ningxia",
+                      "Qinghai","Shaanxi","Shandong","Shanghai","Shanxi","Sichuan","Tianjin","Xinjiang","Xizang (Tibet)","Yunnan","Zhejiang"];
+        break;
+      case "Christmas Island":
+        this.states = ["Christmas Island"];
+        break;
+      case "Clipperton Island":
+        this.states = ["Clipperton Island"];
+        break;
+      case "Cocos (Keeling) Islands":
+        this.states = ["Direction Island","Home Island","Horsburgh Island","North Keeling Island","South Island","West Island"];
+        break;
+      case "Colombia":
+        this.states = ["Amazonas","Antioquia","Arauca","Atlantico","Bolivar","Boyaca","Caldas","Caqueta","Casanare",
+                      "Cauca","Cesar","Choco","Cordoba","Cundinamarca","Distrito Capital de Santa Fe de Bogota","Guainia",
+                      "Guaviare","Huila","La Guajira","Magdalena","Meta","Narino","Norte de Santander","Putumayo","Quindio",
+                      "Risaralda","San Andres y Providencia","Santander","Sucre","Tolima","Valle del Cauca","Vaupes","Vichada"];
+        break;
+      case "Comoros":
+        this.states = ["Anjouan (Nzwani)","Domoni","Fomboni","Grande Comore (Njazidja)","Moheli (Mwali)","Moroni","Moutsamoudou"];
+        break;
+      case "Congo, Democratic Republic of the":
+        this.states = ["Bandundu","Bas-Congo","Equateur","Kasai-Occidental","Kasai-Oriental","Katanga","Kinshasa",
+                      "Maniema","Nord-Kivu","Orientale","Sud-Kivu"];
+        break;
+      case "Congo, Republic of the":
+        this.states = ["Bouenza","Brazzaville","Cuvette","Kouilou","Lekoumou","Likouala","Niari","Plateaux","Pool","Sangha"];
+        break;
+      case "Cook Islands":
+        this.states = ["Aitutaki","Atiu","Avarua","Mangaia","Manihiki","Manuae","Mauke","Mitiaro",
+                      "Nassau Island","Palmerston","Penrhyn","Pukapuka","Rakahanga","Rarotonga","Suwarrow","Takutea"];
+        break;
+      case "Costa Rica":
+        this.states = ["Alajuela","Cartago","Guanacaste","Heredia","Limon","Puntarenas","San Jose"];
+        break;
+      case "Cote d'Ivoire":
+        this.states = ["Abengourou","Abidjan","Aboisso","Adiake'","Adzope","Agboville","Agnibilekrou","Ale'pe'",
+                      "Bangolo","Beoumi","Biankouma","Bocanda","Bondoukou","Bongouanou","Bouafle","Bouake","Bouna",
+                      "Boundiali","Dabakala","Dabon","Daloa","Danane","Daoukro","Dimbokro","Divo","Duekoue","Ferkessedougou",
+                      "Gagnoa","Grand Bassam","Grand-Lahou","Guiglo","Issia","Jacqueville","Katiola","Korhogo","Lakota","Man",
+                      "Mankono","Mbahiakro","Odienne","Oume","Sakassou","San-Pedro","Sassandra","Seguela","Sinfra","Soubre","Tabou",
+                      "Tanda","Tiassale","Tiebissou","Tingrela","Touba","Toulepleu","Toumodi","Vavoua","Yamoussoukro","Zuenoula"];
+        break;
+      case "Croatia":
+        this.states = ["Bjelovarsko-Bilogorska Zupanija","Brodsko-Posavska Zupanija","Dubrovacko-Neretvanska Zupanija",
+                      "Istarska Zupanija","Karlovacka Zupanija","Koprivnicko-Krizevacka Zupanija","Krapinsko-Zagorska Zupanija",
+                      "Licko-Senjska Zupanija","Medimurska Zupanija","Osjecko-Baranjska Zupanija","Pozesko-Slavonska Zupanija",
+                      "Primorsko-Goranska Zupanija","Sibensko-Kninska Zupanija","Sisacko-Moslavacka Zupanija","Splitsko-Dalmatinska Zupanija",
+                      "Varazdinska Zupanija","Viroviticko-Podravska Zupanija","Vukovarsko-Srijemska Zupanija","Zadarska Zupanija",
+                      "Zagreb","Zagrebacka Zupanija"];
+        break;
+      case "Cuba":
+        this.states = ["Camaguey","Ciego de Avila","Cienfuegos","Ciudad de La Habana","Granma","Guantanamo",
+                      "Holguin","Isla de la Juventud","La Habana","Las Tunas","Matanzas","Pinar del Rio","Sancti Spiritus",
+                      "Santiago de Cuba","Villa Clara"];
+        break;
+      case "Cyprus":
+        this.states = ["Famagusta","Kyrenia","Larnaca","Limassol","Nicosia","Paphos"];
+        break;
+      case "Czeck Republic":
+        this.states = ["Brnensky","Budejovicky","Jihlavsky","Karlovarsky","Kralovehradecky","Liberecky",
+                      "Olomoucky","Ostravsky","Pardubicky","Plzensky","Praha","Stredocesky","Ustecky","Zlinsky"];
+        break;
+      case "Denmark":
+        this.states = ["Arhus","Bornholm","Fredericksberg","Frederiksborg","Fyn","Kobenhavn","Kobenhavns",
+                      "Nordjylland","Ribe","Ringkobing","Roskilde","Sonderjylland","Storstrom","Vejle","Vestsjalland","Viborg"];
+        break;
+      case "Djibouti":
+        this.states = ["Ali Sabih","Dikhil","Djibouti","Obock","Tadjoura"];
+        break;
+      case "Dominica":
+        this.states = ["Saint Andrew","Saint David","Saint George","Saint John","Saint Joseph",
+                      "Saint Luke","Saint Mark","Saint Patrick","Saint Paul","Saint Peter"];
+        break;
+      case "Dominican Republic":
+        this.states = ["Azua","Baoruco","Barahona","Dajabon","Distrito Nacional","Duarte","El Seibo",
+                      "Elias Pina","Espaillat","Hato Mayor","Independencia","La Altagracia","La Romana",
+                      "La Vega","Maria Trinidad Sanchez","Monsenor Nouel","Monte Cristi","Monte Plata",
+                      "Pedernales","Peravia","Puerto Plata","Salcedo","Samana","San Cristobal","San Juan",
+                      "San Pedro de Macoris","Sanchez Ramirez","Santiago","Santiago Rodriguez","Valverde"];
+        break;
+      case "Ecuador":
+        this.states = ["Azuay","Bolivar","Canar","Carchi","Chimborazo","Cotopaxi","El Oro","Esmeraldas",
+                      "Galapagos","Guayas","Imbabura","Loja","Los Rios","Manabi","Morona-Santiago","Napo",
+                      "Orellana","Pastaza","Pichincha","Sucumbios","Tungurahua","Zamora-Chinchipe"];
+        break;
+      case "Egypt":
+        this.states = ["Ad Daqahliyah","Al Bahr al Ahmar","Al Buhayrah","Al Fayyum","Al Gharbiyah",
+                      "Al Iskandariyah","Al Isma'iliyah","Al Jizah","Al Minufiyah","Al Minya","Al Qahirah",
+                      "Al Qalyubiyah","Al Wadi al Jadid","As Suways","Ash Sharqiyah","Aswan","Asyut","Bani Suwayf",
+                      "Bur Sa'id","Dumyat","Janub Sina'","Kafr ash Shaykh","Matruh","Qina","Shamal Sina'","Suhaj"];
+        break;
+      case "El Salvador":
+        this.states = ["Ahuachapan","Cabanas","Chalatenango","Cuscatlan","La Libertad",
+                      "La Paz","La Union","Morazan","San Miguel","San Salvador","San Vicente",
+                      "Santa Ana","Sonsonate","Usulutan"];
+        break;
+      case "Equatorial Guinea":
+        this.states = ["Annobon","Bioko Norte","Bioko Sur","Centro Sur","Kie-Ntem","Litoral","Wele-Nzas"];
+        break;
+      case "Eritrea":
+        this.states = ["Akale Guzay","Barka","Denkel","Hamasen","Sahil","Semhar","Senhit","Seraye"];
+        break;
+      case "Estonia":
+        this.states = ["Harjumaa (Tallinn)","Hiiumaa (Kardla)","Ida-Virumaa (Johvi)","Jarvamaa (Paide)",
+                      "Jogevamaa (Jogeva)","Laane-Virumaa (Rakvere)","Laanemaa (Haapsalu)","Parnumaa (Parnu)",
+                      "Polvamaa (Polva)","Raplamaa (Rapla)","Saaremaa (Kuessaare)","Tartumaa (Tartu)",
+                      "Valgamaa (Valga)","Viljandimaa (Viljandi)","Vorumaa (Voru)"];
+        break;
+      case "Ethiopia":
+        this.states = ["Adis Abeba (Addis Ababa)","Afar","Amara","Dire Dawa","Gambela Hizboch",
+                      "Hareri Hizb","Oromiya","Sumale","Tigray","YeDebub Biheroch Bihereseboch na Hizboch"];
+        break;
+      case "Europa Island":
+        this.states = ["Europa Island"];
+        break;
+      case "Falkland Islands (Islas Malvinas)":
+        this.states = ["Falkland Islands (Islas Malvinas)"];
+        break;
+      case "Faroe Islands":
+        this.states = ["Bordoy","Eysturoy","Mykines","Sandoy","Skuvoy",
+                      "Streymoy","Suduroy","Tvoroyri","Vagar"];
+        break;
+      case "Fiji":
+        this.states = ["Central","Eastern","Northern","Rotuma","Western"];
+        break;
+      case "Finland":
+        this.states = ["Aland","Etela-Suomen Laani","Ita-Suomen Laani","Lansi-Suomen Laani","Lappi","Oulun Laani"];
+        break;
+      case "France":
+        this.states = ["Alsace","Aquitaine","Auvergne","Basse-Normandie","Bourgogne","Bretagne","Centre",
+                      "Champagne-Ardenne","Corse","Franche-Comte","Haute-Normandie","Ile-de-France","Languedoc-Roussillon",
+                      "Limousin","Lorraine","Midi-Pyrenees","Nord-Pas-de-Calais","Pays de la Loire","Picardie",
+                      "Poitou-Charentes","Provence-Alpes-Cote d'Azur","Rhone-Alpes"];
+        break;
+      case "French Guiana":
+        this.states = ["French Guiana"];
+        break;
+      case "French Polynesia":
+        this.states = ["Archipel des Marquises","Archipel des Tuamotu","Archipel des Tubuai",
+                      "Iles du Vent","Iles Sous-le-Vent"];
+        break;
+      case "French Southern and Antarctic Lands":
+        this.states = ["Adelie Land","Ile Crozet","Iles Kerguelen","Iles Saint-Paul et Amsterdam"];
+        break;
+      case "Gabon":
+        this.states = ["Estuaire","Haut-Ogooue","Moyen-Ogooue","Ngounie","Nyanga",
+                      "Ogooue-Ivindo","Ogooue-Lolo","Ogooue-Maritime","Woleu-Ntem"];
+        break;
+      case "Gambia, The":
+        this.states = ["Banjul","Central River","Lower River","North Bank","Upper River","Western"];
+        break;
+      case "Gaza Strip":
+        this.states = ["Gaza Strip"];
+        break;
+      case "Georgia":
+        this.states = ["Abashis","Abkhazia or Ap'khazet'is Avtonomiuri Respublika (Sokhumi)",
+                      "Adigenis","Ajaria or Acharis Avtonomiuri Respublika (Bat'umi)","Akhalgoris",
+                      "Akhalk'alak'is","Akhalts'ikhis","Akhmetis","Ambrolauris","Aspindzis","Baghdat'is",
+                      "Bolnisis","Borjomis","Ch'khorotsqus","Ch'okhatauris","Chiat'ura","Dedop'listsqaros",
+                      "Dmanisis","Dushet'is","Gardabanis","Gori","Goris","Gurjaanis","Javis","K'arelis",
+                      "K'ut'aisi","Kaspis","Kharagaulis","Khashuris","Khobis","Khonis","Lagodekhis","Lanch'khut'is",
+                      "Lentekhis","Marneulis","Martvilis","Mestiis","Mts'khet'is","Ninotsmindis","Onis","Ozurget'is",
+                      "P'ot'i","Qazbegis","Qvarlis","Rust'avi","Sach'kheris","Sagarejos","Samtrediis","Senakis","Sighnaghis",
+                      "T'bilisi","T'elavis","T'erjolis","T'et'ritsqaros","T'ianet'is","Tqibuli","Ts'ageris",
+                      "Tsalenjikhis","Tsalkis","Tsqaltubo","Vanis","Zestap'onis","Zugdidi","Zugdidis"];
+        break;
+      case "Germany":
+        this.states = ["Baden-Wuerttemberg","Bayern","Berlin","Brandenburg","Bremen","Hamburg","Hessen",
+                      "Mecklenburg-Vorpommern","Niedersachsen","Nordrhein-Westfalen","Rheinland-Pfalz",
+                      "Saarland","Sachsen","Sachsen-Anhalt","Schleswig-Holstein","Thueringen"];
+        break;
+      case "Ghana":
+        this.states = ["Ashanti","Brong-Ahafo","Central","Eastern","Greater Accra","Northern",
+                      "Upper East","Upper West","Volta","Western"];
+        break;
+      case "Gibraltar":
+        this.states = ["Gibraltar"];
+        break;
+      case "Glorioso Islands":
+        this.states = ["Ile du Lys","Ile Glorieuse"];
+        break;
+      case "Greece":
+        this.states = ["Aitolia kai Akarnania","Akhaia","Argolis","Arkadhia","Arta","Attiki","Ayion Oros (Mt. Athos)",
+                      "Dhodhekanisos","Drama","Evritania","Evros","Evvoia","Florina","Fokis","Fthiotis","Grevena",
+                      "Ilia","Imathia","Ioannina","Irakleion","Kardhitsa","Kastoria","Kavala","Kefallinia","Kerkyra",
+                      "Khalkidhiki","Khania","Khios","Kikladhes","Kilkis","Korinthia","Kozani","Lakonia","Larisa",
+                      "Lasithi","Lesvos","Levkas","Magnisia","Messinia","Pella","Pieria","Preveza","Rethimni","Rodhopi",
+                      "Samos","Serrai","Thesprotia","Thessaloniki","Trikala","Voiotia","Xanthi","Zakinthos"];
+        break;
+      case "Greenland":
+        this.states = ["Avannaa (Nordgronland)","Kitaa (Vestgronland)","Tunu (Ostgronland)"];
+        break;
+      case "Grenada":
+        this.states = ["Carriacou and Petit Martinique","Saint Andrew","Saint David","Saint George",
+                      "Saint John","Saint Mark","Saint Patrick"];
+        break;
+      case "Guadeloupe":
+        this.states = ["Basse-Terre","Grande-Terre","Iles de la Petite Terre","Iles des Saintes","Marie-Galante"];
+        break;
+      case"Guam":
+        this.states = ["Guam"];
+        break;
+      case "Guatemala":
+        this.states = ["Alta Verapaz","Baja Verapaz","Chimaltenango","Chiquimula","El Progreso","Escuintla",
+                      "Guatemala","Huehuetenango","Izabal","Jalapa","Jutiapa","Peten","Quetzaltenango","Quiche",
+                      "Retalhuleu","Sacatepequez","San Marcos","Santa Rosa","Solola","Suchitepequez",
+                      "Totonicapan","Zacapa"];
+        break;
+      case "Guernsey":
+        this.states = ["Castel","Forest","St. Andrew","St. Martin","St. Peter Port","St. Pierre du Bois",
+                      "St. Sampson","St. Saviour","Torteval","Vale"];
+        break;
+      case "Guinea":
+        this.states = ["Beyla","Boffa","Boke","Conakry","Coyah","Dabola","Dalaba","Dinguiraye",
+                      "Dubreka","Faranah","Forecariah","Fria","Gaoual","Gueckedou","Kankan","Kerouane","Kindia",
+                      "Kissidougou","Koubia","Koundara","Kouroussa","Labe","Lelouma","Lola","Macenta","Mali",
+                      "Mamou","Mandiana","Nzerekore","Pita","Siguiri","Telimele","Tougue","Yomou"];
+        break;
+      case "Guinea-Bissau":
+        this.states = ["Bafata","Biombo","Bissau","Bolama-Bijagos","Cacheu","Gabu","Oio","Quinara","Tombali"];
+        break;
+      case "Guyana":
+        this.states = ["Barima-Waini","Cuyuni-Mazaruni","Demerara-Mahaica","East Berbice-Corentyne",
+                      "Essequibo Islands-West Demerara","Mahaica-Berbice","Pomeroon-Supenaam",
+                      "Potaro-Siparuni","Upper Demerara-Berbice","Upper Takutu-Upper Essequibo"];
+        break;
+      case "Haiti":
+        this.states = ["Artibonite","Centre","Grand'Anse","Nord","Nord-Est","Nord-Ouest","Ouest","Sud","Sud-Est"];
+        break;
+      case "Heard Island and McDonald Islands":
+        this.states = ["Heard Island and McDonald Islands"];
+        break;
+      case"Holy See (Vatican City)":
+        this.states = ["Holy See (Vatican City)"];
+        break;
+      case "Honduras":
+        this.states = ["Atlantida","Choluteca","Colon","Comayagua","Copan","Cortes","El Paraiso",
+                      "Francisco Morazan","Gracias a Dios","Intibuca","Islas de la Bahia","La Paz",
+                      "Lempira","Ocotepeque","Olancho","Santa Barbara","Valle","Yoro"];
+        break;
+      case "Hong Kong":
+        this.states = ["Hong Kong"];
+        break;
+      case "Howland Island":
+        this.states = ["Howland Island"];
+        break;
+      case "Hungary":
+        this.states = ["Bacs-Kiskun","Baranya","Bekes","Bekescsaba","Borsod-Abauj-Zemplen","Budapest",
+                      "Csongrad","Debrecen","Dunaujvaros","Eger","Fejer","Gyor","Gyor-Moson-Sopron","Hajdu-Bihar",
+                      "Heves","Hodmezovasarhely","Jasz-Nagykun-Szolnok","Kaposvar","Kecskemet","Komarom-Esztergom",
+                      "Miskolc","Nagykanizsa","Nograd","Nyiregyhaza","Pecs","Pest","Somogy","Sopron","Szabolcs-Szatmar-Bereg",
+                      "Szeged","Szekesfehervar","Szolnok","Szombathely","Tatabanya","Tolna","Vas","Veszprem","Veszprem",
+                      "Zala","Zalaegerszeg"];
+        break;
+      case "Iceland":
+        this.states = ["Akranes","Akureyri","Arnessysla","Austur-Bardhastrandarsysla","Austur-Hunavatnssysla",
+                      "Austur-Skaftafellssysla","Borgarfjardharsysla","Dalasysla","Eyjafjardharsysla","Gullbringusysla",
+                      "Hafnarfjordhur","Husavik","Isafjordhur","Keflavik","Kjosarsysla","Kopavogur","Myrasysla",
+                      "Neskaupstadhur","Nordhur-Isafjardharsysla","Nordhur-Mulasys-la","Nordhur-Thingeyjarsysla",
+                      "Olafsfjordhur","Rangarvallasysla","Reykjavik","Saudharkrokur","Seydhisfjordhur","Siglufjordhur",
+                      "Skagafjardharsysla","Snaefellsnes-og Hnappadalssysla","Strandasysla","Sudhur-Mulasysla","Sudhur-Thingeyjarsysla",
+                      "Vesttmannaeyjar","Vestur-Bardhastrandarsysla","Vestur-Hunavatnssysla","Vestur-Isafjardharsysla",
+                      "Vestur-Skaftafellssysla"];
+        break;
+      case "India":
+        this.states = ["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh",
+                      "Chhattisgarh","Dadra and Nagar Haveli","Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh",
+                      "Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur",
+                      "Meghalaya","Mizoram","Nagaland","Orissa","Pondicherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Tripura",
+                      "Uttar Pradesh","Uttaranchal","West Bengal"];
+        break;
+      case "Indonesia":
+        this.states = ["Aceh","Bali","Banten","Bengkulu","East Timor","Gorontalo","Irian Jaya","Jakarta Raya","Jambi","Jawa Barat",
+                      "Jawa Tengah","Jawa Timur","Kalimantan Barat","Kalimantan Selatan","Kalimantan Tengah","Kalimantan Timur",
+                      "Kepulauan Bangka Belitung","Lampung","Maluku","Maluku Utara","Nusa Tenggara Barat","Nusa Tenggara Timur",
+                      "Riau","Sulawesi Selatan","Sulawesi Tengah","Sulawesi Tenggara","Sulawesi Utara","Sumatera Barat",
+                      "Sumatera Selatan","Sumatera Utara","Yogyakarta"];
+        break;
+      case "Iran":
+        this.states = ["Ardabil","Azarbayjan-e Gharbi","Azarbayjan-e Sharqi","Bushehr","Chahar Mahall va Bakhtiari","Esfahan",
+                      "Fars","Gilan","Golestan","Hamadan","Hormozgan","Ilam","Kerman","Kermanshah","Khorasan","Khuzestan",
+                      "Kohgiluyeh va Buyer Ahmad","Kordestan","Lorestan","Markazi","Mazandaran","Qazvin","Qom","Semnan",
+                      "Sistan va Baluchestan","Tehran","Yazd","Zanjan"];
+        break;
+      case"Iraq":
+        this.states = ["Al Anbar","Al Basrah","Al Muthanna","Al Qadisiyah","An Najaf","Arbil","As Sulaymaniyah","At Ta'mim",
+                      "Babil","Baghdad","Dahuk","Dhi Qar","Diyala","Karbala'","Maysan","Ninawa","Salah ad Din","Wasit"];
+        break;
+      case "Ireland":
+        this.states = ["Carlow","Cavan","Clare","Cork","Donegal","Dublin","Galway","Kerry","Kildare","Kilkenny","Laois","Leitrim",
+                      "Limerick","Longford","Louth","Mayo","Meath","Monaghan","Offaly","Roscommon","Sligo","Tipperary",
+                      "Waterford","Westmeath","Wexford","Wicklow"];
+        break;
+      case "Ireland, Northern":
+        this.states = ["Antrim","Ards","Armagh","Ballymena","Ballymoney","Banbridge","Belfast","Carrickfergus","Castlereagh",
+                      "Coleraine","Cookstown","Craigavon","Derry","Down","Dungannon","Fermanagh","Larne","Limavady","Lisburn",
+                      "Magherafelt","Moyle","Newry and Mourne","Newtownabbey","North Down","Omagh","Strabane"];
+        break;
+      case "Israel":
+        this.states = ["Central","Haifa","Jerusalem","Northern","Southern","Tel Aviv"];
+        break;
+      case "Italy":
+        this.states = ["Abruzzo","Basilicata","Calabria","Campania","Emilia-Romagna","Friuli-Venezia Giulia","Lazio","Liguria",
+                      "Lombardia","Marche","Molise","Piemonte","Puglia","Sardegna","Sicilia","Toscana","Trentino-Alto Adige",
+                      "Umbria","Valle d'Aosta","Veneto"];
+        break;
+      case "Jamaica":
+        this.states = ["Clarendon","Hanover","Kingston","Manchester","Portland","Saint Andrew","Saint Ann","Saint Catherine",
+                      "Saint Elizabeth","Saint James","Saint Mary","Saint Thomas","Trelawny","Westmoreland"];
+        break;
+      case "Jan Mayen":
+        this.states = ["Jan Mayen"];
+        break;
+      case "Japan":
+        this.states = ["Aichi","Akita","Aomori","Chiba","Ehime","Fukui","Fukuoka","Fukushima","Gifu","Gumma","Hiroshima",
+                      "Hokkaido","Hyogo","Ibaraki","Ishikawa","Iwate","Kagawa","Kagoshima","Kanagawa","Kochi","Kumamoto",
+                      "Kyoto","Mie","Miyagi","Miyazaki","Nagano","Nagasaki","Nara","Niigata","Oita","Okayama","Okinawa",
+                      "Osaka","Saga","Saitama","Shiga","Shimane","Shizuoka","Tochigi","Tokushima","Tokyo","Tottori","Toyama",
+                      "Wakayama","Yamagata","Yamaguchi","Yamanashi"];
+        break;
+      case "Jarvis Island":
+        this.states = ["Jarvis Island"];
+        break;
+      case "Jersey":
+        this.states = ["Jersey"];
+        break;
+      case "Johnston Atoll":
+        this.states = ["Johnston Atoll"];
+        break;
+      case "Jordan":
+        this.states = ["Amman","Ajlun","Al 'Aqabah","Al Balqa'","Al Karak","Al Mafraq","At Tafilah",
+                      "Az Zarqa'","Irbid","Jarash","Ma'an","Madaba"];
+        break;
+      case "Juan de Nova Island":
+        this.states = ["Juan de Nova Island"];
+        break;
+      case "Kazakhstan":
+        this.states = ["Almaty","Aqmola","Aqtobe","Astana","Atyrau","Batys Qazaqstan","Bayqongyr","Mangghystau",
+                      "Ongtustik Qazaqstan","Pavlodar","Qaraghandy","Qostanay","Qyzylorda","Shyghys Qazaqstan",
+                      "Soltustik Qazaqstan","Zhambyl"];
+        break;
+      case "Kenya":
+        this.states = ["Central","Coast","Eastern","Nairobi Area","North Eastern","Nyanza","Rift Valley","Western"];
+        break;
+      case "Kiribati":
+        this.states = ["Abaiang","Abemama","Aranuka","Arorae","Banaba","Banaba","Beru","Butaritari",
+                      "Central Gilberts","Gilbert Islands","Kanton","Kiritimati","Kuria","Line Islands",
+                      "Line Islands","Maiana","Makin","Marakei","Nikunau","Nonouti","Northern Gilberts","Onotoa",
+                      "Phoenix Islands","Southern Gilberts","Tabiteuea","Tabuaeran","Tamana","Tarawa","Tarawa","Teraina"];
+        break;
+      case "Korea, North":
+        this.states = ["Chagang-do (Chagang Province)","Hamgyong-bukto (North Hamgyong Province)",
+                      "Hamgyong-namdo (South Hamgyong Province)","Hwanghae-bukto (North Hwanghae Province)",
+                      "Hwanghae-namdo (South Hwanghae Province)","Kaesong-si (Kaesong City)","Kangwon-do (Kangwon Province)",
+                      "Namp'o-si (Namp'o City)","P'yongan-bukto (North P'yongan Province)",
+                      "P'yongan-namdo (South P'yongan Province)","P'yongyang-si (P'yongyang City)","Yanggang-do (Yanggang Province)"];
+        break;
+      case "Korea, South":
+        this.states = ["Ch'ungch'ong-bukto","Ch'ungch'ong-namdo","Cheju-do","Cholla-bukto","Cholla-namdo",
+                      "Inch'on-gwangyoksi","Kangwon-do","Kwangju-gwangyoksi","Kyonggi-do","Kyongsang-bukto","Kyongsang-namdo",
+                      "Pusan-gwangyoksi","Soul-t'ukpyolsi","Taegu-gwangyoksi","Taejon-gwangyoksi","Ulsan-gwangyoksi"];
+        break;
+      case"Kuwait":
+        this.states = ["Al 'Asimah","Al Ahmadi","Al Farwaniyah","Al Jahra'","Hawalli"];
+        break;
+      case "Kyrgyzstan":
+        this.states = ["Batken Oblasty","Bishkek Shaary","Chuy Oblasty (Bishkek)","Jalal-Abad Oblasty","Naryn Oblasty",
+                      "Osh Oblasty","Talas Oblasty","Ysyk-Kol Oblasty (Karakol)"];
+        break;
+      case "Laos":
+        this.states = ["Attapu","Bokeo","Bolikhamxai","Champasak","Houaphan","Khammouan","Louangnamtha","Louangphabang",
+                      "Oudomxai","Phongsali","Salavan","Savannakhet","Viangchan","Viangchan","Xaignabouli","Xaisomboun","Xekong","Xiangkhoang"];
+        break;
+      case "Latvia":
+        this.states = ["Aizkraukles Rajons","Aluksnes Rajons","Balvu Rajons","Bauskas Rajons","Cesu Rajons","Daugavpils",
+                      "Daugavpils Rajons","Dobeles Rajons","Gulbenes Rajons","Jekabpils Rajons","Jelgava","Jelgavas Rajons",
+                      "Jurmala","Kraslavas Rajons","Kuldigas Rajons","Leipaja","Liepajas Rajons","Limbazu Rajons",
+                      "Ludzas Rajons","Madonas Rajons","Ogres Rajons","Preilu Rajons","Rezekne","Rezeknes Rajons","Riga",
+                      "Rigas Rajons","Saldus Rajons","Talsu Rajons","Tukuma Rajons","Valkas Rajons","Valmieras Rajons",
+                      "Ventspils","Ventspils Rajons"];
+        break;
+      case "Lebanon":
+        this.states = ["Beyrouth","Ech Chimal","Ej Jnoub","El Bekaa","Jabal Loubnane"];
+        break;
+      case "Lesotho":
+        this.states = ["Berea","Butha-Buthe","Leribe","Mafeteng","Maseru","Mohales Hoek",
+                      "Mokhotlong","Qacha's Nek","Quthing","Thaba-Tseka"];
+        break;
+      case "Liberia":
+        this.states = ["Bomi","Bong","Grand Bassa","Grand Cape Mount","Grand Gedeh","Grand Kru",
+                      "Lofa","Margibi","Maryland","Montserrado","Nimba","River Cess","Sinoe"];
+        break;
+      case "Libya":
+        this.states = ["Ajdabiya","Al 'Aziziyah","Al Fatih","Al Jabal al Akhdar","Al Jufrah","Al Khums","Al Kufrah",
+                      "An Nuqat al Khams","Ash Shati'","Awbari","Az Zawiyah","Banghazi","Darnah","Ghadamis","Gharyan",
+                      "Misratah","Murzuq","Sabha","Sawfajjin","Surt","Tarabulus","Tarhunah","Tubruq","Yafran","Zlitan"];
+        break;
+      case "Liechtenstein":
+        this.states = ["Balzers","Eschen","Gamprin","Mauren","Planken","Ruggell","Schaan","Schellenberg",
+                      "Triesen","Triesenberg","Vaduz"];
+        break;
+      case "Lithuania":
+        this.states = ["Akmenes Rajonas","Alytaus Rajonas","Alytus","Anyksciu Rajonas","Birstonas","Birzu Rajonas",
+                      "Druskininkai","Ignalinos Rajonas","Jonavos Rajonas","Joniskio Rajonas","Jurbarko Rajonas",
+                      "Kaisiadoriu Rajonas","Kaunas","Kauno Rajonas","Kedainiu Rajonas","Kelmes Rajonas","Klaipeda",
+                      "Klaipedos Rajonas","Kretingos Rajonas","Kupiskio Rajonas","Lazdiju Rajonas","Marijampole",
+                      "Marijampoles Rajonas","Mazeikiu Rajonas","Moletu Rajonas","Neringa Pakruojo Rajonas","Palanga",
+                      "Panevezio Rajonas","Panevezys","Pasvalio Rajonas","Plunges Rajonas","Prienu Rajonas","Radviliskio Rajonas",
+                      "Raseiniu Rajonas","Rokiskio Rajonas","Sakiu Rajonas","Salcininku Rajonas","Siauliai","Siauliu Rajonas",
+                      "Silales Rajonas","Silutes Rajonas","Sirvintu Rajonas","Skuodo Rajonas","Svencioniu Rajonas",
+                      "Taurages Rajonas","Telsiu Rajonas","Traku Rajonas","Ukmerges Rajonas","Utenos Rajonas","Varenos Rajonas",
+                      "Vilkaviskio Rajonas","Vilniaus Rajonas","Vilnius","Zarasu Rajonas"];
+        break;
+      case "Luxembourg":
+        this.states = ["Diekirch","Grevenmacher","Luxembourg"];
+        break;
+      case "Macau":
+        this.states = ["Macau"];
+        break;
+      case "Macedonia, Former Yugoslav Republic of":
+        this.states = ["Aracinovo","Bac","Belcista","Berovo","Bistrica","Bitola","Blatec","Bogdanci","Bogomila",
+                      "Bogovinje","Bosilovo","Brvenica","Cair (Skopje)","Capari","Caska","Cegrane","Centar (Skopje)",
+                      "Centar Zupa","Cesinovo","Cucer-Sandevo","Debar","Delcevo","Delogozdi","Demir Hisar","Demir Kapija",
+                      "Dobrusevo","Dolna Banjica","Dolneni","Dorce Petrov (Skopje)","Drugovo","Dzepciste","Gazi Baba (Skopje)",
+                      "Gevgelija","Gostivar","Gradsko","Ilinden","Izvor","Jegunovce","Kamenjane","Karbinci","Karpos (Skopje)",
+                      "Kavadarci","Kicevo","Kisela Voda (Skopje)","Klecevce","Kocani","Konce","Kondovo","Konopiste","Kosel",
+                      "Kratovo","Kriva Palanka","Krivogastani","Krusevo","Kuklis","Kukurecani","Kumanovo","Labunista","Lipkovo",
+                      "Lozovo","Lukovo","Makedonska Kamenica","Makedonski Brod","Mavrovi Anovi","Meseista","Miravci","Mogila",
+                      "Murtino","Negotino","Negotino-Poloska","Novaci","Novo Selo","Oblesevo","Ohrid","Orasac","Orizari","Oslomej",
+                      "Pehcevo","Petrovec","Plasnia","Podares","Prilep","Probistip","Radovis","Rankovce","Resen","Rosoman","Rostusa",
+                      "Samokov","Saraj","Sipkovica","Sopiste","Sopotnika","Srbinovo","Star Dojran","Staravina","Staro Nagoricane",
+                      "Stip","Struga","Strumica","Studenicani","Suto Orizari (Skopje)","Sveti Nikole","Tearce","Tetovo","Topolcani",
+                      "Valandovo","Vasilevo","Veles","Velesta","Vevcani","Vinica","Vitoliste","Vranestica","Vrapciste","Vratnica",
+                      "Vrutok","Zajas","Zelenikovo","Zileno","Zitose","Zletovo","Zrnovci"];
+        break;
+      case "Madagascar":
+        this.states = ["Antananarivo","Antsiranana","Fianarantsoa","Mahajanga","Toamasina","Toliara"];
+        break;
+      case "Malawi":
+        this.states = ["Balaka","Blantyre","Chikwawa","Chiradzulu","Chitipa","Dedza","Dowa","Karonga","Kasungu","Likoma","Lilongwe",
+                      "Machinga (Kasupe)","Mangochi","Mchinji","Mulanje","Mwanza","Mzimba","Nkhata Bay","Nkhotakota","Nsanje",
+                      "Ntcheu","Ntchisi","Phalombe","Rumphi","Salima","Thyolo","Zomba"];
+        break;
+      case "Malaysia":
+        this.states = ["Johor","Kedah","Kelantan","Labuan","Melaka","Negeri Sembilan","Pahang","Perak","Perlis","Pulau Pinang",
+                      "Sabah","Sarawak","Selangor","Terengganu","Wilayah Persekutuan"];
+        break;
+      case "Maldives":
+        this.states = ["Alifu","Baa","Dhaalu","Faafu","Gaafu Alifu","Gaafu Dhaalu","Gnaviyani","Haa Alifu","Haa Dhaalu",
+                      "Kaafu","Laamu","Lhaviyani","Maale","Meemu","Noonu","Raa","Seenu","Shaviyani","Thaa","Vaavu"];
+        break;
+      case "Mali":
+        this.states = ["Gao","Kayes","Kidal","Koulikoro","Mopti","Segou","Sikasso","Tombouctou"];
+        break;
+      case"Malta":
+        this.states = ["Valletta"];
+        break;
+      case "Man, Isle of":
+        this.states = ["Man, Isle of"];
+        break;
+      case "Marshall Islands":
+        this.states = ["Ailinginae","Ailinglaplap","Ailuk","Arno","Aur","Bikar","Bikini","Bokak","Ebon","Enewetak","Erikub",
+                      "Jabat","Jaluit","Jemo","Kili","Kwajalein","Lae","Lib","Likiep","Majuro","Maloelap","Mejit","Mili","Namorik",
+                      "Namu","Rongelap","Rongrik","Toke","Ujae","Ujelang","Utirik","Wotho","Wotje"];
+        break;
+      case "Martinique":
+        this.states = ["Martinique"];
+        break;
+      case "Mauritania":
+        this.states = ["Adrar","Assaba","Brakna","Dakhlet Nouadhibou","Gorgol","Guidimaka","Hodh Ech Chargui",
+                      "Hodh El Gharbi","Inchiri","Nouakchott","Tagant","Tiris Zemmour","Trarza"];
+        break;
+      case "Mauritius":
+        this.states = ["Agalega Islands","Black River","Cargados Carajos Shoals","Flacq","Grand Port","Moka",
+                      "Pamplemousses","Plaines Wilhems","Port Louis","Riviere du Rempart","Rodrigues","Savanne"];
+        break;
+      case "Mayotte":
+        this.states = ["Mayotte"];
+        break;
+      case "Mexico":
+        this.states = ["Aguascalientes","Baja California","Baja California Sur","Campeche","Chiapas","Chihuahua",
+                      "Coahuila de Zaragoza","Colima","Distrito Federal","Durango","Guanajuato","Guerrero","Hidalgo",
+                      "Jalisco","Mexico","Michoacan de Ocampo","Morelos","Nayarit","Nuevo Leon","Oaxaca","Puebla",
+                      "Queretaro de Arteaga","Quintana Roo","San Luis Potosi","Sinaloa","Sonora","Tabasco","Tamaulipas",
+                      "Tlaxcala","Veracruz-Llave","Yucatan","Zacatecas"];
+        break;
+      case "Micronesia, Federated States of":
+        this.states = ["Chuuk (Truk)","Kosrae","Pohnpei","Yap"];
+        break;
+      case"Midway Islands":
+        this.states = ["Midway Islands"];
+        break;
+      case "Moldova":
+        this.states = ["Balti","Cahul","Chisinau","Chisinau","Dubasari","Edinet","Gagauzia","Lapusna","Orhei","Soroca","Tighina","Ungheni"];
+        break;
+      case "Monaco":
+        this.states = ["Fontvieille","La Condamine","Monaco-Ville","Monte-Carlo"];
+        break;
+      case "Mongolia":
+        this.states = ["Arhangay","Bayan-Olgiy","Bayanhongor","Bulgan","Darhan","Dornod","Dornogovi","Dundgovi","Dzavhan",
+                      "Erdenet","Govi-Altay","Hentiy","Hovd","Hovsgol","Omnogovi","Ovorhangay","Selenge","Suhbaatar","Tov","Ulaanbaatar","Uvs"];
+        break;
+      case "Montserrat":
+        this.states = ["Saint Anthony","Saint Georges","Saint Peter's"];
+        break;
+      case "Morocco":
+        this.states = ["Agadir","Al Hoceima","Azilal","Ben Slimane","Beni Mellal","Boulemane","Casablanca","Chaouen",
+                      "El Jadida","El Kelaa des Srarhna","Er Rachidia","Essaouira","Fes","Figuig","Guelmim","Ifrane","Kenitra",
+                      "Khemisset","Khenifra","Khouribga","Laayoune","Larache","Marrakech","Meknes","Nador","Ouarzazate","Oujda",
+                      "Rabat-Sale","Safi","Settat","Sidi Kacem","Tan-Tan","Tanger","Taounate","Taroudannt","Tata","Taza","Tetouan","Tiznit"];
+        break;
+      case "Mozambique":
+        this.states = ["Cabo Delgado","Gaza","Inhambane","Manica","Maputo","Nampula","Niassa","Sofala","Tete","Zambezia"];
+        break;
+      case "Namibia":
+        this.states = ["Caprivi","Erongo","Hardap","Karas","Khomas","Kunene","Ohangwena","Okavango","Omaheke",
+                      "Omusati","Oshana","Oshikoto","Otjozondjupa"];
+        break;
+      case "Nauru":
+        this.states = ["Aiwo","Anabar","Anetan","Anibare","Baiti","Boe","Buada","Denigomodu","Ewa",
+                      "Ijuw","Meneng","Nibok","Uaboe","Yaren"];
+        break;
+      case "Nepal":
+        this.states = ["Bagmati","Bheri","Dhawalagiri","Gandaki","Janakpur","Karnali","Kosi","Lumbini",
+                      "Mahakali","Mechi","Narayani","Rapti","Sagarmatha","Seti"];
+        break;
+      case"Netherlands":
+        this.states = ["Drenthe","Flevoland","Friesland","Gelderland","Groningen","Limburg","Noord-Brabant",
+                      "Noord-Holland","Overijssel","Utrecht","Zeeland","Zuid-Holland"];
+        break;
+      case "Netherlands Antilles":
+        this.states = ["Netherlands Antilles"];
+        break;
+      case "New Caledonia":
+        this.states = ["Iles Loyaute","Nord","Sud"];
+        break;
+      case "New Zealand":
+        this.states = ["Akaroa","Amuri","Ashburton","Bay of Islands","Bruce","Buller","Chatham Islands","Cheviot",
+                      "Clifton","Clutha","Cook","Dannevirke","Egmont","Eketahuna","Ellesmere","Eltham","Eyre","Featherston",
+                      "Franklin","Golden Bay","Great Barrier Island","Grey","Hauraki Plains","Hawera","Hawke's Bay",
+                      "Heathcote","Hikurangi","Hobson","Hokianga","Horowhenua","Hurunui","Hutt","Inangahua","Inglewood",
+                      "Kaikoura","Kairanga","Kiwitea","Lake","Mackenzie","Malvern","Manaia","Manawatu","Mangonui","Maniototo",
+                      "Marlborough","Masterton","Matamata","Mount Herbert","Ohinemuri","Opotiki","Oroua","Otamatea","Otorohanga",
+                      "Oxford","Pahiatua","Paparua","Patea","Piako","Pohangina","Raglan","Rangiora","Rangitikei","Rodney","Rotorua",
+                      "Runanga","Saint Kilda","Silverpeaks","Southland","Stewart Island","Stratford","Strathallan","Taranaki",
+                      "Taumarunui","Taupo","Tauranga","Thames-Coromandel","Tuapeka","Vincent","Waiapu","Waiheke","Waihemo","Waikato",
+                      "Waikohu","Waimairi","Waimarino","Waimate","Waimate West","Waimea","Waipa","Waipawa","Waipukurau","Wairarapa South",
+                      "Wairewa","Wairoa","Waitaki","Waitomo","Waitotara","Wallace","Wanganui","Waverley","Westland","Whakatane",
+                      "Whangarei","Whangaroa","Woodville"];
+        break;
+      case "Nicaragua":
+        this.states = ["Atlantico Norte","Atlantico Sur","Boaco","Carazo","Chinandega","Chontales","Esteli","Granada","Jinotega",
+                      "Leon","Madriz","Managua","Masaya","Matagalpa","Nueva Segovia","Rio San Juan","Rivas"];
+        break;
+      case "Niger":
+        this.states = ["Agadez","Diffa","Dosso","Maradi","Niamey","Tahoua","Tillaberi","Zinder"];
+        break;
+      case "Nigeria":
+        this.states = ["Abia","Abuja Federal Capital Territory","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno",
+                      "Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi",
+                      "Kogi","Kwara","Lagos","Nassarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
+        break;
+      case "Niue":
+        this.states = ["Niue"];
+        break;
+      case "Norfolk Island":
+        this.states = ["Norfolk Island"];
+        break;
+      case"Northern Mariana Islands":
+        this.states = ["Northern Islands","Rota","Saipan","Tinian"];
+        break;
+      case "Norway":
+        this.states = ["Akershus","Aust-Agder","Buskerud","Finnmark","Hedmark","Hordaland","More og Romsdal","Nord-Trondelag",
+                      "Nordland","Oppland","Oslo","Ostfold","Rogaland","Sogn og Fjordane","Sor-Trondelag","Telemark",
+                      "Troms","Vest-Agder","Vestfold"];
+        break;
+      case "Oman":
+        this.states = ["Ad Dakhiliyah","Al Batinah","Al Wusta","Ash Sharqiyah","Az Zahirah","Masqat","Musandam","Zufar"];
+        break;
+      case "Pakistan":
+        this.states = ["Balochistan","Federally Administered Tribal Areas","Islamabad Capital Territory",
+                      "North-West Frontier Province","Punjab","Sindh"];
+        break;
+      case "Palau":
+        this.states = ["Aimeliik","Airai","Angaur","Hatobohei","Kayangel","Koror","Melekeok","Ngaraard","Ngarchelong",
+                      "Ngardmau","Ngatpang","Ngchesar","Ngeremlengui","Ngiwal","Palau Island","Peleliu","Sonsoral","Tobi"];
+        break;
+      case "Panama":
+        this.states = ["Bocas del Toro","Chiriqui","Cocle","Colon","Darien","Herrera","Los Santos","Panama","San Blas","Veraguas"];
+        break;
+      case "Papua New Guinea":
+        this.states = ["Bougainville","Central","Chimbu","East New Britain","East Sepik","Eastern Highlands","Enga",
+                      "Gulf","Madang","Manus","Milne Bay","Morobe","National Capital","New Ireland","Northern","Sandaun",
+                      "Southern Highlands","West New Britain","Western","Western Highlands"];
+        break;
+      case "Paraguay":
+        this.states = ["Alto Paraguay","Alto Parana","Amambay","Asuncion (city)","Boqueron","Caaguazu","Caazapa","Canindeyu",
+                      "Central","Concepcion","Cordillera","Guaira","Itapua","Misiones","Neembucu","Paraguari",
+                      "Presidente Hayes","San Pedro"];
+        break;
+      case "Peru":
+        this.states = ["Amazonas","Ancash","Apurimac","Arequipa","Ayacucho","Cajamarca","Callao","Cusco","Huancavelica",
+                      "Huanuco","Ica","Junin","La Libertad","Lambayeque","Lima","Loreto","Madre de Dios","Moquegua","Pasco",
+                      "Piura","Puno","San Martin","Tacna","Tumbes","Ucayali"];
+        break;
+      case "Philippines":
+        this.states = ["Abra","Agusan del Norte","Agusan del Sur","Aklan","Albay","Angeles","Antique","Aurora","Bacolod","Bago",
+                      "Baguio","Bais","Basilan","Basilan City","Bataan","Batanes","Batangas","Batangas City","Benguet","Bohol",
+                      "Bukidnon","Bulacan","Butuan","Cabanatuan","Cadiz","Cagayan","Cagayan de Oro","Calbayog","Caloocan",
+                      "Camarines Norte","Camarines Sur","Camiguin","Canlaon","Capiz","Catanduanes","Cavite","Cavite City",
+                      "Cebu","Cebu City","Cotabato","Dagupan","Danao","Dapitan","Davao City Davao","Davao del Sur","Davao Oriental",
+                      "Dipolog","Dumaguete","Eastern Samar","General Santos","Gingoog","Ifugao","Iligan","Ilocos Norte","Ilocos Sur",
+                      "Iloilo","Iloilo City","Iriga","Isabela","Kalinga-Apayao","La Carlota","La Union","Laguna","Lanao del Norte",
+                      "Lanao del Sur","Laoag","Lapu-Lapu","Legaspi","Leyte","Lipa","Lucena","Maguindanao","Mandaue","Manila","Marawi",
+                      "Marinduque","Masbate","Mindoro Occidental","Mindoro Oriental","Misamis Occidental","Misamis Oriental","Mountain",
+                      "Naga","Negros Occidental","Negros Oriental","North Cotabato","Northern Samar","Nueva Ecija","Nueva Vizcaya","Olongapo",
+                      "Ormoc","Oroquieta","Ozamis","Pagadian","Palawan","Palayan","Pampanga","Pangasinan","Pasay","Puerto Princesa","Quezon",
+                      "Quezon City","Quirino","Rizal","Romblon","Roxas","Samar","San Carlos (in Negros Occidental)","San Carlos (in Pangasinan)",
+                      "San Jose","San Pablo","Silay","Siquijor","Sorsogon","South Cotabato","Southern Leyte","Sultan Kudarat","Sulu","Surigao",
+                      "Surigao del Norte","Surigao del Sur","Tacloban","Tagaytay","Tagbilaran","Tangub","Tarlac","Tawitawi","Toledo","Trece Martires",
+                      "Zambales","Zamboanga","Zamboanga del Norte","Zamboanga del Sur"];
+        break;
+      case"Pitcaim Islands":
+        this.states = ["Pitcaim Islands"];
+        break;
+      case "Poland":
+        this.states = ["Dolnoslaskie","Kujawsko-Pomorskie","Lodzkie","Lubelskie","Lubuskie","Malopolskie","Mazowieckie","Opolskie","Podkarpackie",
+                      "Podlaskie","Pomorskie","Slaskie","Swietokrzyskie","Warminsko-Mazurskie","Wielkopolskie","Zachodniopomorskie"];
+        break;
+      case "Portugal":
+        this.states = ["Acores (Azores)","Aveiro","Beja","Braga","Braganca","Castelo Branco","Coimbra","Evora","Faro","Guarda","Leiria","Lisboa",
+                      "Madeira","Portalegre","Porto","Santarem","Setubal","Viana do Castelo","Vila Real","Viseu"];
+        break;
+      case "Puerto Rico":
+        this.states = ["Adjuntas","Aguada","Aguadilla","Aguas Buenas","Aibonito","Anasco","Arecibo","Arroyo","Barceloneta","Barranquitas",
+                      "Bayamon","Cabo Rojo","Caguas","Camuy","Canovanas","Carolina","Catano","Cayey","Ceiba","Ciales","Cidra","Coamo","Comerio",
+                      "Corozal","Culebra","Dorado","Fajardo","Florida","Guanica","Guayama","Guayanilla","Guaynabo","Gurabo","Hatillo","Hormigueros",
+                      "Humacao","Isabela","Jayuya","Juana Diaz","Juncos","Lajas","Lares","Las Marias","Las Piedras","Loiza","Luquillo","Manati",
+                      "Maricao","Maunabo","Mayaguez","Moca","Morovis","Naguabo","Naranjito","Orocovis","Patillas","Penuelas","Ponce","Quebradillas",
+                      "Rincon","Rio Grande","Sabana Grande","Salinas","San German","San Juan","San Lorenzo","San Sebastian","Santa Isabel","Toa Alta",
+                      "Toa Baja","Trujillo Alto","Utuado","Vega Alta","Vega Baja","Vieques","Villalba","Yabucoa","Yauco"];
+        break;
+      case "Qatar":
+        this.states = ["Ad Dawhah","Al Ghuwayriyah","Al Jumayliyah","Al Khawr","Al Wakrah","Ar Rayyan","Jarayan al Batinah",
+                      "Madinat ash Shamal","Umm Salal"];
+        break;
+      case "Reunion":
+        this.states = ["Reunion"];
+        break;
+      case "Romainia":
+        this.states = ["Alba","Arad","Arges","Bacau","Bihor","Bistrita-Nasaud","Botosani","Braila","Brasov","Bucuresti","Buzau",
+                      "Calarasi","Caras-Severin","Cluj","Constanta","Covasna","Dimbovita","Dolj","Galati","Giurgiu","Gorj","Harghita","Hunedoara",
+                      "Ialomita","Iasi","Maramures","Mehedinti","Mures","Neamt","Olt","Prahova","Salaj","Satu Mare","Sibiu","Suceava","Teleorman",
+                      "Timis","Tulcea","Vaslui","Vilcea","Vrancea"];
+        break;
+      case "Russia":
+        this.states = ["Adygeya (Maykop)","Aginskiy Buryatskiy (Aginskoye)","Altay (Gorno-Altaysk)","Altayskiy (Barnaul)",
+                      "Amurskaya (Blagoveshchensk)","Arkhangel'skaya","Astrakhanskaya","Bashkortostan (Ufa)","Belgorodskaya",
+                      "Bryanskaya","Buryatiya (Ulan-Ude)","Chechnya (Groznyy)","Chelyabinskaya","Chitinskaya","Chukotskiy (Anadyr')",
+                      "Chuvashiya (Cheboksary)","Dagestan (Makhachkala)","Evenkiyskiy (Tura)","Ingushetiya (Nazran')","Irkutskaya",
+                      "Ivanovskaya","Kabardino-Balkariya (Nal'chik)","Kaliningradskaya","Kalmykiya (Elista)","Kaluzhskaya",
+                      "Kamchatskaya (Petropavlovsk-Kamchatskiy)","Karachayevo-Cherkesiya (Cherkessk)","Kareliya (Petrozavodsk)",
+                      "Kemerovskaya","Khabarovskiy","Khakasiya (Abakan)","Khanty-Mansiyskiy (Khanty-Mansiysk)","Kirovskaya",
+                      "Komi (Syktyvkar)","Komi-Permyatskiy (Kudymkar)","Koryakskiy (Palana)","Kostromskaya","Krasnodarskiy",
+                      "Krasnoyarskiy","Kurganskaya","Kurskaya","Leningradskaya","Lipetskaya","Magadanskaya","Mariy-El (Yoshkar-Ola)",
+                      "Mordoviya (Saransk)","Moskovskaya","Moskva (Moscow)","Murmanskaya","Nenetskiy (Nar'yan-Mar)","Nizhegorodskaya",
+                      "Novgorodskaya","Novosibirskaya","Omskaya","Orenburgskaya","Orlovskaya (Orel)","Penzenskaya","Permskaya",
+                      "Primorskiy (Vladivostok)","Pskovskaya","Rostovskaya","Ryazanskaya","Sakha (Yakutsk)","Sakhalinskaya (Yuzhno-Sakhalinsk)",
+                      "Samarskaya","Sankt-Peterburg (Saint Petersburg)","Saratovskaya","Severnaya Osetiya-Alaniya [North Ossetia] (Vladikavkaz)",
+                      "Smolenskaya","Stavropol'skiy","Sverdlovskaya (Yekaterinburg)","Tambovskaya","Tatarstan (Kazan')","Taymyrskiy (Dudinka)",
+                      "Tomskaya","Tul'skaya","Tverskaya","Tyumenskaya","Tyva (Kyzyl)","Udmurtiya (Izhevsk)","Ul'yanovskaya",
+                      "Ust'-Ordynskiy Buryatskiy (Ust'-Ordynskiy)","Vladimirskaya","Volgogradskaya","Vologodskaya","Voronezhskaya",
+                      "Yamalo-Nenetskiy (Salekhard)","Yaroslavskaya","Yevreyskaya"];
+        break;
+      case "Rwanda":
+        this.states = ["Butare","Byumba","Cyangugu","Gikongoro","Gisenyi","Gitarama","Kibungo","Kibuye","Kigali Rurale",
+                      "Kigali-ville","Ruhengeri","Umutara"];
+        break;
+      case "Saint Helena":
+        this.states = ["Ascension","Saint Helena","Tristan da Cunha"];
+        break;
+      case"Saint Kitts and Nevis":
+        this.states = ["Christ Church Nichola Town","Saint Anne Sandy Point","Saint George Basseterre","Saint George Gingerland",
+                      "Saint James Windward","Saint John Capisterre","Saint John Figtree","Saint Mary Cayon","Saint Paul Capisterre",
+                      "Saint Paul Charlestown","Saint Peter Basseterre","Saint Thomas Lowland","Saint Thomas Middle Island","Trinity Palmetto Point"];
+        break;
+      case "Saint Lucia":
+        this.states = ["Anse-la-Raye","Castries","Choiseul","Dauphin","Dennery","Gros Islet","Laborie","Micoud",
+                      "Praslin","Soufriere","Vieux Fort"];
+        break;
+      case "Saint Pierre and Miquelon":
+        this.states = ["Miquelon","Saint Pierre"];
+        break;
+      case "Saint Vincent and the Grenadines":
+        this.states = ["Charlotte","Grenadines","Saint Andrew","Saint David","Saint George","Saint Patrick"];
+        break;
+      case "Samoa":
+        this.states = ["A'ana","Aiga-i-le-Tai","Atua","Fa'asaleleaga","Gaga'emauga","Gagaifomauga","Palauli",
+                      "Satupa'itea","Tuamasaga","Va'a-o-Fonoti","Vaisigano"];
+        break;
+      case "San Marino":
+        this.states = ["Acquaviva","Borgo Maggiore","Chiesanuova","Domagnano","Faetano","Fiorentino",
+                      "Monte Giardino","San Marino","Serravalle"];
+        break;
+      case"Sao Tome and Principe":
+        this.states = ["Principe","Sao Tome"];
+        break;
+      case "Saudi Arabia":
+        this.states = ["Asir","Al Bahah","Al Hudud ash Shamaliyah","Al Jawf","Al Madinah","Al Qasim",
+                      "Ar Riyad","Ash Sharqiyah (Eastern Province)","Ha'il","Jizan","Makkah","Najran","Tabuk"];
+        break;
+      case "Scotland":
+        this.states = ["Aberdeen City","Aberdeenshire","Angus","Argyll and Bute","City of Edinburgh",
+                      "Clackmannanshire","Dumfries and Galloway","Dundee City","East Ayrshire","East Dunbartonshire",
+                      "East Lothian","East Renfrewshire","Eilean Siar (Western Isles)","Falkirk","Fife","Glasgow City",
+                      "Highland","Inverclyde","Midlothian","Moray","North Ayrshire","North Lanarkshire","Orkney Islands",
+                      "Perth and Kinross","Renfrewshire","Shetland Islands","South Ayrshire","South Lanarkshire","Stirling",
+                      "The Scottish Borders","West Dunbartonshire","West Lothian"];
+        break;
+      case "Senegal":
+        this.states = ["Dakar","Diourbel","Fatick","Kaolack","Kolda","Louga","Saint-Louis","Tambacounda","Thies","Ziguinchor"];
+        break;
+      case "Seychelles":
+        this.states = ["Anse aux Pins","Anse Boileau","Anse Etoile","Anse Louis","Anse Royale","Baie Lazare",
+                      "Baie Sainte Anne","Beau Vallon","Bel Air","Bel Ombre","Cascade","Glacis","Grand' Anse (on Mahe)",
+                      "Grand' Anse (on Praslin)","La Digue","La Riviere Anglaise","Mont Buxton","Mont Fleuri","Plaisance",
+                      "Pointe La Rue","Port Glaud","Saint Louis","Takamaka"];
+        break;
+      case "Sierra Leone":
+        this.states = ["Eastern","Northern","Southern","Western"];
+        break;
+      case "Singapore":
+        this.states = ["Singapore"];
+        break;
+      case "Slovakia":
+        this.states = ["Banskobystricky","Bratislavsky","Kosicky","Nitriansky","Presovsky",
+                      "Trenciansky","Trnavsky","Zilinsky"];
+        break;
+      case "Slovenia":
+        this.states = ["Ajdovscina","Beltinci","Bled","Bohinj","Borovnica","Bovec","Brda","Brezice",
+                      "Brezovica","Cankova-Tisina","Celje","Cerklje na Gorenjskem","Cerknica","Cerkno",
+                      "Crensovci","Crna na Koroskem","Crnomelj","Destrnik-Trnovska Vas","Divaca","Dobrepolje",
+                      "Dobrova-Horjul-Polhov Gradec","Dol pri Ljubljani","Domzale","Dornava","Dravograd","Duplek",
+                      "Gorenja Vas-Poljane","Gorisnica","Gornja Radgona","Gornji Grad","Gornji Petrovci","Grosuplje",
+                      "Hodos Salovci","Hrastnik","Hrpelje-Kozina","Idrija","Ig","Ilirska Bistrica","Ivancna Gorica",
+                      "Izola","Jesenice","Jursinci","Kamnik","Kanal","Kidricevo","Kobarid","Kobilje","Kocevje","Komen",
+                      "Koper","Kozje","Kranj","Kranjska Gora","Krsko","Kungota","Kuzma","Lasko","Lenart","Lendava",
+                      "Litija","Ljubljana","Ljubno","Ljutomer","Logatec","Loska Dolina","Loski Potok","Luce","Lukovica",
+                      "Majsperk","Maribor","Medvode","Menges","Metlika","Mezica","Miren-Kostanjevica","Mislinja","Moravce",
+                      "Moravske Toplice","Mozirje","Murska Sobota","Muta","Naklo","Nazarje","Nova Gorica","Novo Mesto","Odranci",
+                      "Ormoz","Osilnica","Pesnica","Piran","Pivka","Podcetrtek","Podvelka-Ribnica","Postojna","Preddvor","Ptuj",
+                      "Puconci","Race-Fram","Radece","Radenci","Radlje ob Dravi","Radovljica","Ravne-Prevalje","Ribnica",
+                      "Rogasevci","Rogaska Slatina","Rogatec","Ruse","Semic","Sencur","Sentilj","Sentjernej","Sentjur pri Celju",
+                      "Sevnica","Sezana","Skocjan","Skofja Loka","Skofljica","Slovenj Gradec","Slovenska Bistrica","Slovenske Konjice",
+                      "Smarje pri Jelsah","Smartno ob Paki","Sostanj","Starse","Store","Sveti Jurij","Tolmin","Trbovlje","Trebnje",
+                      "Trzic","Turnisce","Velenje","Velike Lasce","Videm","Vipava","Vitanje","Vodice","Vojnik","Vrhnika",
+                      "Vuzenica","Zagorje ob Savi","Zalec","Zavrc","Zelezniki","Ziri","Zrece"];
+        break;
+      case"Solomon Islands":
+        this.states = ["Bellona","Central","Choiseul (Lauru)","Guadalcanal","Honiara","Isabel","Makira",
+                      "Malaita","Rennell","Temotu","Western"];
+        break;
+      case "Somalia":
+        this.states = ["Awdal","Bakool","Banaadir","Bari","Bay","Galguduud","Gedo","Hiiraan","Jubbada Dhexe",
+                      "Jubbada Hoose","Mudug","Nugaal","Sanaag","Shabeellaha Dhexe","Shabeellaha Hoose","Sool",
+                      "Togdheer","Woqooyi Galbeed"];
+        break;
+      case "South Africa":
+        this.states = ["Eastern Cape","Free State","Gauteng","KwaZulu-Natal","Mpumalanga","North-West",
+                      "Northern Cape","Northern Province","Western Cape"];
+        break;
+      case "South Georgia and South Sandwich Islands":
+        this.states = ["Bird Island","Bristol Island","Clerke Rocks","Montagu Island","Saunders Island",
+                      "South Georgia","Southern Thule","Traversay Islands"];
+        break;
+      case "Spain":
+        this.states = ["Andalucia","Aragon","Asturias","Baleares (Balearic Islands)","Canarias (Canary Islands)",
+                      "Cantabria","Castilla y Leon","Castilla-La Mancha","Cataluna","Ceuta","Communidad Valencian",
+                      "Extremadura","Galicia","Islas Chafarinas","La Rioja","Madrid","Melilla","Murcia","Navarra",
+                      "Pais Vasco (Basque Country)","Penon de Alhucemas","Penon de Velez de la Gomera"];
+        break;
+      case "Spratly Islands":
+        this.states = ["Spratly Islands"];
+        break;
+      case "Sri Lanka":
+        this.states = ["Central","Eastern","North Central","North Eastern","North Western","Northern",
+                      "Sabaragamuwa","Southern","Uva","Western"];
+        break;
+      case"Sudan":
+        this.states = ["A'ali an Nil","Al Bahr al Ahmar","Al Buhayrat","Al Jazirah","Al Khartum","Al Qadarif",
+                      "Al Wahdah","An Nil al Abyad","An Nil al Azraq","Ash Shamaliyah","Bahr al Jabal",
+                      "Gharb al Istiwa'iyah","Gharb Bahr al Ghazal","Gharb Darfur","Gharb Kurdufan","Janub Darfur",
+                      "Janub Kurdufan","Junqali","Kassala","Nahr an Nil","Shamal Bahr al Ghazal","Shamal Darfur",
+                      "Shamal Kurdufan","Sharq al Istiwa'iyah","Sinnar","Warab"];
+        break;
+      case "Suriname":
+        this.states = ["Brokopondo","Commewijne","Coronie","Marowijne","Nickerie","Para","Paramaribo",
+                      "Saramacca","Sipaliwini","Wanica"];
+        break;
+      case "Svalbard":
+        this.states = ["Barentsoya","Bjornoya","Edgeoya","Hopen","Kvitoya","Nordaustandet","Prins Karls Forland","Spitsbergen"];
+        break;
+      case "Swaziland":
+        this.states = ["Hhohho","Lubombo","Manzini","Shiselweni"];
+        break;
+      case "Sweden":
+        this.states = ["Blekinge","Dalarnas","Gavleborgs","Gotlands","Hallands","Jamtlands","Jonkopings","Kalmar",
+                      "Kronobergs","Norrbottens","Orebro","Ostergotlands","Skane","Sodermanlands","Stockholms",
+                      "Uppsala","Varmlands","Vasterbottens","Vasternorrlands","Vastmanlands","Vastra Gotalands"];
+        break;
+      case "Switzerland":
+        this.states = ["Aargau","Ausser-Rhoden","Basel-Landschaft","Basel-Stadt","Bern","Fribourg","Geneve",
+                      "Glarus","Graubunden","Inner-Rhoden","Jura","Luzern","Neuchatel","Nidwalden","Obwalden",
+                      "Sankt Gallen","Schaffhausen","Schwyz","Solothurn","Thurgau","Ticino","Uri","Valais","Vaud",
+                      "Zug","Zurich"];
+        break;
+      case "Syria":
+        this.states = ["Al Hasakah","Al Ladhiqiyah","Al Qunaytirah","Ar Raqqah","As Suwayda'","Dar'a","Dayr az Zawr",
+                      "Dimashq","Halab","Hamah","Hims","Idlib","Rif Dimashq","Tartus"];
+        break;
+      case "Taiwan":
+        this.states = ["Chang-hua","Chi-lung","Chia-i","Chia-i","Chung-hsing-hsin-ts'un","Hsin-chu","Hsin-chu","Hua-lien",
+                      "I-lan","Kao-hsiung","Kao-hsiung","Miao-li","Nan-t'ou","P'eng-hu","P'ing-tung","T'ai-chung","T'ai-chung",
+                      "T'ai-nan","T'ai-nan","T'ai-pei","T'ai-pei","T'ai-tung","T'ao-yuan","Yun-lin"];
+        break;
+      case "Tajikistan":
+        this.states = ["Viloyati Khatlon","Viloyati Leninobod","Viloyati Mukhtori Kuhistoni Badakhshon"];
+        break;
+      case "Tanzania":
+        this.states = ["Arusha","Dar es Salaam","Dodoma","Iringa","Kagera","Kigoma","Kilimanjaro","Lindi","Mara",
+                      "Mbeya","Morogoro","Mtwara","Mwanza","Pemba North","Pemba South","Pwani","Rukwa","Ruvuma","Shinyanga",
+                      "Singida","Tabora","Tanga","Zanzibar Central/South","Zanzibar North","Zanzibar Urban/West"];
+        break;
+      case "Thailand":
+        this.states = ["Amnat Charoen","Ang Thong","Buriram","Chachoengsao","Chai Nat","Chaiyaphum","Chanthaburi","Chiang Mai",
+                      "Chiang Rai","Chon Buri","Chumphon","Kalasin","Kamphaeng Phet","Kanchanaburi","Khon Kaen","Krabi",
+                      "Krung Thep Mahanakhon (Bangkok)","Lampang","Lamphun","Loei","Lop Buri","Mae Hong Son","Maha Sarakham",
+                      "Mukdahan","Nakhon Nayok","Nakhon Pathom","Nakhon Phanom","Nakhon Ratchasima","Nakhon Sawan",
+                      "Nakhon Si Thammarat","Nan","Narathiwat","Nong Bua Lamphu","Nong Khai","Nonthaburi","Pathum Thani",
+                      "Pattani","Phangnga","Phatthalung","Phayao","Phetchabun","Phetchaburi","Phichit","Phitsanulok",
+                      "Phra Nakhon Si Ayutthaya","Phrae","Phuket","Prachin Buri","Prachuap Khiri Khan","Ranong","Ratchaburi",
+                      "Rayong","Roi Et","Sa Kaeo","Sakon Nakhon","Samut Prakan","Samut Sakhon","Samut Songkhram",
+                      "Sara Buri","Satun","Sing Buri","Sisaket","Songkhla","Sukhothai","Suphan Buri","Surat Thani","Surin",
+                      "Tak","Trang","Trat","Ubon Ratchathani","Udon Thani","Uthai Thani","Uttaradit","Yala","Yasothon"];
+        break;
+      case "Tobago":
+        this.states = ["Tobago"];
+        break;
+      case"Toga":
+        this.states = ["De La Kara","Des Plateaux","Des Savanes","Du Centre","Maritime"];
+        break;
+      case "Tokelau":
+        this.states = ["Atafu","Fakaofo","Nukunonu"];
+        break;
+      case "Tonga":
+        this.states = ["Ha'apai","Tongatapu","Vava'u"];
+        break;
+      case "Trinidad":
+        this.states = ["Arima","Caroni","Mayaro","Nariva","Port-of-Spain","Saint Andrew","Saint David","Saint George",
+                      "Saint Patrick","San Fernando","Victoria"];
+        break;
+      case "Tunisia":
+        this.states = ["Ariana","Beja","Ben Arous","Bizerte","El Kef","Gabes","Gafsa","Jendouba","Kairouan","Kasserine",
+                      "Kebili","Mahdia","Medenine","Monastir","Nabeul","Sfax","Sidi Bou Zid","Siliana","Sousse","Tataouine",
+                      "Tozeur","Tunis","Zaghouan"];
+        break;
+      case "Turkey":
+        this.states = ["Adana","Adiyaman","Afyon","Agri","Aksaray","Amasya","Ankara","Antalya","Ardahan","Artvin",
+                      "Aydin","Balikesir","Bartin","Batman","Bayburt","Bilecik","Bingol","Bitlis","Bolu","Burdur",
+                      "Bursa","Canakkale","Cankiri","Corum","Denizli","Diyarbakir","Duzce","Edirne","Elazig","Erzincan",
+                      "Erzurum","Eskisehir","Gaziantep","Giresun","Gumushane","Hakkari","Hatay","Icel","Igdir","Isparta",
+                      "Istanbul","Izmir","Kahramanmaras","Karabuk","Karaman","Kars","Kastamonu","Kayseri","Kilis","Kirikkale",
+                      "Kirklareli","Kirsehir","Kocaeli","Konya","Kutahya","Malatya","Manisa","Mardin","Mugla","Mus","Nevsehir",
+                      "Nigde","Ordu","Osmaniye","Rize","Sakarya","Samsun","Sanliurfa","Siirt","Sinop","Sirnak","Sivas","Tekirdag",
+                      "Tokat","Trabzon","Tunceli","Usak","Van","Yalova","Yozgat","Zonguldak"];
+        break;
+      case "Turkmenistan":
+        this.states = ["Ahal Welayaty","Balkan Welayaty","Dashhowuz Welayaty","Lebap Welayaty","Mary Welayaty"];
+        break;
+      case "Tuvalu":
+        this.states = ["Tuvalu"];
+        break;
+      case "Uganda":
+        this.states = ["Adjumani","Apac","Arua","Bugiri","Bundibugyo","Bushenyi","Busia","Gulu","Hoima","Iganga",
+                      "Jinja","Kabale","Kabarole","Kalangala","Kampala","Kamuli","Kapchorwa","Kasese","Katakwi",
+                      "Kibale","Kiboga","Kisoro","Kitgum","Kotido","Kumi","Lira","Luwero","Masaka","Masindi",
+                      "Mbale","Mbarara","Moroto","Moyo","Mpigi","Mubende","Mukono","Nakasongola","Nebbi","Ntungamo",
+                      "Pallisa","Rakai","Rukungiri","Sembabule","Soroti","Tororo"];
+        break;
+      case "Ukraine":
+        this.states = ["Avtonomna Respublika Krym (Simferopol')","Cherkas'ka (Cherkasy)","Chernihivs'ka (Chernihiv)",
+                      "Chernivets'ka (Chernivtsi)","Dnipropetrovs'ka (Dnipropetrovs'k)","Donets'ka (Donets'k)",
+                      "Ivano-Frankivs'ka (Ivano-Frankivs'k)","Kharkivs'ka (Kharkiv)","Khersons'ka (Kherson)",
+                      "Khmel'nyts'ka (Khmel'nyts'kyy)","Kirovohrads'ka (Kirovohrad)","Kyyiv","Kyyivs'ka (Kiev)",
+                      "L'vivs'ka (L'viv)","Luhans'ka (Luhans'k)","Mykolayivs'ka (Mykolayiv)","Odes'ka (Odesa)",
+                      "Poltavs'ka (Poltava)","Rivnens'ka (Rivne)","Sevastopol'","Sums'ka (Sumy)","Ternopil's'ka (Ternopil')",
+                      "Vinnyts'ka (Vinnytsya)","Volyns'ka (Luts'k)","Zakarpats'ka (Uzhhorod)","Zaporiz'ka (Zaporizhzhya)",
+                      "Zhytomyrs'ka (Zhytomyr)"];
+        break;
+      case "United Arab Emirates":
+        this.states = ["Ajman","Abu Zaby (Abu Dhabi)","Al Fujayrah","Ash Shariqah (Sharjah)","Dubayy (Dubai)",
+                      "Ra's al Khaymah","Umm al Qaywayn"];
+        break;
+      case"United Kingdom":
+        this.states = ["Barking and Dagenham","Barnet","Barnsley","Bath and North East Somerset","Bedfordshire",
+                      "Bexley","Birmingham","Blackburn with Darwen","Blackpool","Bolton","Bournemouth","Bracknell Forest",
+                      "Bradford","Brent","Brighton and Hove","Bromley","Buckinghamshire","Bury","Calderdale","Cambridgeshire",
+                      "Camden","Cheshire","City of Bristol","City of Kingston upon Hull","City of London","Cornwall","Coventry",
+                      "Croydon","Cumbria","Darlington","Derby","Derbyshire","Devon","Doncaster","Dorset","Dudley","Durham","Ealing",
+                      "East Riding of Yorkshire","East Sussex","Enfield","Essex","Gateshead","Gloucestershire","Greenwich","Hackney",
+                      "Halton","Hammersmith and Fulham","Hampshire","Haringey","Harrow","Hartlepool","Havering","Herefordshire",
+                      "Hertfordshire","Hillingdon","Hounslow","Isle of Wight","Islington","Kensington and Chelsea","Kent",
+                      "Kingston upon Thames","Kirklees","Knowsley","Lambeth","Lancashire","Leeds","Leicester","Leicestershire",
+                      "Lewisham","Lincolnshire","Liverpool","Luton","Manchester","Medway","Merton","Middlesbrough","Milton Keynes",
+                      "Newcastle upon Tyne","Newham","Norfolk","North East Lincolnshire","North Lincolnshire","North Somerset",
+                      "North Tyneside","North Yorkshire","Northamptonshire","Northumberland","Nottingham","Nottinghamshire",
+                      "Oldham","Oxfordshire","Peterborough","Plymouth","Poole","Portsmouth","Reading","Redbridge",
+                      "Redcar and Cleveland","Richmond upon Thames","Rochdale","Rotherham","Rutland","Salford","Sandwell",
+                      "Sefton","Sheffield","Shropshire","Slough","Solihull","Somerset","South Gloucestershire","South Tyneside",
+                      "Southampton","Southend-on-Sea","Southwark","St. Helens","Staffordshire","Stockport","Stockton-on-Tees",
+                      "Stoke-on-Trent","Suffolk","Sunderland","Surrey","Sutton","Swindon","Tameside","Telford and Wrekin","Thurrock",
+                      "Torbay","Tower Hamlets","Trafford","Wakefield","Walsall","Waltham Forest","Wandsworth","Warrington",
+                      "Warwickshire","West Berkshire","West Sussex","Westminster","Wigan","Wiltshire","Windsor and Maidenhead",
+                      "Wirral","Wokingham","Wolverhampton","Worcestershire","York"];
+        break;
+      case "Uruguay":
+        this.states = ["Artigas","Canelones","Cerro Largo","Colonia","Durazno","Flores","Florida","Lavalleja","Maldonado",
+                      "Montevideo","Paysandu","Rio Negro","Rivera","Rocha","Salto","San Jose","Soriano","Tacuarembo",
+                      "Treinta y Tres"];
+        break;
+      case "USA":
+        this.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
+                      "District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa",
+                      "Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota",
+                      "Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico",
+                      "New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania",
+                      "Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia",
+                      "Washington","West Virginia","Wisconsin","Wyoming"];
+        break;
+      case "Uzbekistan":
+        this.states = ["Andijon Wiloyati","Bukhoro Wiloyati","Farghona Wiloyati","Jizzakh Wiloyati",
+                      "Khorazm Wiloyati (Urganch)","Namangan Wiloyati","Nawoiy Wiloyati","Qashqadaryo Wiloyati (Qarshi)",
+                      "Qoraqalpoghiston (Nukus)","Samarqand Wiloyati","Sirdaryo Wiloyati (Guliston)",
+                      "Surkhondaryo Wiloyati (Termiz)","Toshkent Shahri","Toshkent Wiloyati"];
+        break;
+      case "Vanuatu":
+        this.states = ["Malampa","Penama","Sanma","Shefa","Tafea","Torba"];
+        break;
+      case "Venezuela":
+        this.states = ["Amazonas","Anzoategui","Apure","Aragua","Barinas","Bolivar","Carabobo","Cojedes",
+                      "Delta Amacuro","Dependencias Federales","Distrito Federal","Falcon","Guarico","Lara",
+                      "Merida","Miranda","Monagas","Nueva Esparta","Portuguesa","Sucre","Tachira","Trujillo",
+                      "Vargas","Yaracuy","Zulia"];
+        break;
+      case "Vietnam":
+        this.states = ["An Giang","Ba Ria-Vung Tau","Bac Giang","Bac Kan","Bac Lieu","Bac Ninh","Ben Tre",
+                      "Binh Dinh","Binh Duong","Binh Phuoc","Binh Thuan","Ca Mau","Can Tho","Cao Bang","Da Nang",
+                      "Dac Lak","Dong Nai","Dong Thap","Gia Lai","Ha Giang","Ha Nam","Ha Noi","Ha Tay","Ha Tinh",
+                      "Hai Duong","Hai Phong","Ho Chi Minh","Hoa Binh","Hung Yen","Khanh Hoa","Kien Giang","Kon Tum",
+                      "Lai Chau","Lam Dong","Lang Son","Lao Cai","Long An","Nam Dinh","Nghe An","Ninh Binh","Ninh Thuan",
+                      "Phu Tho","Phu Yen","Quang Binh","Quang Nam","Quang Ngai","Quang Ninh","Quang Tri","Soc Trang","Son La",
+                      "Tay Ninh","Thai Binh","Thai Nguyen","Thanh Hoa","Thua Thien-Hue","Tien Giang","Tra Vinh","Tuyen Quang",
+                      "Vinh Long","Vinh Phuc","Yen Bai"];
+        break;
+      case "Virgin Islands":
+        this.states = ["Saint Croix","Saint John","Saint Thomas"];
+        break;
+      case "Wales":
+        this.states = ["Blaenau Gwent","Bridgend","Caerphilly","Cardiff","Carmarthenshire","Ceredigion","Conwy","Denbighshire",
+                      "Flintshire","Gwynedd","Isle of Anglesey","Merthyr Tydfil","Monmouthshire","Neath Port Talbot","Newport",
+                      "Pembrokeshire","Powys","Rhondda Cynon Taff","Swansea","The Vale of Glamorgan","Torfaen","Wrexham"];
+        break;
+      case "Wallis and Futuna":
+        this.states = ["Alo","Sigave","Wallis"];
+        break;
+      case "West Bank":
+        this.states = ["West Bank"];
+        break;
+      case"Western Sahara":
+        this.states = ["Western Sahara"];
+        break;
+      case "Yemen":
+        this.states = ["'Adan","'Ataq","Abyan","Al Bayda'","Al Hudaydah","Al Jawf","Al Mahrah","Al Mahwit","Dhamar",
+                      "Hadhramawt","Hajjah","Ibb","Lahij","Ma'rib","Sa'dah","San'a'","Ta'izz"];
+        break;
+      case "Yugoslavia":
+        this.states = ["Kosovo","Montenegro","Serbia","Vojvodina"];
+        break;
+      case "Zambia":
+        this.states = ["Central","Copperbelt","Eastern","Luapula","Lusaka","North-Western","Northern","Southern","Western"];
+        break;
+      case "Zimbabwe":
+        this.states = ["Bulawayo","Harare","ManicalandMashonaland Central","Mashonaland East","Mashonaland West",
+                      "Masvingo","Matabeleland North","Matabeleland South","Midlands"];
         break;
     }
   }

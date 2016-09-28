@@ -56,12 +56,15 @@
       <label for="confirmPassword">Date of Birth</label>
       <br>
       <select formControlName="month" (change)="onMonthChange($event.target.value)">
+        <option value="" disabled selected>Select a Month</option>
         <option *ngFor="let month of months" [value]="month">{{month}}</option>
       </select>
       <select formControlName="day">
+        <option value="" disabled selected>Select a Day</option>
         <option *ngFor="let day of days" [value]="day">{{day}}</option>
       </select>
       <select formControlName="year">
+        <option value="" disabled selected>Select a Year</option>
         <option *ngFor="let year of years" [value]="year">{{year}}</option>
       </select>
         <div class="validation-error" *ngIf="(registerForm.controls.month.errors?.required ||
@@ -71,13 +74,15 @@
       <label for="confirmPassword">Place Of Residence</label>
       <br>
       <select formControlName="country" (change)="onCountryChange($event.target.value)">
-        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+        <option value="" disabled selected>Select a Country</option>
+        <option  *ngFor="let country of countries" [value]="country">{{country}}</option>
       </select>
-      <select formControlName="city">
-        <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+      <select formControlName="state" *ngIf="states != null">
+        <option value="" disabled selected>Select a State</option>
+        <option *ngFor="let state of states" [value]="state">{{state}}</option>
       </select>
       <div class="validation-error" *ngIf="(registerForm.controls.country.errors?.required ||
-                    registerForm.controls.city.errors?.required)">Place of Residence is Required</div>
+                    registerForm.controls.state.errors?.required)">Place of Residence is Required</div>
     </div>
     <div class="form-group">
       <label>Gender</label>

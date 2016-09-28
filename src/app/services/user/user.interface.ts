@@ -10,4 +10,6 @@ export interface User {
   day: number;
   year: number
   gender: string
+  state: string
+  country: string
 }

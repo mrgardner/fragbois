@@ -51,6 +51,11 @@ export class UserService {
     tuple["age"] = age;
     tuple["password"] = user.password;
     tuple["gender"] = user.gender;
+    tuple["country"] = user.country;
+    tuple["state"] = user.state;
+    tuple["role"] = 'guest';
+    tuple["roleColor"] = 'green';
+    tuple["loggedIn"] = false;
     firebase.database().ref(`Users/${id}`).update(tuple);
   }
 
@@ -78,6 +83,8 @@ export class UserService {
               that.user["postTitle"] = snapshot.val().postTitle;
               that.user["role"] = snapshot.val().role;
               that.user["roleColor"] = snapshot.val().roleColor;
+              that.user["state"] = snapshot.val().state;
+              that.user["country"] = snapshot.val().country;
         });
     return that.user;
   }
@@ -112,6 +119,8 @@ export class UserService {
             that.user["postTitle"] = snapshot.val()[id].postTitle;
             that.user["role"] = snapshot.val()[id].role;
             that.user["roleColor"] = snapshot.val()[id].roleColor;
+            that.user["state"] = snapshot.val()[id].state;
+            that.user["country"] = snapshot.val()[id].country;
             that.users.push(that.user)
           }
         }
@@ -157,7 +166,6 @@ export class UserService {
   }
 
   uploadFile(file:File, fileName:string, id: string) {
-    console.log(fileName)
     var storageRef = firebase.storage().ref(`images/${fileName}`);
     storageRef.put(file);
   }
@@ -216,6 +224,18 @@ export class UserService {
     let tuple = {}
     tuple["loggedIn"] = false;
     firebase.database().ref(`Users/${uid}/friends/${name}`).update(tuple);
+  }
+
+  currentUserOffline(uid: any) {
+    let tuple = {}
+    tuple["loggedIn"] = false;
+    firebase.database().ref(`Users/${uid}`).update(tuple);
+  }
+
+  currentUserOnline(uid: any) {
+    let tuple = {}
+    tuple["loggedIn"] = true;
+    firebase.database().ref(`Users/${uid}`).update(tuple);
   }
 
   isAuthenticated() {

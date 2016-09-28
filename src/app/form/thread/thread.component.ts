@@ -82,27 +82,9 @@ export class ThreadComponent implements OnInit {
           if(that.allUsers[i].numberOfPosts == null) {
             that.allUsers[i].numberOfPosts = 0;
           }
-          // if(that.allUsers[i].role === "admin") {
-          //   // document.getElementById('testing'+j).style.color = "red";
-          //   console.log("admin")
-          //   that.authorColor[i] = that.allUsers[i].roleColor;
-          // }
-          // else if(that.allUsers[i].role === "member") {
-          //   // document.getElementById('testing'+j).style.color = "blue";
-          //   that.authorColor[i] = that.allUsers[i].roleColor;
-          //   console.log("member");
-          // }
-          // else if(that.allUsers[i].role === "guest") {
-          //   // document.getElementById('testing'+j).style.color = "green";
-          //   that.authorColor[i] = that.allUsers[i].roleColor;
-          //   console.log("guest");
-          // }
           if(that.allUsers[i].numberOfPosts == null) {
             that.allUsers[i].numberOfPosts = 0;
           }
-          // if(that.allUsers[i].role == null) {
-          //   that.allUsers[i].role = "guest";
-          // }
           if(that.allUsers[i].numberOfPosts == 0)
           {
             that.allUsers[i].postTitle = "Rookie"
@@ -115,10 +97,6 @@ export class ThreadComponent implements OnInit {
           {
             that.allUsers[i].postTitle = "The Coolest Cat"
           }
-          console.log(that.posts.length)
-          // for(let j=0; j < that.posts.length;j++) {
-
-          // }
         }
       },500);
     });
@@ -150,16 +128,13 @@ export class ThreadComponent implements OnInit {
         }
         for(let j=0; j < that.posts.length;j++) {
           if(that.allUsers[i].role == "guest") {
-            console.log("Guest")
             that.authorColor[j] = "guest";
           }
           else if(that.allUsers[i].role == "member") {
             that.authorColor[j] = "member";
-            console.log("member")
           }
           else if(that.allUsers[i].role == "admin") {
             that.authorColor[j] = "admin";
-            console.log("admin")
           }
         }
       }
@@ -206,5 +181,4 @@ export class ThreadComponent implements OnInit {
       document.getElementById('post'+(that.id-1)).scrollIntoView();
     },500);
   }
-
 }

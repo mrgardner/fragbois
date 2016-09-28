@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
   getFile(event) {
     let that = this;
     let imageFile = event.target.files[0];
-    console.log(imageFile)
     let img = new Image();
     let reader = new FileReader();
     reader.addEventListener("load", (fre:FileReaderEvent) => {
@@ -58,7 +57,6 @@ export class HomeComponent implements OnInit {
     that.user = that.userService.getCurrentUser();
     that.currentUser = that.userService.getUser(that.user.uid);
       that.filesToUpload = imageFile;
-      console.log(that.currentUser)
       that.fileName =  that.currentUser.username+ ".jpg";
       that.isFile = true;
 

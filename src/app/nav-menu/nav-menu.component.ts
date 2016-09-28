@@ -83,9 +83,8 @@ export class NavMenuComponent implements OnInit {
   onLogout() {
     let that = this;
     this.imageName = "";
-    // localStorage.removeItem('personalMessageTotal')
-    // localStorage.removeItem('personalMessageId');
     this.userService.signedIn(false);
+    that.userService.currentUserOffline(that.user.uid);
     that.logoutUser = that.userService.getUser(that.user.uid);
     that.users = that.userService.getAllUsers();
     for (let i = 0; i < that.users.length; i++) {

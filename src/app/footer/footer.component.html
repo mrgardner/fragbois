@@ -1,4 +1,4 @@
-<div *ngIf="isSigned()" class="dropup">
+<div *ngIf="isSigned() && friends != null" class="dropup">
     <button class="dropdown-toggle friendListButton" type="button" data-toggle="dropdown">Friends</button>
     <div class="dropdown-menu friendList" (click)="$event.stopPropagation()">
       <span class="spinner fa fa-circle-o-notch fa-spin" *ngIf="isSigned() && isAuth() && loading"></span>
