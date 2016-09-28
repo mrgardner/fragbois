@@ -47,22 +47,11 @@ export class FooterComponent implements OnInit {
           that.messagesService.sender$.subscribe((user) => {
             that.sender = that.messagesService.getAllPersonalSenderMessages(user.sender, user.recipient);
             that.recipient = that.messagesService.getAllPersonalRecipientMessages(user.sender,user.recipient);
-            console.log("RECIPIENT "+user.recipient)
-            console.log("SENDER "+user.sender)
             setTimeout(function () {
-              console.log(user.id)
-              console.log(user.sender)
-              console.log(user.recipient)
-
-              console.log("Sedner List "+that.sender.length)
-              console.log("Sedner List "+that.sender)
-              console.log("RECIVERS LIST "+that.recipient.length)
-              console.log("RECIVERS LIST "+that.recipient)
               that.senderList[user.id] = that.recipient.concat(that.sender).sort((function(a:any, b:any) {
                 return +new Date(a.time) - +new Date(b.time);
               }));
 
-              console.log(that.senderList[user.id]);
             },200);
             setTimeout(function () {
               let objDiv = document.getElementById("chatterBox"+user.id);
@@ -105,7 +94,6 @@ export class FooterComponent implements OnInit {
 
   openChatWindow(name: any, id: any) {
     let that = this;
-    console.log(that.friendName.length)
     if (that.chatId < 3 && that.chatId >= 0) {
       if(this.friendName.length == 0) {
         this.friendName = [];
@@ -126,8 +114,6 @@ export class FooterComponent implements OnInit {
     let that = this;
     that.senderList = [];
     that.senderList = [];
-    console.log(that.friendName[0]);
-    console.log(id);
     if(that.chatId < 4 && that.chatId >= 0){
       if(that.friendName.length  == 3) {
         if(id == 0) {
@@ -175,7 +161,6 @@ export class FooterComponent implements OnInit {
       if ((id) > -1) {
         if(that.friendName.length > 1) {
           that.friendName.splice((id), 1);
-          console.log(that.friendName)
           if(that.friendName.length < 2) {
             that.chatId = id;
           }
