@@ -26,7 +26,6 @@ export class MessagesService {
           localStorage.setItem('total', total.toString());
           for (let i = 0; i < total; i++) {
             let tuple = {};
-            let id = Object(Object.keys(snapshot.val())[i]);
             tuple["sender"] = snapshot.val()[i].sender;
             tuple["message"] = snapshot.val()[i].message;
             tuple["time"] = snapshot.val()[i].time;
@@ -36,7 +35,6 @@ export class MessagesService {
         else {
           localStorage.removeItem('total');
         }
-
       });
     messages = [];
     return messages;
@@ -67,7 +65,6 @@ export class MessagesService {
           let total = Object.keys(snapshot.val()).length;
           for (let i = 0; i < total; i++) {
             let tuple = {};
-            let id = Object(Object.keys(snapshot.val())[i]);
             tuple["name"] = snapshot.val()[i].name;
             tuple["sender"] = snapshot.val()[i].sender;
             tuple["message"] = snapshot.val()[i].message;
@@ -88,7 +85,6 @@ export class MessagesService {
           let total = Object.keys(snapshot.val()).length;
           for (let i = 0; i < total; i++) {
             let tuple = {};
-            let id = Object(Object.keys(snapshot.val())[i]);
             tuple["name"] = snapshot.val()[i].name;
             tuple["sender"] = snapshot.val()[i].sender;
             tuple["message"] = snapshot.val()[i].message;

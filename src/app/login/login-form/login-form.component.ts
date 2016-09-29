@@ -54,7 +54,6 @@ export class LoginFormComponent implements OnInit {
         }
       }
       that.userService.signedIn(true);
-
       that.router.navigate(['']);
     }).catch((error) => {
       that.wrongCredentials = true;

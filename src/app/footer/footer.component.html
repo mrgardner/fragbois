@@ -4,9 +4,9 @@
       <span class="spinner fa fa-circle-o-notch fa-spin" *ngIf="isSigned() && isAuth() && loading"></span>
       <div *ngIf="!loading">
         <div *ngFor="let friend of friends; let i = index;">
-          <a (click)="openChatWindow(friend.name,i)">{{friend.name}}</a>
-          <span *ngIf="friend.loggedIn == true" class="online">o</span>
-          <span *ngIf="friend.loggedIn == false" class="offline">o</span>
+          <span *ngIf="friend.loggedIn == true" class="online fa fa-circle"></span>
+          <span *ngIf="friend.loggedIn == false" class="offline fa fa-circle"></span>
+          <a (click)="openChatWindow(friend.name)">{{friend.name}}</a>
         </div>
       </div>
     </div>
@@ -17,6 +17,7 @@
       <div class="dropdown-menu" id="friendChat{{i}}" (click)="$event.stopPropagation()">
         <div class="chatWindow" id="chatterBox{{i}}">
           <span class="fa fa-times" (click)="closeChatWindow(i)"></span>
+          <span class="chatSpinner fa fa-circle-o-notch fa-spin" *ngIf="isSigned() && isAuth() && chatLoading[i]"></span>
           <div class="messageContainer" *ngFor="let send of senderList[i]">
             <div>
               <div class="messageTime">{{send.time | date:"MM/dd/yyyy hh:mm:ss a"}}</div>

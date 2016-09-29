@@ -23,6 +23,7 @@ export class FooterComponent implements OnInit {
   private windowId: number;
   private chats: any;
   private loading: boolean;
+  private chatLoading: any;
   private chatId: any;
 
 
@@ -37,21 +38,24 @@ export class FooterComponent implements OnInit {
     that.id = 0;
     that.chatId = 0;
     that.windowId = 0;
+    that.chatLoading = [];
 
     this.userService.signInItem$.subscribe(_ => {
       that.loading = true;
+
       setTimeout(function () {
         if (that.userService.isAuthenticated()) {
           that.user = that.userService.getCurrentUser();
           that.currentUser = that.userService.getUser(that.user.uid);
           that.messagesService.sender$.subscribe((user) => {
+            that.chatLoading[user.id] = true;
             that.sender = that.messagesService.getAllPersonalSenderMessages(user.sender, user.recipient);
             that.recipient = that.messagesService.getAllPersonalRecipientMessages(user.sender,user.recipient);
             setTimeout(function () {
               that.senderList[user.id] = that.recipient.concat(that.sender).sort((function(a:any, b:any) {
                 return +new Date(a.time) - +new Date(b.time);
               }));
-
+              that.chatLoading[user.id] = false;
             },200);
             setTimeout(function () {
               let objDiv = document.getElementById("chatterBox"+user.id);
@@ -92,15 +96,14 @@ export class FooterComponent implements OnInit {
     that.messagesService.setSender(that.currentUser.username, index, name);
   }
 
-  openChatWindow(name: any, id: any) {
+  openChatWindow(name: any) {
     let that = this;
     if (that.chatId < 3 && that.chatId >= 0) {
       if(this.friendName.length == 0) {
         this.friendName = [];
         that.chatId =0;
-
       }
-      if(!that.duplicates(that.friendName)) {
+      if(that.contains.call(that.friendName, name) == false) {
         this.friendName[that.chatId] = name;
         document.getElementById('friendChatButton'+(that.chatId)).style.display = "block"
         document.getElementById('friendChat'+(that.chatId)).style.display = "block";
@@ -180,17 +183,31 @@ export class FooterComponent implements OnInit {
       }
     }
   }
-  duplicates (a) {
-  var counts = [];
-  for(var i = 0; i <= a.length; i++) {
-    if(counts[a[i]] === undefined) {
-      counts[a[i]] = 1;
+
+  contains (needle) {
+    let that = this;
+    let findNaN = needle !== needle;
+    let indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+      indexOf = Array.prototype.indexOf;
     } else {
-      return true;
+      indexOf = function(needle) {
+        let i = -1, index = -1;
+
+        for(i = 0; i < needle.length; i++) {
+          let item = that[i];
+
+          if((findNaN && item !== item) || item === needle) {
+            index = i;
+            break;
+          }
+        }
+        return index;
+      };
     }
-  }
-  return false;
-}
+    return indexOf.call(this, needle) > -1;
+  };
 
   isAuth() {
     return this.userService.isAuthenticated();

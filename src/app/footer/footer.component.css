@@ -39,6 +39,14 @@
   font-size: 25px;
 }
 
+.chatSpinner {
+  color: white;
+  position: absolute;
+  top: 35%;
+  right: 45%;
+  font-size: 50px;
+}
+
 .chatWindow {
   background-color: rgba(44, 44, 44, 0.93);
 }
@@ -126,32 +134,14 @@ a {
   color: black;
 }
 
-/*#friendChatButton3{*/
-  /*display: none;*/
-  /*position: fixed;*/
-  /*top: 97%;*/
-  /*left: 21%;*/
-  /*width: 23%;*/
-  /*text-align: center;*/
-  /*background-color: grey;*/
-  /*color: white;*/
-/*}*/
-
-/*#friendChat3{*/
-  /*top: 46.5%;*/
-  /*left: 21%;*/
-  /*height: 50%;*/
-  /*width: 23%;*/
-  /*position: fixed;*/
-  /*color: black;*/
-/*}*/
-
 .chat0,
 .chat1,
 .chat2,
 .chat3 {
   position: absolute;
-  top: 90%;
+  top: 87%;
+  height: 47px;
+  width: 85%;
 }
 
 .chatButton0,
@@ -159,6 +149,7 @@ a {
 .chatButton2,
 .chatButton3 {
   position: absolute;
-  top: 90%;
+  top: 87%;
+  height: 47px;
   right: 0;
 }

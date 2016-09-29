@@ -46,9 +46,8 @@ export class NavMenuComponent implements OnInit {
             that.userService.updateProfileImg(that.user.uid,url);
           }).catch(function (error) {
             that.imageSrc = "https://firebasestorage.googleapis.com/v0/b/fragbois-b7c29.appspot.com/o/images%2Fidenticon.png?alt=media&token=949eb2a7-32d5-4603-9aac-e32cecdb43bd";
-            // Handle any errors
             that.userService.updateProfileImg(that.user.uid,'https://firebasestorage.googleapis.com/v0/b/fragbois-b7c29.appspot.com/o/images%2Fidenticon.png?alt=media&token=949eb2a7-32d5-4603-9aac-e32cecdb43bd');
-          })
+          });
 
           if(that.userDetails.requests)
           {
@@ -78,7 +77,6 @@ export class NavMenuComponent implements OnInit {
   isSigned() {
     return this.userService.isSignedIn();
   }
-  // if (Object.keys(that.users[i].friends)[j] == that.currentUser.username && res.uid != that.users[i].uid) {
 
   onLogout() {
     let that = this;

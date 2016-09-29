@@ -22,17 +22,32 @@ export class UserService {
     this.verifyUser = null;
     this.verifyEmailAddress = null;
     this.signedInValue = false;
-
   }
 
   signupUser=(users: User) =>{
     let that = this;
     firebase.auth().createUserWithEmailAndPassword(users.email, users.password).then(function(user){
       that.createUserDB(users, user.uid);
-      //Here if you want you can sign in the user
-    }).catch(function(error) {
-      //Handle error
-    });
+    }).catch(function(error) {});
+  };
+
+  updateUserDetails(user: User, id:any) {
+    let date = new Date(user.month + " "+ user.day + " " + user.year);
+    let userDate = ("0" + (date.getMonth() + 1)).slice(-2) + "/"+date.getDate()+"/"+date.getFullYear();
+    let age = Math.floor(Math.floor(Date.now() - +(new Date(userDate)))/(24*3600*1000*365));
+    let tuple = {};
+    tuple["username"] = user.username;
+    tuple["firstName"] = user.firstName;
+    tuple["lastName"] = user.lastName;
+    tuple["dob"] = user.month + " "+ user.day + " " + user.year;
+    tuple["day"] = user.day;
+    tuple["month"] = user.month;
+    tuple["year"] = user.year;
+    tuple["age"] = age;
+    tuple["gender"] = user.gender;
+    tuple["country"] = user.country;
+    tuple["state"] = user.state;
+    firebase.database().ref(`Users/${id}`).update(tuple);
   }
 
   createUserDB(user: User, id: any) {

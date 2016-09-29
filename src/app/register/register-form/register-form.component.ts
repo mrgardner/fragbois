@@ -40,12 +40,11 @@ export class RegisterFormComponent implements OnInit {
     this.emailVerify = false;
     this.userAvailable = null;
     this.emailAvailable = null;
-    this.userService.verifyUsername("")
-    this.userService.verifyEmail("")
+    this.userService.verifyUsername("");
+    this.userService.verifyEmail("");
     this.registerForm = formBuilder.group({
       'username': ['',[
         Validators.required,
-        // Validators.pattern("^[a-zA-Z0-9]+$")
       ]],
       'firstName': ['',[
         Validators.required,
@@ -124,10 +123,7 @@ export class RegisterFormComponent implements OnInit {
                       "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"];
   }
 
-
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   verifyUser(username:string) {
     let user = this.userService.verifyUsername(username);
@@ -221,7 +217,7 @@ export class RegisterFormComponent implements OnInit {
                       "Sidi Bel Abbes","Skikda","Souk Ahras","Tamanghasset","Tebessa","Tiaret","Tindouf","Tipaza",
                       "Tissemsilt","Tizi Ouzou","Tlemcen"];
         break;
-      case"American Samoa":
+      case "American Samoa":
         this.states = ["Eastern","Manu'a","Rose Island","Swains Island","Western"];
         break;
       case"Angola":
