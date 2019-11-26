@@ -23,16 +23,19 @@ export class ThreadComponent implements OnInit {
   private text: string;
   private allUsers: any;
   private authorColor: any;
+  private currentPage: number;
+  private itemsPerPage: number;
 
   constructor(private route: ActivatedRoute, private formService: FormService, private userService: UserService) {
     let that = this;
+    that.currentPage = 1;
+    that.itemsPerPage = 10;
     that.imageName = [];
     that.imageSrc = [];
     that.userDetails = [];
     that.allUsers = [];
     that.authorColor = [];
     that.text = "";
-    that.route.snapshot.params["matrixParameterName"];
     that.route.params.subscribe(matrixParams => {
       that.threadTitle = matrixParams["thread"];
       that.sectionTitle = matrixParams["section"];
@@ -67,16 +70,8 @@ export class ThreadComponent implements OnInit {
             that.imageSrc[i] = "https://firebasestorage.googleapis.com/v0/b/fragbois-b7c29.appspot.com/o/images%2Fidenticon.png?alt=media&token=949eb2a7-32d5-4603-9aac-e32cecdb43bd";
             // Handle any errors
             that.userService.updateProfileImg(that.user.uid,'https://firebasestorage.googleapis.com/v0/b/fragbois-b7c29.appspot.com/o/images%2Fidenticon.png?alt=media&token=949eb2a7-32d5-4603-9aac-e32cecdb43bd');
-          })
-          if(that.posts[i].role == "guest") {
-            that.authorColor[i] = that.posts[i].role;
-          }
-          else if(that.posts[i].role == "admin") {
-            that.authorColor[i] = that.posts[i].role;
-          }
-          else if(that.posts[i].role == "member") {
-            that.authorColor[i] = that.posts[i].role;
-          }
+          });
+          that.authorColor[i] = that.posts[i].role;
         }
         for(let i=0; i<that.allUsers.length; i++){
           if(that.allUsers[i].numberOfPosts == null) {
@@ -153,6 +148,7 @@ export class ThreadComponent implements OnInit {
     tuple["author"] = this.currentUser.username;
     tuple["post"] = text;
     tuple["time"] = this.date;
+    tuple["role"] = this.currentUser.role;
     let postTuple = {};
     if(this.userDetails.numberOfPosts == null) {
       this.userDetails.numberOfPosts = 0;

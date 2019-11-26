@@ -225,7 +225,6 @@ export class UserService {
 
   logout() {
     firebase.auth().signOut();
-    localStorage.removeItem('username');
     this.router.navigate(['/login']);
   }
 

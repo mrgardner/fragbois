@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
+import { ModuleWithProviders} from '@angular/core';
 import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {RegisterComponent} from "./register/register.component";
@@ -8,6 +9,7 @@ import {MembersComponent} from "./members/members.component";
 import {MemberProfileComponent} from "./member-profile/member-profile.component";
 import {FormComponent} from "./form/form.component";
 import {ThreadComponent} from "./form/thread/thread.component";
+import {EditProfileComponent} from "./profile/editProfile/edit-profile.component";
 
 const APP_ROUTES: Routes = [
   { path: '', component: HomeComponent},
@@ -16,6 +18,7 @@ const APP_ROUTES: Routes = [
   { path: 'members', component: MembersComponent},
   { path: 'members/:id', component: MemberProfileComponent},
   { path: 'profile', component: ProfileComponent,canActivate: [AuthGuard]},
+  { path: 'profile/edit', component: EditProfileComponent,canActivate: [AuthGuard]},
   { path: 'form', component: FormComponent},
   { path: 'form/:section/:thread', component: ThreadComponent},
 

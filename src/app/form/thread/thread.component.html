@@ -2,8 +2,8 @@
   <div class="container">
       <div *ngIf="id > 0" class="threadContainer">
           <span class="threadTitle">{{threadTitle}}</span>
-            <div *ngFor="let post of posts; let i = index;">
-              <div class="entirePost" id="post{{i}}">
+            <div *ngFor="let post of posts | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index;">
+              <div class="entirePost" id="post{{(i)+(currentPage*itemsPerPage)-itemsPerPage}}">
                 <div class="left-panel">
                   <div class="userContainer">
 
@@ -17,7 +17,7 @@
                         </div>
                         <div class="userStatus">
 
-                          <span class="userRole" [ngClass]="authorColor[i]">{{post.role}}</span>
+                          <span class="userRole" [ngClass]="authorColor[(i)+(currentPage*itemsPerPage)-itemsPerPage]">{{post.role}}</span>
                         </div>
                         <br>
                         <img [src]="imageSrc[i]" class="profileImg">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="right-panel">
                   <div class="dateContainer">
-                    <span>{{post.time | date:"MM/dd/yyyy hh:mm:ss a"}}</span> #{{i+1}}
+                    <span>{{post.time | date:"MM/dd/yyyy hh:mm:ss a"}}</span> #{{(i+1)+(currentPage*itemsPerPage)-itemsPerPage}}
                   </div>
                   <div class="postContainer">
                     <span>{{post.post}}</span>
@@ -47,6 +47,7 @@
                 </div>
               </div>
             </div>
+          <pagination-controls autoHide="true" (pageChange)="currentPage = $event"></pagination-controls>
           <textarea type="text" [(ngModel)]="text"></textarea>
           <button class="postButton" (click)="createPost(author, text); text = ''">Create post</button>
       </div>

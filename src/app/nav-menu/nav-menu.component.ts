@@ -13,7 +13,7 @@ export class NavMenuComponent implements OnInit {
   private imageName: string;
   private userDetails: any;
   private user: any;
-  private test: string;
+  private profileName: string;
   private numOfNotifications: any;
   private showNotifications: boolean;
   private requests: any;
@@ -39,7 +39,7 @@ export class NavMenuComponent implements OnInit {
           that.userDetails = {};
           that.user = that.userService.getCurrentUser();
           that.userDetails = that.userService.getUser(that.user.uid);
-          that.test = that.userDetails.username;
+          that.profileName = that.userDetails.firstName + " " + that.userDetails.lastName;
           that.imageName = that.userDetails.username+ ".jpg";
           that.userService.downloadFile(that.imageName).getDownloadURL().then(function (url) {
             that.imageSrc = url;

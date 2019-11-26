@@ -23,7 +23,7 @@ module.exports = function (config) {
         lcovonly: './coverage/coverage.lcov'
       }
     },
-    angularCliConfig: './angular-cli.json',
+    angularCliConfig: './angular.json',
     reporters: ['progress', 'karma-remap-istanbul'],
     port: 9876,
     colors: true,

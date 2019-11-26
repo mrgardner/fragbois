@@ -23,6 +23,10 @@ import { FooterComponent } from './footer/footer.component';
 import { FormComponent } from './form/form.component';
 import {FormService} from "./services/form/form.service";
 import { ThreadComponent } from './form/thread/thread.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {startFrom} from "./form/thread/thread.pipe";
+import {EditProfileComponent} from "./profile/editProfile/edit-profile.component";
+import {Ng2PaginationModule} from "ng2-pagination/index";
 
 @NgModule({
   declarations: [
@@ -40,14 +44,18 @@ import { ThreadComponent } from './form/thread/thread.component';
     MemberProfileComponent,
     FooterComponent,
     FormComponent,
-    ThreadComponent
+    ThreadComponent,
+    startFrom,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
+    Ng2PaginationModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    routing
+    routing,
+    NgbModule.forRoot()
   ],
   providers: [UserService, {provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuard, MessagesService, FormService],
   bootstrap: [AppComponent]

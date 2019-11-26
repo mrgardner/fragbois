@@ -1,6 +1,6 @@
 .headerContainer {
   height: 50px;
-  background-color: black;
+  background-color: grey;
 }
 
 .profileImgContainer {
@@ -11,8 +11,13 @@
 
 .notificationContainer {
   position: absolute;
-  left: 85%;
+  right: 60px;
   color: white;
+}
+
+.notificationMenu {
+  top: 40px !important;
+  right: 10px;
 }
 
 .spinner {
@@ -22,24 +27,71 @@
   font-size: 45px;
 }
 
+.dropdown-menu {
+  left: -235px;
+  min-width: 250px;
+  top: 27px;
+}
+
 .profileImg {
-  height: auto;
-  width: 50px;
-  bottom: 25px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  bottom: 20px;
   position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.dropDownProfileImg {
+  position: relative;
+  left: 15px;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 60px;
+  border-radius: 50%;
+  height: 60px;
   cursor: pointer;
 }
 
 .dropdown-menu {
-  background-color: black;
+  background-color: grey;
+  height: 200px;
+}
+
+.dropDownMenuArrow {
+  color: grey;
+  font-size: 29px;
+  position: absolute;
+  left: 90%;
+  top: -19px;
 }
 
 .numberOfNotifications {
   margin-bottom: 1em;
+  padding-left: 6em;
 }
 
 .notificationSubContainer {
   margin-bottom: 1em;
+}
+
+.accountSection {
+  padding-top: 4em;
+}
+
+.AccountLink {
+  position: relative;
+  left: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.logoutButton {
+  position: absolute;
+  left: 75%;
 }
 
 .acceptButton {
@@ -48,16 +100,12 @@
   right: 0;
 }
 
-.userText {
-  margin-left: 0.5em;
-}
-
-.accountArrow,
 .userText  {
   color: white;
   position: relative;
-  bottom: 15px;
   margin-right: 0.5em;
+  left: 20px;
+  font-size: 20px;
 }
 
 .notificationNumber {

@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../services/user/user.service";
+import {UserService} from "../../services/user/user.service";
 import {Validators, FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
-import {FileReaderEvent} from "../shared/fileReaderEvent.interface";
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
   private userDetails: any;
-  private imageSrc: string;
   private user: any;
-  private imageName: string;
-  private profileName: string;
   private profileForm:FormGroup;
   private months:Array<string>;
   private days:Array<number>;
@@ -24,12 +20,6 @@ export class ProfileComponent implements OnInit {
   private states:Array<string>;
   private userVerify: boolean;
   private userAvailable: boolean;
-  private isFile: boolean;
-  filesToUpload: File;
-  private fileName:string;
-  private imgSrc: any;
-  private imgTooBig: boolean;
-  private currentUser: any;
   public genders = [
     { value: 'Female', display: 'Female' },
     { value: 'Male', display: 'Male' },
@@ -38,28 +28,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder, private userService: UserService, private router: Router) {
     let that = this;
-    that.imageSrc = "";
-
-        if(that.userService.isAuthenticated())
-        {
-          that.userDetails = {};
-          that.user = this.userService.getCurrentUser();
-          that.userDetails = that.userService.getUser(that.user.uid);
-          that.profileName = that.userDetails.firstName + " " + that.userDetails.lastName;
-          that.imageName = that.userDetails.username+ ".jpg";
-          that.userService.downloadFile(that.imageName).getDownloadURL().then(function (url) {
-            that.imageSrc = url;
-            that.userService.updateProfileImg(that.user.uid,url);
-          }).catch(function (error) {
-            that.imageSrc = "https://firebasestorage.googleapis.com/v0/b/fragbois-b7c29.appspot.com/o/images%2Fidenticon.png?alt=media&token=949eb2a7-32d5-4603-9aac-e32cecdb43bd";
-            that.userService.updateProfileImg(that.user.uid,'https://firebasestorage.googleapis.com/v0/b/fragbois-b7c29.appspot.com/o/images%2Fidenticon.png?alt=media&token=949eb2a7-32d5-4603-9aac-e32cecdb43bd');
-          });
-        }
     if(that.userService.isAuthenticated())
     {
-
+      that.userDetails = {};
+      that.user = this.userService.getCurrentUser();
+      that.userDetails = that.userService.getUser(that.user.uid);
     }
-    that.userService.verifyUsername("");
+    that.userService.verifyUsername("")
     that.users = [];
     that.userVerify = false;
     that.profileForm = formBuilder.group({
@@ -128,44 +103,9 @@ export class ProfileComponent implements OnInit {
       "Western Sahara", "Yemen", "Yugoslavia", "Zambia", "Zimbabwe"];
 
     that.states = [that.userDetails.state];
-
-    this.isFile = false;
   }
 
   ngOnInit() {}
-
-  onUpload() {
-    this.userService.uploadFile(this.filesToUpload, this.fileName, this.user.uid);
-    this.userService.signInItem$.emit();
-  }
-
-  getFile(event) {
-    let that = this;
-    let imageFile = event.target.files[0];
-    let img = new Image();
-    let reader = new FileReader();
-    reader.addEventListener("load", (fre:FileReaderEvent) => {
-      img.src = fre.target.result;
-      img.addEventListener('load', function () {
-        if(this.width > 800 && this.height > 800) {
-          that.isFile = false;
-          that.imgTooBig = true;
-        }
-        else {
-          that.imgTooBig = false;
-        }
-      });
-      that.imgSrc = img.src
-    }, false);
-
-    reader.readAsDataURL(imageFile);
-    that.user = that.userService.getCurrentUser();
-    that.currentUser = that.userService.getUser(that.user.uid);
-    that.filesToUpload = imageFile;
-    that.fileName =  that.currentUser.username+ ".jpg";
-    that.isFile = true;
-
-  }
 
   verifyUser(username:string) {
     let user = this.userService.verifyUsername(username);
